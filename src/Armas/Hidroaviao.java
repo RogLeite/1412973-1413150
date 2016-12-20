@@ -15,24 +15,30 @@ public class Hidroaviao extends Arma {
 	}
 
 	public void setLocation(float x, float y) {
-		vector[0]= new Point2D.Float(x,y);
-		vector[1]= new Point2D.Float(x+1,y+1);
 		switch(rotate){
 		case 0:
-			vector[2]= new Point2D.Float(x+2,y);
 			setSize(WIDTH_IN_CELL*CELL_SIZE, HEIGHT_IN_CELL*CELL_SIZE);
+			vector[0]= new Point2D.Float(0,1*CELL_SIZE);
+			vector[1]= new Point2D.Float(1*CELL_SIZE,0);
+			vector[2]= new Point2D.Float(2*CELL_SIZE,1*CELL_SIZE);
 			break;
 		case 1:
-			vector[2]= new Point2D.Float(x+1,y-1);
 			setSize( HEIGHT_IN_CELL*CELL_SIZE, WIDTH_IN_CELL*CELL_SIZE);
+			vector[0]= new Point2D.Float(0,0);
+			vector[1]= new Point2D.Float(1*CELL_SIZE,1*CELL_SIZE);
+			vector[2]= new Point2D.Float(0,2*CELL_SIZE);
 			break;
 		case 2:
-			vector[2]= new Point2D.Float(x-1,y+1);
 			setSize(WIDTH_IN_CELL*CELL_SIZE, HEIGHT_IN_CELL*CELL_SIZE);
+			vector[0]= new Point2D.Float(2*CELL_SIZE,0);
+			vector[1]= new Point2D.Float(1*CELL_SIZE,1*CELL_SIZE);
+			vector[2]= new Point2D.Float(0,0);
 			break;
 		case 3:
-			vector[2]= new Point2D.Float(x,y+2);
 			setSize( HEIGHT_IN_CELL*CELL_SIZE, WIDTH_IN_CELL*CELL_SIZE);
+			vector[0]= new Point2D.Float(1*CELL_SIZE,2*CELL_SIZE);
+			vector[1]= new Point2D.Float(1*CELL_SIZE,0);
+			vector[2]= new Point2D.Float(0,1*CELL_SIZE);
 			break;
 		}
 	}

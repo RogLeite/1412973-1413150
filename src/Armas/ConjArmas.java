@@ -86,22 +86,22 @@ public class ConjArmas{
 //		System.out.printf("getFilledArray:\n\tc\t= %s\n",Boolean.toString(c==null));
 //		System.out.printf("TipoArma.Hidroaviao.getQtdMax() = %d\n",TipoArma.Hidroaviao.getQtdMax());
 //		System.out.printf("TotalNotDestroyed = %d\n",TotalNotDestroyed);
-		for(int i=0; i<TipoArma.Hidroaviao.getQtdMax(); i++,j++)
-			c[j]= new Hidroaviao(TipoArma.Hidroaviao.getNumCels(),cellSize);
 		for(int i=0; i<TipoArma.Submarino.getQtdMax(); i++,j++)
 			c[j]= new Navio( TipoArma.Submarino, TipoArma.Submarino.getNumCels(),cellSize);
 		for(int i=0; i<TipoArma.Destroyer.getQtdMax(); i++,j++)
 			c[j]= new Navio( TipoArma.Destroyer, TipoArma.Destroyer.getNumCels(),cellSize);
+		for(int i=0; i<TipoArma.Hidroaviao.getQtdMax(); i++,j++)
+			c[j]= new Hidroaviao(TipoArma.Hidroaviao.getNumCels(),cellSize);
 		for(int i=0; i<TipoArma.Cruzador.getQtdMax(); i++,j++)
 			c[j]= new Navio( TipoArma.Cruzador, TipoArma.Cruzador.getNumCels(),cellSize);
 		for(int i=0; i<TipoArma.Couracado.getQtdMax();i++,j++)
 			c[j]= new Navio (TipoArma.Couracado, TipoArma.Couracado.getNumCels(),cellSize);
-
+		
 //		System.out.printf("J = %d\n",j);
 		for(int i=0; i<TipoArma.getSomaQtdMax();i++){
 			c[i].setLocation((float)(i-((i/5)*5))*(width/5),(float)((i/5)*width/3));
 //			System.out.printf("Cheguei i = %d ConjArmas.getFilledArray\n",i/5);
-			System.out.printf("Cheguei ArmaPos = %s ConjArmas.getFilledArray\n",c[i].getLocation().toString());
+			System.out.printf("Cheguei c[%d].getLocation = %s ConjArmas.getFilledArray\n",i,c[i].getLocation().toString());
 			c[i].setIgnoreRepaint(false);
 			c[i].setVisible(true);
 		}

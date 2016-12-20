@@ -41,7 +41,7 @@ public abstract class Tabuleiro extends JPanel/* implements ITabuleiroPartida, I
 		bound_player = player;
 
 		tabInvisivel = TabuleiroListener.newInstanceTabuleiroInvisivel(SIDE_TAB);
-		System.out.printf("Cheguei tabInvisivel in %s TabuleiroInvisivel\n",tabInvisivel.getLocation().toString() );
+//		System.out.printf("Cheguei tabInvisivel in %s TabuleiroInvisivel\n",tabInvisivel.getLocation().toString() );
 		add(tabInvisivel);
 		for(int i=1;i<SIDE_TAB;i++){
 			for(int j=1;j<SIDE_TAB;j++){

@@ -12,6 +12,7 @@ public enum TipoArma {
 	private final int nCell;
 	private final Color MAIN_COLOR; 
 	private final int qtdMax;
+	private static final int qtdTipes = 5;
 	TipoArma(int numCelulas,Color c,int Max) {
 		this.nCell = numCelulas;
 		this.MAIN_COLOR = c;
@@ -48,6 +49,9 @@ public enum TipoArma {
 		if(n==Couracado.nCell)
 			return Couracado; 
 		return null;
+	}
+	public static int getQtdTipes() {
+		return qtdTipes;
 	}
 	
 }

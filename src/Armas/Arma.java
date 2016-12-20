@@ -127,14 +127,15 @@ public abstract class Arma extends JPanel {
 		////			}
 
 		Graphics2D g2d = (Graphics2D)g;
-		setLocation(getX(), getY());
+//		setLocation(getX(), getY());
 		for(int i=0;i<numPartes;i++){	//vertical
+//			System.out.printf("Cheguei vector[%d] = %s in Arma.paintComponent\n",i, vector[i].toString());
 			int x = (int)(vector[i].getX());
 			int y = (int)(vector[i].getY());
 			g2d.setColor(getColor());
-			g2d.fillRect(x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE);
+			g2d.fillRect(x,y,CELL_SIZE,CELL_SIZE);
 			g2d.setColor(Color.BLACK);
-			g2d.drawRect(x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE-1, CELL_SIZE-1);
+			g2d.drawRect(x , y ,CELL_SIZE-2,CELL_SIZE-2);
 		}
 
 }
