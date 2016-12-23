@@ -23,7 +23,9 @@ public class ArmaListener extends Listener {
 	public static boolean isHitHere(Point2D point, Arma a) {
 		return a.isHitHere(point);
 	}
-	public static boolean isDestroyed(Arma a){
+	public static boolean isDestroyed(ConjArmas c, Point p){
+		int index = ArmaListener.getIndiceArma(c, p);
+		Arma a = c.getArmVec()[index];
 		return a.getDestroyed();
 	}
 
@@ -52,7 +54,40 @@ public class ArmaListener extends Listener {
 		else{
 			throw new ExceptionComponentIsNotArma();
 		}
-		
+
+
+	}
+	public static boolean hasArma(ConjArmas c, Point p) {
+		int index = c.getIndiceArma((int)p.getX(), (int)p.getY());
+		if(index>=0 && c.getArmVec()[index].isHere(p)){
+			System.out.printf("Cheguei index = %d  ArmaListener.hasArma\n", index);
+			return true;
+		}
+		else{
+			return false;
+		}
+
+	}
+	public static boolean hasDestroyedPart(ConjArmas c, Point p) {
+		if(hasArma(c, p)){
+			int index = getIndiceArma(c, p);
+			return c.ArmVect[index].isHitHere(p);
+		}
+		else{
+			return false;
+		}
+	}
+	public static Color getColorHere(ConjArmas c, Point p) throws ExceptionNoWeaponHere {
+		if(hasArma(c, p)){
+			int index = getIndiceArma(c, p);
+			return c.ArmVect[index].getColor();
+		}
+		else{
+			throw new ExceptionNoWeaponHere();
+		}
+	}
+	public static void receiveArma(ConjArmas conjArmas, Point2D p) throws ExceptionArmVectFilled, ExceptionNoWeaponSelected {
+		ConjArmas.receiveArma(conjArmas,p);
 		
 	}
 

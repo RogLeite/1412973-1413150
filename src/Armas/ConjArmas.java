@@ -48,15 +48,24 @@ public class ConjArmas{
 
 	int getIndiceArma( int x, int y){
 		Point2D.Float pt = new Point2D.Float((float)x,(float)y);
+		
 		for(int i=0; i<ArmVect.length; i++){
 			if(ArmVect[i]==null){
 			}
-			else if(ArmVect[i].isHere(pt)){
+			else if((x>=ArmVect[i].getX())
+				  	&& (x<=ArmVect[i].getX()+ArmVect[i].getWidth())
+				  	&&(y>=ArmVect[i].getY())
+				  	&& (x<=ArmVect[i].getY()+ArmVect[i].getHeight())){
 				return i;
 			}
 		}
 		return -1;
 	}
+	//(ArmVect[i].isHere(pt))
+	/*((x>=ArmVect[i].getX())
+	  	&& (x<=ArmVect[i].getX()+ArmVet[i].getWidth())
+	  	&&(y>=ArmVect[i].getY())
+	  	&& (x<=ArmVect[i].getY()+ArmVect[i].getHeight()))*/
 
 
 	public TipoArma	getTipoArma ( int x, int y ){
@@ -98,9 +107,11 @@ public class ConjArmas{
 			c[j]= new Navio (TipoArma.Couracado, TipoArma.Couracado.getNumCels(),cellSize);
 		
 //		System.out.printf("J = %d\n",j);
-		for(int i=0; i<TipoArma.getSomaQtdMax();i++){
+		for(int i=0; i<c.length;i++){
 			c[i].setLocation((float)(i-((i/5)*5))*(width/5),(float)((i/5)*width/3));
+//			System.out.printf("Cheguei width = %f ConjArmas.getFilledArray\n",width/3);
 //			System.out.printf("Cheguei i = %d ConjArmas.getFilledArray\n",i/5);
+			System.out.printf("Cheguei \n\tc[%d].x = %f\n\tc[%d].y = %f\nConjArmas.getFilledArray\n",i,(i-((i/5)*5))*(width/5),i,((i/5)*width/3));
 			System.out.printf("Cheguei c[%d].getLocation = %s ConjArmas.getFilledArray\n",i,c[i].getLocation().toString());
 			c[i].setIgnoreRepaint(false);
 			c[i].setVisible(true);
@@ -127,6 +138,10 @@ public class ConjArmas{
 		if(a==null){
 			throw new ExceptionNoWeaponSelected();
 		}
+		if(AllowPlacement()){
+			
+		}
+		System.out.printf("\nCheguei Arma Location %s ConjArmas.receiveArma\n",p.toString());
 		a.setLocation((float)p.getX(),(float)p.getY());
 		addArma(c,a);
 	}
@@ -137,7 +152,6 @@ public class ConjArmas{
 				c.ArmVect[i] = a;
 				System.out.printf("Cheguei c.ArmVect[i] tem algo?: %b ConjArmas.addArma\n",(c.ArmVect[i]!=null));
 				emptySelectedArma();
-				
 				return;
 			}
 		}
@@ -159,6 +173,10 @@ public class ConjArmas{
 		return ArmVect;
 	}
 
+	private static boolean AllowPlacement() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }
 

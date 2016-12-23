@@ -16,6 +16,7 @@ public class Navio extends Arma {
 	}
 
 	public void setLocation(float x, float y) {
+		setLocation((int)x, (int)y);
 		if (rotate==0|| rotate ==3){	//horizontal
 			setSize(WIDTH_IN_CELL*CELL_SIZE, HEIGHT_IN_CELL*CELL_SIZE);
 			for(int i=0;i<numPartes;i++){

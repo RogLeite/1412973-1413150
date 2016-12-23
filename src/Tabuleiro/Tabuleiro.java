@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 
 import Armas.ArmaListener;
 import Armas.ConjArmas;
+import Armas.ExceptionNoWeaponHere;
 
 //import TabuleiroPartida.FrameEmbate;
 //import TopoNivel.MyMouseListener;
@@ -106,44 +107,20 @@ public abstract class Tabuleiro extends JPanel/* implements ITabuleiroPartida, I
 	public abstract void takeAction(Point2D p) throws ExceptionCellAlreadyHit, ExceptionCellAlreadyFilled;
 	public boolean imHit(Point p) {
 		ConjArmas c = getTabuleiroInvisivel().getArmasArray();
-		int i = ArmaListener.getIndiceArma(c,p.getLocation());
-//		System.out.printf("Cheguei: i: %d Tabuleiro.imHit", i);
-		if(i<0){
-			return false;
-			}
-		else{
-			return ArmaListener.isHitHere(p.getLocation(),c.ArmVect[i]);
-		}
+		return ArmaListener.hasDestroyedPart(c,p.getLocation());
 
 	}
 	public boolean imFilled(Point p){
 		ConjArmas c = getTabuleiroInvisivel().getArmasArray();
 //		System.out.printf("Cheguei c tem algo? %b Tabuleiro.imFilled\n", (c!=null));
-		int i = ArmaListener.getIndiceArma(c,p.getLocation());
-		if(i<0){
-			return false;
-			}
-		else{
-			return true;
-		}
+		return ArmaListener.hasArma(c,p.getLocation());
 	}
-	public boolean imDestroyed(Point p) {
-		int i = ArmaListener.getIndiceArma(getTabuleiroInvisivel().getArmasArray(),p.getLocation());
-		if(i<0){
-			return false;
-			}
-		else if(ArmaListener.isDestroyed((getTabuleiroInvisivel().getArmasArray().getArmVec())[i])){
-			return true;
-		}
-		return false;
+	public boolean imDestroyed(Point p){
+		ConjArmas c = getTabuleiroInvisivel().getArmasArray();
+		return ArmaListener.isDestroyed(c,p);
 	}
-	public Color myColor(Point p) {
-		int i = ArmaListener.getIndiceArma(getTabuleiroInvisivel().getArmasArray(),p.getLocation());
-		if(i<0){
-			return null;
-			}
-		else{
-			return ArmaListener.getColor((getTabuleiroInvisivel().getArmasArray().getArmVec())[i]);
-		}
+	public Color myColor(Point p) throws ExceptionNoWeaponHere {
+		ConjArmas c = getTabuleiroInvisivel().getArmasArray();
+		return ArmaListener.getColorHere(c,p);
 	}
 }

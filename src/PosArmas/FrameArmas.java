@@ -73,7 +73,7 @@ public class FrameArmas extends GameFrame {
 		
 		APanel = ArmasPickPanel.instance(0, 0,getWidth()/2,ALT_DEFAULT);
 		ConjArmas CArmas = new ConjArmas();
-		CArmas.ArmVect= ArmaListener.getFilledArray((float)getAPanel().getWidth(),(int) (ALT_DEFAULT/16) );
+		CArmas.ArmVect= ArmaListener.getFilledArray((float)getAPanel().getWidth(),(int) ALT_DEFAULT/16);
 
 //		System.out.printf("getComponentCount = %d\n",getContentPane().getComponentCount());
 //		System.out.printf("CArmas.ArmVect.length = %d\n",CArmas.ArmVect.length);

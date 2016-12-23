@@ -3,6 +3,7 @@ package Armas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Float;
 
@@ -74,9 +75,9 @@ public abstract class Arma extends JPanel {
 		for(int i=0; i<numPartes;i++)
 			vectHit[i]=false;
 	}
-	protected boolean isHitHere(Point2D point){
+	protected boolean isHitHere(Point2D p){
 		int i;
-		for (i=0; i<vector.length&&!(point.equals(vector[i]));i++);
+		for (i=0; i<vector.length&&!(isHere((Point) p));i++);
 		return vectHit[i];
 	}
 	protected boolean Atingir(Point2D.Float pt){
@@ -140,10 +141,16 @@ public abstract class Arma extends JPanel {
 
 }
 
-public boolean isHere(Float pt) {
+public boolean isHere(Point p) {
+	int x = p.x-getX();
+	int y = p.y-getY();
 	for(int j=0; j<vector.length; j++)
-		if(vector[j].equals(pt))
+		if((x>=vector[j].getX())
+			  	&& (x<=vector[j].getX()+CELL_SIZE)
+			  	&&(y>=vector[j].getY())
+			  	&& (y<=vector[j].getY()+CELL_SIZE)){
 			return true;
+		}
 	return false;
 }
 float getThisSize(){
