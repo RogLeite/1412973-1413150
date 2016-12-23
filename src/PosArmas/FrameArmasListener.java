@@ -47,6 +47,10 @@ public class FrameArmasListener extends Listener{
 				ArmasPickPanel.getInstance().selectArmaAqui(p);
 	}
 
+	public static void storeBoard() {
+		
+	}
+
 
 
 }

@@ -91,6 +91,7 @@ public class Testador{
 	}
 	public static void weaponsPlacementDone() {
 		placements++;
+		FrameArmasListener.storeBoard();
 		if(placements<PlayerNames.length){
 			startPlacement();
 		}
