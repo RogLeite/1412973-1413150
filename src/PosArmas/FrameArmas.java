@@ -3,8 +3,10 @@ package PosArmas;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.peer.FramePeer;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 
@@ -13,6 +15,7 @@ import Tabuleiro.TabuleiroListener;
 import TopoNivel.GameFrame;
 import TopoNivel.MyActionListener;
 import TopoNivel.MyMouseListener;
+import TopoNivel.TestadorListener;
 import Armas.Arma;
 
 //import Tabuleiro.TabuleiroInvisivel;
@@ -20,7 +23,7 @@ import Armas.Arma;
 import Armas.ArmaListener;
 import Armas.ConjArmas;
 
-public class FrameArmas extends GameFrame {
+public class FrameArmas extends GameFrame{
 
 	private static final long serialVersionUID = 1L;
 	private static FrameArmas tabuleiro;
@@ -28,7 +31,7 @@ public class FrameArmas extends GameFrame {
 	private static JLabel campoP;
 	private static JButton butt;
 
-//	private static TabuleiroInvisivel T;
+	//	private static TabuleiroInvisivel T;
 
 	private static final String BASE_ACTION_STRING = "PLACE";
 	private static final String TAKE_ACTION_STRING = "PLACE_TAKE_ACTION";
@@ -65,20 +68,20 @@ public class FrameArmas extends GameFrame {
 		butt.setLayout(null);
 		getContentPane().add(butt,getContentPane().getComponentCount());
 
-//		T = new TabuleiroInvisivel((int)(ALT_DEFAULT+MARGIN),(int)MARGIN, ALT_DEFAULT);
-//		T.setLayout(null);
-//		T.addMouseListener(new MyMouseListener(getTakeActionString()));
-//		ArmaListener.addArmas(T, SIZE_FACTOR);
-//		getContentPane().add(T,getContentPane().getComponentCount());
-		
+		//		T = new TabuleiroInvisivel((int)(ALT_DEFAULT+MARGIN),(int)MARGIN, ALT_DEFAULT);
+		//		T.setLayout(null);
+		//		T.addMouseListener(new MyMouseListener(getTakeActionString()));
+		//		ArmaListener.addArmas(T, SIZE_FACTOR);
+		//		getContentPane().add(T,getContentPane().getComponentCount());
+
 		APanel = ArmasPickPanel.instance(0, 0,getWidth()/2,ALT_DEFAULT);
 		ConjArmas CArmas = new ConjArmas();
 		CArmas.ArmVect= ArmaListener.getFilledArray((float)getAPanel().getWidth(),(int) ALT_DEFAULT/16);
 
-//		System.out.printf("getComponentCount = %d\n",getContentPane().getComponentCount());
-//		System.out.printf("CArmas.ArmVect.length = %d\n",CArmas.ArmVect.length);
+		//		System.out.printf("getComponentCount = %d\n",getContentPane().getComponentCount());
+		//		System.out.printf("CArmas.ArmVect.length = %d\n",CArmas.ArmVect.length);
 		for(int i=0;i<CArmas.ArmVect.length;i++){
-//			System.out.printf("3+i = %d\n",3+i);
+			//			System.out.printf("3+i = %d\n",3+i);
 			APanel.add((CArmas.ArmVect[i]));
 		}
 		APanel.addMouseListener(new MyMouseListener(getTakeActionString()));
@@ -119,13 +122,7 @@ public class FrameArmas extends GameFrame {
 		return tabuleiro;
 	}
 
-	public static void receiveCommand(String m) {
-		//		switch(m){
-		//		case COMM4:
-		//			posArmas(tab);
-		//			break;
-		//		}
-	}
+
 
 
 	/*	private static void posArmas (int x) {
@@ -140,7 +137,7 @@ public class FrameArmas extends GameFrame {
 
 	}
 
-	public void takeAction( Point p) {
+	/*public void takeAction( Point p) {
 		//		System.out.printf("\nCheguei FrameArmas.takeAction(%s)\n",p.toString());
 		try {
 			((TabuleiroArmas) (getInstance().getContentPane().getComponent(0))).takeAction(p);
@@ -150,7 +147,7 @@ public class FrameArmas extends GameFrame {
 			//			System.out.println("\nCheguei Exception FrameArmas.takeAction()");
 			return;
 		}
-	}
+	}*/
 	@Override
 	protected void cellHit() {
 		// TODO Auto-generated method stub
@@ -170,6 +167,49 @@ public class FrameArmas extends GameFrame {
 	}
 	private ArmasPickPanel getAPanel(){
 		return APanel;
+	}
+
+	public static void rememberBoard() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public static String getThisActionCommand(Class<?> class1){
+		if(class1.isAssignableFrom(MyMouseListener.class)){
+			System.out.println("Cheguei MyMouseListener FrameArmasListener.getThisActionCommand()");
+			return FrameArmas.getTakeActionString();
+		}
+		else if(class1.isAssignableFrom(MyActionListener.class)){
+			//			System.out.println("Cheguei MyActionListener FrameArmasListener.getThisActionCommand()");
+			return FrameArmas.getBaseActionString();
+		}
+		return "<in FrameArmasListener>YOU DON'T KNOW WHAT YOU'RE LOOKING FOR!";
+	}	
+	public static void takeAction(GameFrame g, Point p){
+		//		System.out.println("Cheguei FrameArmasListener.takeAction()");
+		((FrameArmas)g).takeAction(p);
+		if(g.equals(getInstance())){
+			//		System.out.printf("\nCheguei FrameArmas.takeAction(%s)\n",p.toString());
+			try {
+				((TabuleiroArmas) (getInstance().getContentPane().getComponent(0))).takeAction(p);
+
+				return;
+			} catch (ExceptionCellAlreadyFilled e) {
+				//			System.out.println("\nCheguei Exception FrameArmas.takeAction()");
+				return;
+			}
+		}
+	}
+	public static void receiveCommand(String m) {
+		if(m.equals(FrameArmas.getPlacementDoneString())){
+			FrameArmas.safeTerminate();
+			TestadorListener.receiveCommand(FrameArmasListener.class);
+		}
+
+	}
+	public void takeAction(Point p){
+		System.out.println("Cheguei FrameArmasListener.takeAction(Point)");
+		ArmasPickPanel.getInstance().selectArmaAqui(p);
 	}
 }
 
