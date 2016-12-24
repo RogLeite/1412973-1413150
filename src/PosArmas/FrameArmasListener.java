@@ -12,8 +12,8 @@ import TopoNivel.MyActionListener;
 import TopoNivel.MyMouseListener;
 import TopoNivel.TestadorListener;
 
-public interface FrameArmasListener{
-	public String getThisActionCommand(Class<?> class1);/*{
+public class FrameArmasListener extends Listener{
+	public static String getThisActionCommand(Class<?> class1){
 		if(class1.isAssignableFrom(MyMouseListener.class)){
 			System.out.println("Cheguei MyMouseListener FrameArmasListener.getThisActionCommand()");
 			return FrameArmas.getTakeActionString();
@@ -23,31 +23,33 @@ public interface FrameArmasListener{
 			return FrameArmas.getBaseActionString();
 		}
 		return "<in FrameArmasListener>YOU DON'T KNOW WHAT YOU'RE LOOKING FOR!";
-	}*/
+	}
 
-	public void takeAction(GameFrame g, Point point);/*{
+	public static void takeAction(GameFrame g, Point point){
 //		System.out.println("Cheguei FrameArmasListener.takeAction()");
 		((FrameArmas)g).takeAction(point);
-	}*/
+	}
 
-	public JFrame instance(String name);/* {
+	public static JFrame instance(String name) {
 		return FrameArmas.instance(name);
-	}*/
+	}
 
-	public void receiveCommand(String m); /*{
+	public static void receiveCommand(String m) {
 		if(m.equals(FrameArmas.getPlacementDoneString())){
 			FrameArmas.safeTerminate();
 			TestadorListener.receiveCommand(FrameArmasListener.class);
 		}
 
-	}*/
+	}
 
-	public void takeAction(Point p);/*{
+	public static void takeAction(Point p){
 		System.out.println("Cheguei FrameArmasListener.takeAction(Point)");
 				ArmasPickPanel.getInstance().selectArmaAqui(p);
-	}*/
+	}
 
-	public void rememberBoard();
+	public static void storeBoard() {
+		
+	}
 
 
 
