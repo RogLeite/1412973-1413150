@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import PlayerNameInput.FrameRegistroNomesListener;
 //import PosArmas.FrameArmas;
 import PosArmas.FrameArmasListener;
+import TabuleiroPartida.FrameEmbate;
 //import TabuleiroPartida.FrameEmbate;
 import TabuleiroPartida.FrameEmbateListener;
 
@@ -26,6 +27,7 @@ public class Testador{
 	private static int x;
 	private static int y;
 	private static JFrame main;
+	private static FrameEmbate frameEmbate;
 	public static void main(String[] args) {
 		beginGame();
 	}
@@ -81,6 +83,7 @@ public class Testador{
 
 //		System.out.printf("\nCheguei PlayerNames[0] '%s' Testador.nameRegisterDone()\n",PlayerNames[0]);
 //		System.out.printf("\nCheguei PlayerNames[1] '%s' Testador.nameRegisterDone()\n",PlayerNames[1]);
+		frameEmbate = FrameEmbateListener.instance(PlayerNames);
 		startPlacement();
 	}
 	private static void startPlacement() {
@@ -90,8 +93,8 @@ public class Testador{
 		main.setVisible(true);
 	}
 	public static void weaponsPlacementDone() {
+		FrameArmasListener.rememberBoard(placements);
 		placements++;
-		FrameArmasListener.storeBoard();
 		if(placements<PlayerNames.length){
 			startPlacement();
 		}
@@ -102,7 +105,7 @@ public class Testador{
 	}
 	private static void startMatch() {
 		main.setVisible(false);
-		main = FrameEmbateListener.instance(PlayerNames);
+		main = frameEmbate;/*FrameEmbateListener.instance(PlayerNames);*/
 		recalculateLocation();
 		main.setVisible(true);
 	}

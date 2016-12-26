@@ -6,6 +6,7 @@ import java.awt.Point;
 import javax.swing.JButton;
 
 import Tabuleiro.ExceptionCellAlreadyHit;
+import Tabuleiro.Tabuleiro;
 import TopoNivel.GameFrame;
 import TopoNivel.MyActionListener;
 import TopoNivel.MyMouseListener;
@@ -185,5 +186,8 @@ public class FrameEmbate extends GameFrame{
 	public void takeAction(Point p) {}
 	public static String getTakeActionString() {
 		return TAKE_ACTION_STRING;
+	}
+	public Tabuleiro getThisBoard(int board) {
+		return (Tabuleiro)getContentPane().getComponent(board);
 	}
 }

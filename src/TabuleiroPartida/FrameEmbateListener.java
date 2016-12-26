@@ -5,6 +5,7 @@ import java.awt.Point;
 import javax.swing.JFrame;
 import javax.xml.bind.Marshaller.Listener;
 
+import Tabuleiro.Tabuleiro;
 import TopoNivel.GameFrame;
 import TopoNivel.MyActionListener;
 import TopoNivel.MyMouseListener;
@@ -51,7 +52,17 @@ public class FrameEmbateListener extends Listener{
 //		System.out.println("Cheguei FrameEmbateListener.takeAction()");
 		((FrameEmbate)g).takeAction(string, point);
 	}
-	public static JFrame instance(String[] names) {
+	public static FrameEmbate instance(String[] names) {
 		return FrameEmbate.instance(names);
+	}
+	public static void addBoardIn(Object board, int board2) {
+		// TODO Auto-generated method stub
+		
+	}
+	public static FrameEmbate getInstance() {
+		return FrameEmbate.getInstance();
+	}
+	public static Tabuleiro getThisBoard(FrameEmbate instance, int board) {
+		return instance.getThisBoard(board);
 	}
 }

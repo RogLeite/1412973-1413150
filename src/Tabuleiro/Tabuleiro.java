@@ -123,4 +123,11 @@ public abstract class Tabuleiro extends JPanel/* implements ITabuleiroPartida, I
 		ConjArmas c = getTabuleiroInvisivel().getArmasArray();
 		return ArmaListener.getColorHere(c,p);
 	}
+	void transferirTabuleiroInvisivel(Tabuleiro t){
+		t.addTabuleiroInvisivel(getTabuleiroInvisivel());
+	}
+	private void addTabuleiroInvisivel(TabuleiroInvisivel tabuleiroInvisivel) {
+		tabInvisivel = tabuleiroInvisivel;
+		System.out.println("Cheguei Tabuleiro.addTabuleiroInvisivel");
+	}
 }

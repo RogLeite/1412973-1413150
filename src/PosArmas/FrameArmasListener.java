@@ -7,6 +7,9 @@ import javax.swing.JPanel;
 import javax.xml.bind.Marshaller.Listener;
 
 import Armas.ExceptionComponentIsNotArma;
+import Tabuleiro.TabuleiroListener;
+import TabuleiroPartida.FrameEmbate;
+import TabuleiroPartida.FrameEmbateListener;
 import TopoNivel.GameFrame;
 import TopoNivel.MyActionListener;
 import TopoNivel.MyMouseListener;
@@ -47,8 +50,8 @@ public class FrameArmasListener extends Listener{
 				ArmasPickPanel.getInstance().selectArmaAqui(p);
 	}
 
-	public static void storeBoard() {
-		
+	public static void rememberBoard(int board) {
+		TabuleiroListener.transferirTabuleiroInvisivel(FrameEmbateListener.getThisBoard(FrameEmbateListener.getInstance(),board),FrameArmas.getInstance().getBoard());
 	}
 
 

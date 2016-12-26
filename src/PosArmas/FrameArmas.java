@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 
 
 import Tabuleiro.ExceptionCellAlreadyFilled;
+import Tabuleiro.Tabuleiro;
 import Tabuleiro.TabuleiroListener;
 import TopoNivel.GameFrame;
 import TopoNivel.MyActionListener;
@@ -85,6 +86,7 @@ public class FrameArmas extends GameFrame {
 		add(APanel);
 		setTitle("Posicionamento das Armas "+name);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setVisible(false);
 
 	}
 
@@ -170,6 +172,10 @@ public class FrameArmas extends GameFrame {
 	}
 	private ArmasPickPanel getAPanel(){
 		return APanel;
+	}
+
+	public Tabuleiro getBoard() {
+		return (Tabuleiro) getContentPane().getComponent(0);
 	}
 }
 

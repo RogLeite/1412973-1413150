@@ -59,5 +59,8 @@ public class TabuleiroListener extends Listener {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public static void transferirTabuleiroInvisivel(Tabuleiro in,Tabuleiro out){
+		out.transferirTabuleiroInvisivel(in);
+	}
 	
 }
