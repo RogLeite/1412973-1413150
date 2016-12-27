@@ -8,7 +8,9 @@ import java.awt.Point;
 import javax.swing.JPanel;
 
 import Armas.ArmaListener;
+import Armas.ConjArmas;
 import Armas.ExceptionComponentIsNotArma;
+import Armas.ExceptionNoWeaponSelected;
 import Armas.ExceptionWeaponAllreadySelected;
 
 public class ArmasPickPanel extends JPanel{
@@ -16,6 +18,16 @@ public class ArmasPickPanel extends JPanel{
 	private ArmasPickPanel(float x, float y, float width, float height){
 		super();
 		setBounds((int) x, (int) y, (int) width, (int) height);
+
+		ConjArmas CArmas = new ConjArmas();
+		CArmas.ArmVect= ArmaListener.getFilledArray((float)getWidth(),(int) getHeight()/16);
+
+//		System.out.printf("getComponentCount = %d\n",getContentPane().getComponentCount());
+//		System.out.printf("CArmas.ArmVect.length = %d\n",CArmas.ArmVect.length);
+		for(int i=0;i<CArmas.ArmVect.length;i++){
+//			System.out.printf("3+i = %d\n",3+i);
+			add((CArmas.ArmVect[i]));
+		}
 	}
 	public static ArmasPickPanel instance(float x, float y, float width, float height){
 		APanel = new ArmasPickPanel(x,y,width, height);
@@ -49,6 +61,14 @@ public class ArmasPickPanel extends JPanel{
 			return;
 		}	
 	}
-
+	public void rotatePiece() {
+		try {
+			System.out.println("Cheguei ArmasPickPanel.rotatePiece()");
+			ArmaListener.rotatePiece();
+		} catch (ExceptionNoWeaponSelected e) {
+			System.out.println("Cheguei ExceptionNoWeaponSelected in ArmasPickPanel.rotatePiece()");
+			return; 
+		}
+	}
 
 }

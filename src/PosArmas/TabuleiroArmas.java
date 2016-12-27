@@ -46,8 +46,11 @@ public class TabuleiroArmas extends Tabuleiro{
 		setVisibilidade(true);
 	}
 
-	public static String getTakeActionString() {
+	public String getTakeActionString() {
 		return TAKE_ACTION_STRING;
+	}
+	public boolean imHit(Point p){
+		return false;
 	}
 
 }

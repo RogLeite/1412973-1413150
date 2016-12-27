@@ -90,6 +90,10 @@ public class ArmaListener extends Listener {
 		ConjArmas.receiveArma(conjArmas,p);
 		
 	}
+	public static void rotatePiece() throws ExceptionNoWeaponSelected {
+		System.out.println("Cheguei ArmasListener.rotatePiece()");
+		ConjArmas.rotatePiece();
+	}
 
 
 }

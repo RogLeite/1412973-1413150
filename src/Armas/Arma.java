@@ -51,6 +51,7 @@ public abstract class Arma extends JPanel {
 		setNotDestroyed();
 	}
 	protected void setRotate(){
+		System.out.println("Cheguei Arma.setRotate()");
 		if (rotate==3)
 			rotate=0;
 		else
@@ -161,6 +162,10 @@ protected Point2D.Float[] getVectorLocation(){
 } 
 protected int getRotate(){
 	return rotate; 
+}
+
+public void rotate() {
+	
 } 
 
 

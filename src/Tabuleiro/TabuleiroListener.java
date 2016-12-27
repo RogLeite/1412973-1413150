@@ -9,13 +9,13 @@ import TabuleiroPartida.FrameEmbateMenuBar;
 import TabuleiroPartida.TabuleiroEmbate;
 import TopoNivel.MyMouseListener;
 
-public class TabuleiroListener extends Listener {
+public interface TabuleiroListener{
 	
-	public static TabuleiroInvisivel newInstanceTabuleiroInvisivel(int SIDE_TAB) {
+	public TabuleiroInvisivel newInstanceTabuleiroInvisivel(int SIDE_TAB); /*{
 		return TabuleiroInvisivel.newInstance(SIDE_TAB);
-	}
+	}*/
 
-	public static void clicked(Tabuleiro t, Point point) {
+	public void clicked(Point point);/*{
 		try {
 			t.takeAction(point);
 		} catch (ExceptionCellAlreadyHit e) {
@@ -25,15 +25,15 @@ public class TabuleiroListener extends Listener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 
-	public static String getThisActionCommand(Class<?> class1) {
+	public String getThisActionCommand(Class<?> class1);/* {
 		if(class1.isAssignableFrom(MyMouseListener.class)){
 			return TabuleiroArmas.getTakeActionString();
 		}
 		return null;
-	}
-//	
+	}*/
+//	UNOFFICIAL
 //	public void receiveCommand(String m){
 //		if(m.compareTo(TabuleiroInvisivel.getTakeActionString())==0){
 //			
@@ -41,7 +41,7 @@ public class TabuleiroListener extends Listener {
 //	}
 //	
 
-	public static boolean imHit(Tabuleiro t, Point p) {
+	public boolean imHit(Point p);/* {
 		if(t instanceof TabuleiroArmas){
 			return false;
 		}
@@ -49,18 +49,17 @@ public class TabuleiroListener extends Listener {
 			t.imHit(p);
 		}
 		return false;
-	}
+	}*/
 
-	public static boolean getVisibilidade(Tabuleiro t) {
+	public boolean getVisibilidade(); /*{
 		return t.getVisibilidade();
-	}
+	}*/
 
-	public static String getTakeActionString() {
-		// TODO Auto-generated method stub
+	public String getTakeActionString(); /*{
 		return null;
-	}
-	public static void transferirTabuleiroInvisivel(Tabuleiro in,Tabuleiro out){
+	}*/
+	public void transferirTabuleiroInvisivel(Tabuleiro in,Tabuleiro out);/*{
 		out.transferirTabuleiroInvisivel(in);
-	}
+	}*/
 	
 }

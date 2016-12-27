@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 
 //import PlayerNameInput.FrameRegistroNomes;
 import PlayerNameInput.FrameRegistroNomesListener;
+import PosArmas.FrameArmas;
 //import PosArmas.FrameArmas;
 import PosArmas.FrameArmasListener;
 import TabuleiroPartida.FrameEmbate;
@@ -88,12 +89,12 @@ public class Testador{
 	}
 	private static void startPlacement() {
 		main.setVisible(false);
-		main = FrameArmasListener.instance(PlayerNames[placements]);
+		main = new FrameArmas(PlayerNames[placements]);
 		recalculateLocation();
 		main.setVisible(true);
 	}
 	public static void weaponsPlacementDone() {
-		FrameArmasListener.rememberBoard(placements);
+		((FrameArmas) main).rememberBoard(placements);
 		placements++;
 		if(placements<PlayerNames.length){
 			startPlacement();

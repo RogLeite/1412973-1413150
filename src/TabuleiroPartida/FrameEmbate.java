@@ -47,14 +47,12 @@ public class FrameEmbate extends GameFrame{
 //		System.out.printf("\t CURR_PLAYER: %s",P1.getBoundPlayer());
 
 		P1.setVisibilidade(false);
-		P1.addMouseListener(new MyMouseListener(getTakeActionString()));
 		P1.setName(P1.getBoundPlayer()+" BOARD");
 
 		P2 = new TabuleiroEmbate((int)(ALT_DEFAULT+3*MARGIN),(int)OVER_MARGIN,ALT_DEFAULT,getPlayerOption(2));
 //		System.out.printf("\t CURR_PLAYER: %s",P2.getBoundPlayer());
 
 		P2.setVisibilidade(false);
-		P2.addMouseListener(new MyMouseListener(getTakeActionString()));
 		P2.setName(P2.getBoundPlayer()+" BOARD");
 
 		P1.setLayout(null);

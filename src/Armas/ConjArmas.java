@@ -174,8 +174,17 @@ public class ConjArmas{
 	}
 
 	private static boolean AllowPlacement() {
-		// TODO Auto-generated method stub
 		return false;
+	}
+	public static void rotatePiece() throws ExceptionNoWeaponSelected {
+		System.out.println("Cheguei ConjArmas.rotatePiece()");
+		if(getSelectedArma()==null){
+			throw new ExceptionNoWeaponSelected();
+		}
+		else{
+			getSelectedArma().setRotate();
+		}
+		
 	}
 
 }

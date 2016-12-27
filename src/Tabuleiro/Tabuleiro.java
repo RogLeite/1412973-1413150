@@ -16,13 +16,16 @@ import javax.swing.JPanel;
 import Armas.ArmaListener;
 import Armas.ConjArmas;
 import Armas.ExceptionNoWeaponHere;
+import PosArmas.TabuleiroArmas;
+import TabuleiroPartida.TabuleiroEmbate;
+import TopoNivel.MyMouseListener;
 
 //import TabuleiroPartida.FrameEmbate;
 //import TopoNivel.MyMouseListener;
 
 //import PlayerNameInput.MyActionListener;
 
-public abstract class Tabuleiro extends JPanel/* implements ITabuleiroPartida, ITabuleiroArmas*/{
+public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* implements ITabuleiroPartida, ITabuleiroArmas*/{
 	/**
 	 * 
 	 */
@@ -41,7 +44,7 @@ public abstract class Tabuleiro extends JPanel/* implements ITabuleiroPartida, I
 		setIgnoreRepaint(false);
 		bound_player = player;
 
-		tabInvisivel = TabuleiroListener.newInstanceTabuleiroInvisivel(SIDE_TAB);
+		tabInvisivel = newInstanceTabuleiroInvisivel(SIDE_TAB);
 //		System.out.printf("Cheguei tabInvisivel in %s TabuleiroInvisivel\n",tabInvisivel.getLocation().toString() );
 		add(tabInvisivel);
 		for(int i=1;i<SIDE_TAB;i++){
@@ -105,11 +108,7 @@ public abstract class Tabuleiro extends JPanel/* implements ITabuleiroPartida, I
 		return bound_player;
 	}
 	public abstract void takeAction(Point2D p) throws ExceptionCellAlreadyHit, ExceptionCellAlreadyFilled;
-	public boolean imHit(Point p) {
-		ConjArmas c = getTabuleiroInvisivel().getArmasArray();
-		return ArmaListener.hasDestroyedPart(c,p.getLocation());
-
-	}
+	public abstract boolean imHit(Point p); 
 	public boolean imFilled(Point p){
 		ConjArmas c = getTabuleiroInvisivel().getArmasArray();
 //		System.out.printf("Cheguei c tem algo? %b Tabuleiro.imFilled\n", (c!=null));
@@ -129,5 +128,40 @@ public abstract class Tabuleiro extends JPanel/* implements ITabuleiroPartida, I
 	private void addTabuleiroInvisivel(TabuleiroInvisivel tabuleiroInvisivel) {
 		tabInvisivel = tabuleiroInvisivel;
 		System.out.println("Cheguei Tabuleiro.addTabuleiroInvisivel");
+	}
+	public TabuleiroInvisivel newInstanceTabuleiroInvisivel(int SIDE_TAB){
+		return TabuleiroInvisivel.newInstance(SIDE_TAB);
+	}
+	public void clicked(Point point) {
+		try {
+			takeAction(point);
+		} catch (ExceptionCellAlreadyHit e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExceptionCellAlreadyFilled e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public String getThisActionCommand(Class<?> class1) {
+		if(class1.isAssignableFrom(MyMouseListener.class)){
+			return getTakeActionString();
+		}
+		return null;
+	}
+	public String getTakeActionString() {
+		return null;
+	}
+
+	public  void transferirTabuleiroInvisivel(Tabuleiro in,Tabuleiro out){
+		out.transferirTabuleiroInvisivel(in);
+	}
+	public boolean imHovered(Point location) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	public boolean placingAllowed() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
