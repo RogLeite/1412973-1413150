@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import Tabuleiro.ExceptionCellAlreadyFilled;
 import Tabuleiro.Tabuleiro;
 import Tabuleiro.TabuleiroListener;
+import TabuleiroPartida.ExceptionBoardNotInstanced;
 import TabuleiroPartida.FrameEmbateListener;
 import TopoNivel.GameFrame;
 import TopoNivel.MyActionListener;
@@ -196,7 +197,11 @@ public class FrameArmas extends GameFrame {
 		return "<in FrameArmasListener>YOU DON'T KNOW WHAT YOU'RE LOOKING FOR!";
 	}
 	public void rememberBoard(int board) {
-		getBoard().transferirTabuleiroInvisivel(FrameEmbateListener.getThisBoard(FrameEmbateListener.getInstance(),board),getBoard());
+		try {
+			getBoard().transferirTabuleiroInvisivel(FrameEmbateListener.getThisBoard(FrameEmbateListener.getInstance(),board),getBoard());
+		} catch (ExceptionBoardNotInstanced e) {
+			FrameEmbateListener.instance(getAllPlayers());
+		}
 	}
 }
 

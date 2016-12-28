@@ -29,7 +29,7 @@ public class FrameEmbateListener extends Listener{
 		}
 		return "<in FrameEmbateListener>YOU DON'T KNOW WHAT YOU'RE LOOKING FOR!";
 	}
-	public static void receiveCommand(String m){
+	public static void receiveCommand(String m) throws ExceptionBoardNotInstanced{
 
 		System.out.printf("\nCheguei message: '%s' FrameEmbateListener.receiveCommand()\n",m);
 		System.out.printf("\nCheguei BPS: '%s' FrameEmbateListener.receiveCommand()\n",FrameEmbate.getBeginPlayString());
@@ -59,7 +59,7 @@ public class FrameEmbateListener extends Listener{
 		// TODO Auto-generated method stub
 		
 	}
-	public static FrameEmbate getInstance() {
+	public static FrameEmbate getInstance() throws ExceptionBoardNotInstanced {
 		return FrameEmbate.getInstance();
 	}
 	public static Tabuleiro getThisBoard(FrameEmbate instance, int board) {

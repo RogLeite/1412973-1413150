@@ -12,8 +12,7 @@ import PlayerNameInput.FrameRegistroNomesListener;
 import PosArmas.FrameArmas;
 //import PosArmas.FrameArmas;
 import PosArmas.FrameArmasListener;
-
-
+import TabuleiroPartida.ExceptionBoardNotInstanced;
 import TabuleiroPartida.FrameEmbateListener;
 public class MyActionListener implements ActionListener{
 	private String message;
@@ -28,7 +27,12 @@ public class MyActionListener implements ActionListener{
 		}
 		else if(message.contains(FrameEmbateListener.getThisActionCommand(MyActionListener.class))){
 			//			System.out.println("Cheguei message.contains(MATCH) in MyActionListener.actionPerformed()");
-			FrameEmbateListener.receiveCommand(message);
+			try {
+				FrameEmbateListener.receiveCommand(message);
+			} catch (ExceptionBoardNotInstanced e1) {
+				FrameEmbateListener.instance(null);
+				actionPerformed(e);
+			}
 		}
 		else if(message.contains(FrameRegistroNomesListener.getThisActionCommand(MyActionListener.class))){
 			//			System.out.println("Cheguei message.contains(CAPT) in MyActionListener.actionPerformed()");

@@ -29,6 +29,7 @@ public abstract class GameFrame extends JFrame{
 	public String getCurrPlayer(){
 		//		System.out.println("Cheguei GameFrame.getCurrPlayer()");
 //		System.out.printf("\n\t vet_index: %d",vet_index);
+		System.out.printf("Cheguei CURR_PLAYER = %s GameFrame.getCurrPlayer\n",CURR_PLAYER);
 		return CURR_PLAYER;
 	}
 	public boolean currPlayerIsNeutral(){
@@ -52,7 +53,7 @@ public abstract class GameFrame extends JFrame{
 //		System.out.printf("\nCheguei CURR_PLAYER : '%s' GameFrame.nextPlayer()\n",getPlayerOption(vet_index));
 		CURR_PLAYER = getPlayerOption(vet_index);
 	}
-	private String[] getAllPlayers() {
+	protected String[] getAllPlayers() {
 		
 		return TestadorListener.getPlayers();
 	}

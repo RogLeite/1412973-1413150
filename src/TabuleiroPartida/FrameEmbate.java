@@ -92,10 +92,9 @@ public class FrameEmbate extends GameFrame{
 		tabuleiro.setIgnoreRepaint(true);
 		return tabuleiro;
 	}
-	public static FrameEmbate getInstance(){
+	public static FrameEmbate getInstance() throws ExceptionBoardNotInstanced{
 		if(tabuleiro==null){
-			//TODO ExceptionBoardNotInstanced
-			return null;
+			throw new ExceptionBoardNotInstanced();
 		}
 		return tabuleiro;
 	}
@@ -122,13 +121,13 @@ public class FrameEmbate extends GameFrame{
 
 		if(((TabuleiroEmbate)(tabuleiro.getContentPane().getComponent(0))).getBoundPlayer().equals(getCurrPlayer())){
 			//			System.out.println("Cheguei P1 turn TabuleiroEmbateEmbate.beginPlay()");
-			((TabuleiroEmbate)(tabuleiro.getContentPane().getComponent(1))).setVisibilidade(true);
-			((TabuleiroEmbate)(tabuleiro.getContentPane().getComponent(1))).repaint(((TabuleiroEmbate)(tabuleiro.getContentPane().getComponent(1))).getBounds());
+			((TabuleiroEmbate)(tabuleiro.getContentPane().getComponent(0))).setVisibilidade(true);
+			((TabuleiroEmbate)(tabuleiro.getContentPane().getComponent(0))).repaint(((TabuleiroEmbate)(tabuleiro.getContentPane().getComponent(1))).getBounds());
 		}
 		else{
 			//			System.out.println("Cheguei P2 turn TabuleiroEmbateEmbate.beginPlay()");
-			((TabuleiroEmbate)(tabuleiro.getContentPane().getComponent(0))).setVisibilidade(true);
-			((TabuleiroEmbate)(tabuleiro.getContentPane().getComponent(0))).repaint(((TabuleiroEmbate)(tabuleiro.getContentPane().getComponent(0))).getBounds());
+			((TabuleiroEmbate)(tabuleiro.getContentPane().getComponent(1))).setVisibilidade(true);
+			((TabuleiroEmbate)(tabuleiro.getContentPane().getComponent(1))).repaint(((TabuleiroEmbate)(tabuleiro.getContentPane().getComponent(0))).getBounds());
 		}
 	}
 	public String getCurrFrame() {
@@ -149,7 +148,7 @@ public class FrameEmbate extends GameFrame{
 		for(int i=0;i<TAB_COUNT;i++){
 //			System.out.printf("\nCheguei FrameEmbate.takeAction()\n\ttab.getBound: %s \n\tboundplayer: %s\n",((TabuleiroEmbate)tabuleiro.getContentPane().getComponent(i)).getBoundPlayer(),bound_player);
 			if(((TabuleiroEmbate)tabuleiro.getContentPane().getComponent(i)).getBoundPlayer().equals(bound_player)
-					&& ((TabuleiroEmbate)tabuleiro.getContentPane().getComponent(i)).getVisibilidade()/*getBoundPlayer().equals(getCurrPlayer())*/){
+					&& !((TabuleiroEmbate)tabuleiro.getContentPane().getComponent(i)).getVisibilidade()/*getBoundPlayer().equals(getCurrPlayer())*/){
 				try {
 					((TabuleiroEmbate)tabuleiro.getContentPane().getComponent(i)).takeAction(p);
 //					System.out.println("Cheguei deu certo FrameEmbate.takeAction()");
