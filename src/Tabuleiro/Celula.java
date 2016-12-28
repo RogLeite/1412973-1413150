@@ -57,11 +57,11 @@ public final class Celula extends JPanel{
 		Tabuleiro t = ((Tabuleiro)this.getParent());
 		//		System.out.println("Cheguei Celula.paintComponent()");
 
-		if (t.getVisibilidade()||t.imHit(this.getLocation())) {
+		if (t.getVisibilidade()||imHit()) {
 			//			System.out.println("Cheguei visibilidade||HIT Celula.paintComponent()");
 			g2d.setColor(decideCor(t));
 			g2d.fillRect(0, 0, (int) CELL_SIZE, (int) CELL_SIZE);
-			if(t.imHit(this.getLocation())){
+			if(imHit()){
 				g2d.setColor(Color.BLACK);
 				g2d.drawLine(0, 0,(int)CELL_SIZE, (int)CELL_SIZE);
 				g2d.drawLine(0, (int)CELL_SIZE,(int)CELL_SIZE, 0);
@@ -90,6 +90,10 @@ public final class Celula extends JPanel{
 
 
 	}
+	private boolean imHit() {
+		return HIT;
+	}
+
 	private Color decideCor(Tabuleiro t){
 		//		System.out.println("Cheguei Celula.decideCor()");
 		//		System.out.printf("imFilled %b\n",t.imFilled(this.getLocation()));

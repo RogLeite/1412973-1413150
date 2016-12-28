@@ -81,11 +81,15 @@ public abstract class Arma extends JPanel {
 		for (i=0; i<vector.length&&!(isHere((Point) p));i++);
 		return vectHit[i];
 	}
-	protected boolean Atingir(Point2D.Float pt){
+	protected boolean Atingir(Point pt){
+		float x = (float) pt.getX()-getX();
+		float y = (float) pt.getY()-getY();
 		for (int i=0; i<vector.length;i++)
-			if(pt.equals(vector[i])){
-				vectHit[i]=true;
-				return true;
+			if((x>=vector[i].getX())
+				  	&& (x<=vector[i].getX()+CELL_SIZE)
+				  	&&(y>=vector[i].getY())
+				  	&& (y<=vector[i].getY()+CELL_SIZE)){
+				return !(vectHit[i]);
 			}
 		return false;
 	}

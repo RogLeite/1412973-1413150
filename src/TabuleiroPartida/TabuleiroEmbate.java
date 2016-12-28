@@ -23,6 +23,7 @@ public class TabuleiroEmbate  extends Tabuleiro{
 
 	public void takeAction(Point2D p) throws ExceptionCellAlreadyHit {
 //		System.out.printf("\nCheguei TabuleiroEmbate.takeAction(%s)\n",p.toString());
+		getTabuleiroInvisivel().getArmasArray().atingiuArma((int)p.getX(), (int)p.getY());
 		Celula.hitCell(((Celula)getComponentAt((Point)p)));
 	}
 	public boolean imHit(Point p){

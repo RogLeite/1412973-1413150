@@ -146,6 +146,7 @@ public class FrameEmbate extends GameFrame{
 
 	public void takeAction(String bound_player,Point p){
 		for(int i=0;i<TAB_COUNT;i++){
+			if(!currPlayerIsNeutral()){
 //			System.out.printf("\nCheguei FrameEmbate.takeAction()\n\ttab.getBound: %s \n\tboundplayer: %s\n",((TabuleiroEmbate)tabuleiro.getContentPane().getComponent(i)).getBoundPlayer(),bound_player);
 			if(((TabuleiroEmbate)tabuleiro.getContentPane().getComponent(i)).getBoundPlayer().equals(bound_player)
 					&& !((TabuleiroEmbate)tabuleiro.getContentPane().getComponent(i)).getVisibilidade()/*getBoundPlayer().equals(getCurrPlayer())*/){
@@ -160,6 +161,7 @@ public class FrameEmbate extends GameFrame{
 				}
 			}
 			else{}
+			}
 		}
 	}
 	public static String getSaveString() {
