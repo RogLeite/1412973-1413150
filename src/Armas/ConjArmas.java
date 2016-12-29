@@ -141,9 +141,6 @@ public static void receiveArma(ConjArmas c, Point2D p) throws ExceptionArmVectFi
 	if(a==null){
 		throw new ExceptionNoWeaponSelected();
 	}
-	if(!AllowPlacement()){
-		
-	}
 	System.out.printf("\nCheguei Arma Location %s ConjArmas.receiveArma\n",p.toString());
 	a.setLocation((float)p.getX(),(float)p.getY());
 	addArma(c,a);
@@ -176,9 +173,6 @@ public Arma[] getArmVec() {
 	return ArmVect;
 }
 
-private static boolean AllowPlacement() {
-	return false;
-}
 public static void rotatePiece() throws ExceptionNoWeaponSelected {
 	System.out.println("Cheguei ConjArmas.rotatePiece()");
 	if(getSelectedArma()==null){
