@@ -7,6 +7,8 @@ import java.awt.geom.Point2D;
 
 import Armas.ArmaListener;
 import Armas.ConjArmas;
+import Armas.ExceptionArrayNotFilled;
+import Armas.ExceptionNoWeaponHere;
 import Tabuleiro.Celula;
 import Tabuleiro.ExceptionCellAlreadyHit;
 import Tabuleiro.Tabuleiro;
@@ -23,8 +25,11 @@ public class TabuleiroEmbate  extends Tabuleiro{
 
 	public void takeAction(Point2D p) throws ExceptionCellAlreadyHit{
 		//		System.out.printf("\nCheguei TabuleiroEmbate.takeAction(%s)\n",p.toString());
-		if(!getTabuleiroInvisivel().getArmasArray().atingiuArma((int)p.getX(), (int)p.getY()))
-		{
+		try {
+			getTabuleiroInvisivel().getArmasArray().atingiuArma((int)p.getX(), (int)p.getY());
+		} catch (ExceptionNoWeaponHere e1) {
+			System.out.print("Foi na Agua!!\tTabuleiroEmbate.takeAction");
+		} catch (ExceptionArrayNotFilled e1) {
 			
 		}
 		

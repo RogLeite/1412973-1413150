@@ -13,9 +13,6 @@ import Armas.ConjArmas;
 
 public class ArmaListener extends Listener {
 
-	public static float getThisSize(Arma a){
-		return a.getThisSize();
-	}
 	public static ConjArmas getEmptyArray() {
 		return ConjArmas.getEmptyArray();
 	}

@@ -1,49 +1,63 @@
 package Armas;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.geom.Point2D;
 
+import Tabuleiro.ExceptionCellAlreadyFilled;
+
 public class Hidroaviao extends Arma {
+	private final TipoArma tipo = TipoArma.Hidroaviao;
+	public Hidroaviao(){
+		super();
+		cellMatrix = CelulaMatrix.instance(this,3,2);
+		try {
+			cellMatrix.fill(0,1);
+			cellMatrix.fill(1,0);
+			cellMatrix.fill(2,1);
+		} catch (ExceptionCellAlreadyFilled e) {
+			e.printStackTrace();
+		}
 
-	private static final long serialVersionUID = 1L;
-
-	public Hidroaviao(int size, int cellSize){
-	//	super(3,Color.YELLOW,5,size);
-		super(3,Color.YELLOW,size, cellSize);
-		HEIGHT_IN_CELL = 2;
-		WIDTH_IN_CELL = (int)size;
 	}
+	public Hidroaviao(float x, float y){
+		super(x,y);
+		cellMatrix = CelulaMatrix.instance(this,3,2);
+		try {
+			cellMatrix.fill(0,1);
+			cellMatrix.fill(1,0);
+			cellMatrix.fill(2,1);
+		} catch (ExceptionCellAlreadyFilled e) {
+			e.printStackTrace();
+		}
 
-	public void setLocation(float x, float y) {
-
-//		setLocation((int)((x/CELL_SIZE)*CELL_SIZE), (int)((y/CELL_SIZE)*CELL_SIZE));
-		setLocation((int)x, (int)y);
-
-		switch(rotate){
-		case 0:
-			setSize(WIDTH_IN_CELL*CELL_SIZE, HEIGHT_IN_CELL*CELL_SIZE);
-			vector[0]= new Point2D.Float(0,1*CELL_SIZE);
-			vector[1]= new Point2D.Float(1*CELL_SIZE,0);
-			vector[2]= new Point2D.Float(2*CELL_SIZE,1*CELL_SIZE);
-			break;
-		case 1:
-			setSize( HEIGHT_IN_CELL*CELL_SIZE, WIDTH_IN_CELL*CELL_SIZE);
-			vector[0]= new Point2D.Float(0,0);
-			vector[1]= new Point2D.Float(1*CELL_SIZE,1*CELL_SIZE);
-			vector[2]= new Point2D.Float(0,2*CELL_SIZE);
-			break;
-		case 2:
-			setSize(WIDTH_IN_CELL*CELL_SIZE, HEIGHT_IN_CELL*CELL_SIZE);
-			vector[0]= new Point2D.Float(2*CELL_SIZE,0);
-			vector[1]= new Point2D.Float(1*CELL_SIZE,1*CELL_SIZE);
-			vector[2]= new Point2D.Float(0,0);
-			break;
-		case 3:
-			setSize( HEIGHT_IN_CELL*CELL_SIZE, WIDTH_IN_CELL*CELL_SIZE);
-			vector[0]= new Point2D.Float(1*CELL_SIZE,2*CELL_SIZE);
-			vector[1]= new Point2D.Float(1*CELL_SIZE,0);
-			vector[2]= new Point2D.Float(0,1*CELL_SIZE);
-			break;
+	}
+	public static Hidroaviao instance() {
+		return new Hidroaviao();
+	}
+	public static Hidroaviao instance(Point p){
+		float x = p.x;
+		float y = p.y;
+		return new Hidroaviao(x,y);
+	}
+	public static Hidroaviao instance(float x, float y){
+		return new Hidroaviao(x,y);
+	}
+	public void paintComponent(Graphics g){
+		Graphics2D g2d = (Graphics2D)g;
+		setSize();
+		for(int i=0;i<cellMatrix.getWidth();i++){
+			for(int j=0;j<cellMatrix.getHeight();j++){
+				if(cellMatrix.isHere(i,j)){
+					g2d.setColor(this.tipo.getColor());
+					g2d.fillRect(getX()*i*CELL_SIZE, getY()*j*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+					g2d.setColor(Color.BLACK);
+					g2d.drawRect(getX()*i*CELL_SIZE, getY()*j*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+				}
+			}
 		}
 	}
+	
 }

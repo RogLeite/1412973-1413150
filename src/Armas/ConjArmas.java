@@ -6,6 +6,8 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 import javax.swing.JFrame;
 
+import Tabuleiro.ExceptionCellAlreadyHit;
+
 public class ConjArmas{
 	private static int TotalNotDestroyed=TipoArma.getSomaQtdMax();
 	private static Arma selectedArma = null;
@@ -20,17 +22,25 @@ public class ConjArmas{
 	}
 	public ConjArmas(){
 	}
-	public boolean atingiuArma(int x, int y){
+	public void atingiuArma(int x, int y) throws ExceptionCellAlreadyHit, ExceptionNoWeaponHere, ExceptionArrayNotFilled{
 		Point pt = new Point(x,y);
-		for(int i=0; i<ArmVect.length; i++)
-			if(EhArma(x,y)){
-				if(ArmVect[i].Atingir(pt)){
-					if(ArmVect[i].getDestroyed())
-						TotalNotDestroyed--;
-					return true;
+		for(int i=0; i<ArmVect.length; i++){
+
+			System.out.printf("Cheguei (ArmVect==null) = %s\n", Boolean.toString((ArmVect==null)));
+			System.out.printf("Cheguei (ArmVect[%d]==null) = %s\n", i,Boolean.toString((ArmVect[i]==null)));
+			if(ArmVect[i]==null){
+//				throw new ExceptionArrayNotFilled();
+//				TODO
+				throw new ExceptionNoWeaponHere();
+			}
+
+			if(ArmVect[i].Atingir(pt)){
+				if(ArmVect[i].getDestroyed()){
+					TotalNotDestroyed--;
 				}
-			}	
-		return false;
+			}
+
+		}
 	}
 
 	public boolean EhArma( int x, int y){
@@ -97,15 +107,15 @@ public class ConjArmas{
 		//		System.out.printf("TipoArma.Hidroaviao.getQtdMax() = %d\n",TipoArma.Hidroaviao.getQtdMax());
 		//		System.out.printf("TotalNotDestroyed = %d\n",TotalNotDestroyed);
 		for(int i=0; i<TipoArma.Submarino.getQtdMax(); i++,j++)
-			c[j]= new Navio( TipoArma.Submarino, TipoArma.Submarino.getNumCels(),cellSize);
+			c[j]= Submarino.instance();
 		for(int i=0; i<TipoArma.Destroyer.getQtdMax(); i++,j++)
-			c[j]= new Navio( TipoArma.Destroyer, TipoArma.Destroyer.getNumCels(),cellSize);
+			c[j]= Destroyer.instance();
 		for(int i=0; i<TipoArma.Hidroaviao.getQtdMax(); i++,j++)
-			c[j]= new Hidroaviao(TipoArma.Hidroaviao.getNumCels(),cellSize);
+			c[j]= Hidroaviao.instance();
 		for(int i=0; i<TipoArma.Cruzador.getQtdMax(); i++,j++)
-			c[j]= new Navio( TipoArma.Cruzador, TipoArma.Cruzador.getNumCels(),cellSize);
+			c[j]= Cruzador.instance();
 		for(int i=0; i<TipoArma.Couracado.getQtdMax();i++,j++)
-			c[j]= new Navio (TipoArma.Couracado, TipoArma.Couracado.getNumCels(),cellSize);
+			c[j]= Couracado.instance();
 
 		//		System.out.printf("J = %d\n",j);
 		for(int i=0; i<c.length;i++){
@@ -148,9 +158,9 @@ public class ConjArmas{
 		a.setLocation((float)p.getX(),(float)p.getY());
 		addArma(c,a);
 
-	if(!AllowPlacement()){
-	}
-		
+		if(!AllowPlacement()){
+		}
+
 
 	}
 	static void addArma(ConjArmas c, Arma a) throws ExceptionArmVectFilled {
@@ -190,7 +200,7 @@ public class ConjArmas{
 			throw new ExceptionNoWeaponSelected();
 		}
 		else{
-			getSelectedArma().setRotate();
+			getSelectedArma().rotateClockwise();
 		}
 
 	}

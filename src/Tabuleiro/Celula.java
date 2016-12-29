@@ -17,6 +17,8 @@ public final class Celula extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private final Tabuleiro tabResp;
 	private static float CELL_SIZE;
+	private boolean VISIBLE = false;
+	private boolean DESTROYED = false;
 	private boolean HIT = false;
 	private boolean FILLED = false;
 	//	private boolean visibilidade = true;

@@ -96,7 +96,7 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 	public void setVisibilidade(boolean v){
 		visibilidade = v;
 //				System.out.printf("\nCheguei %s Tabuleiro.setVisibilidade(%b)\n",bound_player,v);
-		System.out.println("Cheguei Tabuleiro.setVisibilidade");
+//		System.out.println("Cheguei Tabuleiro.setVisibilidade");
 		for(int i=0;i<getComponentCount()-1;i++){
 			((Celula)getComponent(i)).repaint();
 		}

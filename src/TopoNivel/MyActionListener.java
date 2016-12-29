@@ -19,7 +19,7 @@ public class MyActionListener implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		message = e.getActionCommand();
 		Object o = e.getSource();
-		System.out.printf("\nCheguei message: '%s' MyActionListener.actionPerformed()\n",message);
+//		System.out.printf("\nCheguei message: '%s' MyActionListener.actionPerformed()\n",message);
 
 		if(message.contains("GOTO")){
 			//			System.out.println("Cheguei message.contains(GOTO) in MyActionListener.actionPerformed()");
