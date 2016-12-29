@@ -158,7 +158,7 @@ public class FrameEmbate extends GameFrame{
 				} catch (ExceptionCellAlreadyHit e) {
 					denyedPlay();
 					return;
-				}
+				} 
 			}
 			else{}
 			}

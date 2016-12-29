@@ -3,6 +3,7 @@ package Tabuleiro;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 
 //import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -67,8 +68,8 @@ public final class Celula extends JPanel{
 				g2d.drawLine(0, (int)CELL_SIZE,(int)CELL_SIZE, 0);
 			}
 		}
-		else if(t.imHovered(this.getLocation())){
-			if(t.imHovered(this.getLocation())){
+		else if(t.imHovered(this.getCorrectedLocation())){
+			if(t.imHovered(this.getCorrectedLocation())){
 				System.out.println("Cheguei imHovered Celula.decideCor()");
 				if(t.placingAllowed()){
 					g2d.setColor(Color.GRAY);
@@ -96,14 +97,14 @@ public final class Celula extends JPanel{
 
 	private Color decideCor(Tabuleiro t){
 		//		System.out.println("Cheguei Celula.decideCor()");
-		//		System.out.printf("imFilled %b\n",t.imFilled(this.getLocation()));
-		if(t.imFilled(this.getLocation())){//ve se tem arma
-			if(t.imDestroyed(this.getLocation())){//SÓ MUDARÁ A CÔR SE ESTIVER DETONADA
+		//		System.out.printf("imFilled %b\n",t.imFilled(this.getCorrectedLocation()));
+		if(t.imFilled(this.getCorrectedLocation())){//ve se tem arma
+			if(t.imDestroyed(this.getCorrectedLocation())){//SÓ MUDARÁ A CÔR SE ESTIVER DETONADA
 				return new Color(224,41,20);
 			}
 			try {
-				//System.out.printf("Cheguei Cor da Arma: %s Celula.decideCor()",t.myColor(this.getLocation()).toString());
-				return t.myColor(this.getLocation());
+				//System.out.printf("Cheguei Cor da Arma: %s Celula.decideCor()",t.myColor(this.getCorrectedLocation()).toString());
+				return t.myColor(this.getCorrectedLocation());
 			} catch (ExceptionNoWeaponHere e) {
 				//System.out.println("Cheguei Azul Escuro Celula.decideCor()");
 				return new Color(43, 66, 227);
@@ -134,5 +135,10 @@ public final class Celula extends JPanel{
 	//	public boolean getVisibilidade(){
 	//		return visibilidade;
 	//	}
+
+	private Point getCorrectedLocation() {
+		
+		return new Point((int)(getX()+CELL_SIZE),(int)(getY()+CELL_SIZE));
+	}
 
 }

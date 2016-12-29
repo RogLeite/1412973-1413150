@@ -18,7 +18,7 @@ public abstract class Arma extends JPanel {
 	//	private final int qtdMax;
 	//	private boolean destroyed; //indica se uma arma foi completamente atingida
 	protected int numPartes=0;
-	protected int rotate=0;			//cada acrescimo indica giro de 90º
+	protected int rotate;			//cada acrescimo indica giro de 90º
 	protected Point2D.Float vector[];		//vetor c coord das partes da arma
 	protected boolean vectHit[];			//indica partes atingidas
 	private final Color MAIN_COLOR;			//indica cor da arma
@@ -39,6 +39,7 @@ public abstract class Arma extends JPanel {
 	}
 
 	public Arma(int partes, Color c,int size, int cellSize){
+		setRotate(0);
 		numPartes=partes;
 		MAIN_COLOR = c;
 		SIZE=size;
@@ -141,7 +142,7 @@ public abstract class Arma extends JPanel {
 			g2d.setColor(getColor());
 			g2d.fillRect(x,y,CELL_SIZE,CELL_SIZE);
 			g2d.setColor(Color.BLACK);
-			g2d.drawRect(x , y ,CELL_SIZE-2,CELL_SIZE-2);
+			g2d.drawRect(x , y ,CELL_SIZE,CELL_SIZE);
 		}
 
 }
@@ -168,9 +169,6 @@ protected int getRotate(){
 	return rotate; 
 }
 
-public void rotate() {
-	
-} 
 
 
 

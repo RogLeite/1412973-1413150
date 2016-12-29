@@ -111,7 +111,7 @@ public static Arma[] getFilledArray(float width, int cellSize) {
 
 	//		System.out.printf("J = %d\n",j);
 	for(int i=0; i<c.length;i++){
-		c[i].setLocation((float)(i-((i/5)*5))*(width/5),(float)((i/5)*width/3));
+		c[i].setLocation((float)((i-((int)(i/5)*5))*(int)(width/5)),(float)(((int)(i/5)*(int)width/3)));
 		//			System.out.printf("Cheguei width = %f ConjArmas.getFilledArray\n",width/3);
 		//			System.out.printf("Cheguei i = %d ConjArmas.getFilledArray\n",i/5);
 		System.out.printf("Cheguei \n\tc[%d].x = %f\n\tc[%d].y = %f\nConjArmas.getFilledArray\n",i,(i-((i/5)*5))*(width/5),i,((i/5)*width/3));
@@ -141,8 +141,8 @@ public static void receiveArma(ConjArmas c, Point2D p) throws ExceptionArmVectFi
 	if(a==null){
 		throw new ExceptionNoWeaponSelected();
 	}
-	if(AllowPlacement()){
-
+	if(!AllowPlacement()){
+		
 	}
 	System.out.printf("\nCheguei Arma Location %s ConjArmas.receiveArma\n",p.toString());
 	a.setLocation((float)p.getX(),(float)p.getY());

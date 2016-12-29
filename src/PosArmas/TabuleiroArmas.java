@@ -32,7 +32,7 @@ public class TabuleiroArmas extends Tabuleiro{
 		System.out.printf("\nCheguei TabuleiroArmas.takeAction(%s)\n",p.toString());
 		try {
 			int cel = (int)CELL_SIZE;
-			p.setLocation((((int)p.getX())/cel)*cel, ((int)p.getY()/cel)*cel);
+			p.setLocation((((float)p.getX())/cel)*cel, ((float)p.getY()/cel)*cel);
 			System.out.printf("\nCheguei p = %s TabuleiroArmas.takeAction\n",p.toString());
 			ArmaListener.receiveArma((getTabuleiroInvisivel().getArmasArray()),p);
 		} catch (ExceptionArmVectFilled e) {

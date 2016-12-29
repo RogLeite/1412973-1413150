@@ -132,16 +132,14 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 	public TabuleiroInvisivel newInstanceTabuleiroInvisivel(int SIDE_TAB){
 		return TabuleiroInvisivel.newInstance(SIDE_TAB);
 	}
-	public void clicked(Point point) {
+	public void clicked(Point point){
 		try {
 			takeAction(point);
 		} catch (ExceptionCellAlreadyHit e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ExceptionCellAlreadyFilled e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} 
 	}
 	public String getThisActionCommand(Class<?> class1) {
 		if(class1.isAssignableFrom(MyMouseListener.class)){
