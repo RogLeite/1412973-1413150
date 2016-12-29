@@ -15,6 +15,7 @@ public class Hidroaviao extends Arma {
 	}
 
 	public void setLocation(float x, float y) {
+		setLocation((int)x,(int)y);
 		switch(rotate){
 		case 0:
 			setSize(WIDTH_IN_CELL*CELL_SIZE, HEIGHT_IN_CELL*CELL_SIZE);

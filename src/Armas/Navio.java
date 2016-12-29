@@ -18,15 +18,17 @@ public class Navio extends Arma {
 	public void setLocation(float x, float y) {
 		setLocation((int)x, (int)y);
 		if (rotate==0|| rotate ==3){	//horizontal
-			setSize(WIDTH_IN_CELL*CELL_SIZE, HEIGHT_IN_CELL*CELL_SIZE);
+			setSize(WIDTH_IN_CELL*CELL_SIZE,numPartes*HEIGHT_IN_CELL*CELL_SIZE);
 			for(int i=0;i<numPartes;i++){
 				vector[i]=new Point2D.Float(i*CELL_SIZE,0);
+			//				vector[i]=new Point2D.Float((x+i)*CELL_SIZE,y);
 			}
 		}
 		else{
-			setSize(HEIGHT_IN_CELL*CELL_SIZE, WIDTH_IN_CELL*CELL_SIZE);
+			setSize(numPartes*HEIGHT_IN_CELL*CELL_SIZE, WIDTH_IN_CELL*CELL_SIZE);
 			for(int i=0;i<numPartes;i++)	//vertical
 				vector[i]=new Point2D.Float(0,i*CELL_SIZE);
+			//	vector[i]=new Point2D.Float(x,(y+i)*CELL_SIZE);
 		}
 
 	}

@@ -133,7 +133,7 @@ public abstract class Arma extends JPanel {
 		////			}
 
 		Graphics2D g2d = (Graphics2D)g;
-//		setLocation(getX(), getY());
+		setLocation(getX(), getY());
 		for(int i=0;i<numPartes;i++){	//vertical
 //			System.out.printf("Cheguei vector[%d] = %s in Arma.paintComponent\n",i, vector[i].toString());
 			int x = (int)(vector[i].getX());
