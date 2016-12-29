@@ -120,6 +120,7 @@ public class ConjArmas{
 		return c;
 	}
 
+
 	//	public void instArmaPlayer ( JFrame tab, TipoArma nome, int rotate,int x, int y){
 	//		ArmVect[i].setColor(nome.getColor());
 	//		setNumPartes(nome.getNumCels());
@@ -133,6 +134,7 @@ public class ConjArmas{
 	public static ConjArmas getEmptyArray(){
 		return new ConjArmas();
 	}
+
 	public static void receiveArma(ConjArmas c, Point2D p) throws ExceptionArmVectFilled, ExceptionNoWeaponSelected{
 		System.out.println("Cheguei ConjArmas.receiveArma");
 		Arma a = getSelectedArma();
@@ -145,6 +147,11 @@ public class ConjArmas{
 		System.out.printf("\nCheguei Arma Location %s ConjArmas.receiveArma\n",p.toString());
 		a.setLocation((float)p.getX(),(float)p.getY());
 		addArma(c,a);
+
+	if(!AllowPlacement()){
+	}
+		
+
 	}
 	static void addArma(ConjArmas c, Arma a) throws ExceptionArmVectFilled {
 		System.out.println("Cheguei ConjArmas.addArma");

@@ -61,6 +61,7 @@ public class ArmaListener extends Listener {
 		int index = c.getIndiceArma((int)p.getX(), (int)p.getY());
 		if(index>=0 && c.getArmVec()[index].isHere(p)){
 			System.out.printf("Cheguei index = %d  ArmaListener.hasArma\n", index);
+			System.out.printf("Cheguei Point = %s  ArmaListener.hasArma\n", p.toString());
 			return true;
 		}
 		else{

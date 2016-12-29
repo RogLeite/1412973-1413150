@@ -20,7 +20,7 @@ public class ArmasPickPanel extends JPanel{
 		setBounds((int) x, (int) y, (int) width, (int) height);
 
 		ConjArmas CArmas = new ConjArmas();
-		CArmas.ArmVect= ArmaListener.getFilledArray((float)getWidth(),(int) getHeight()/16);
+		CArmas.ArmVect= ArmaListener.getFilledArray((float)getWidth(),(int)(height/16));
 
 //		System.out.printf("getComponentCount = %d\n",getContentPane().getComponentCount());
 //		System.out.printf("CArmas.ArmVect.length = %d\n",CArmas.ArmVect.length);
