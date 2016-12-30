@@ -128,11 +128,11 @@ public class ConjArmas{
 			System.out.printf("l=%d\n", l);
 			for(int i=0;i<t.getQtdMax();i++){
 				System.out.printf("\tl=%d\n", l);
-				c[l].setLocation((float)i*cellSize*(t.getNumCels()+1),(float)(k)*(3*cellSize));
+				c[l].setLocation((float) (i*cellSize*(t.getNumCels()+1)*0.9),(float)(k)*(3*cellSize));
 				//			System.out.printf("Cheguei width = %f ConjArmas.getFilledArray\n",width/3);
 				//			System.out.printf("Cheguei i = %d ConjArmas.getFilledArray\n",i/5);
 //				System.out.printf("Cheguei c[%d].getLocation = %s ConjArmas.getFilledArray\n",i,c[l].getLocation().toString());
-				System.out.printf("\tc[%d] = %s \n",i,c[l].getLocation().toString());
+				System.out.printf("\tc[%d] = %s \n",l,c[l].getLocation().toString());
 				c[l].setIgnoreRepaint(false);
 				c[l].setVisible(true);
 				c[l].setLayout(null);

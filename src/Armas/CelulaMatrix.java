@@ -5,9 +5,16 @@ import Tabuleiro.ExceptionCellAlreadyHit;
 
 public class CelulaMatrix {
 	private CelulaSimples[][] m;
-	private Arma myArma;
-	private TipoArma tArma;
 	private CelulaMatrix(Arma a, int x,int y){
+		m = new CelulaSimples[x][y];
+		for(int i=0;i<m.length;i++){
+			m[i] = new CelulaSimples[y];
+			for(int j=0;j<m[0].length;j++){
+				m[i][j] = new CelulaSimples(a);
+			}
+		}
+	}
+	private CelulaMatrix(int x,int y){
 		m = new CelulaSimples[x][y];
 		for(int i=0;i<m.length;i++){
 			m[i] = new CelulaSimples[y];
@@ -15,12 +22,13 @@ public class CelulaMatrix {
 				m[i][j] = new CelulaSimples();
 			}
 		}
-		myArma = a;
-		tArma = a.tipo;
 	}
 
 	public static CelulaMatrix instance(Arma a,int x,int y){
 		return new CelulaMatrix(a,x,y);
+	}
+	public static CelulaMatrix instance(int x,int y){
+		return new CelulaMatrix(x,y);
 	}
 	public void spinClockwise(){
 		CelulaSimples[][] temp = new CelulaSimples[m[0].length][m.length];
@@ -56,7 +64,7 @@ public class CelulaMatrix {
 				try {
 					m[i][j].fill();
 				} catch (ExceptionCellAlreadyFilled e) {
-					
+
 				}
 			}
 		}
@@ -104,36 +112,46 @@ public class CelulaMatrix {
 		return m[0].length;
 	}
 }
-	class CelulaSimples{
+class CelulaSimples{
 
-		private boolean VISIBLE;
-		private boolean FILLED;
-		private boolean HIT;
-		private boolean DESTROYED;
-		protected CelulaSimples(){
-			VISIBLE = false;
-			DESTROYED = false;
-			HIT = false;
-			FILLED = false;
-		}
-		public boolean isFilled() {
-			return FILLED;
-		}
-		public void hit() throws ExceptionCellAlreadyHit {
-			if(HIT){
-				throw new ExceptionCellAlreadyHit();
-			}
-			
-		}
-		public boolean isHit() {
-			return HIT;
-		}
-		public boolean isDestroyed() {
-			return DESTROYED;
-		}
-		public void fill() throws ExceptionCellAlreadyFilled {
-			if(FILLED)
-				throw new ExceptionCellAlreadyFilled();
-			FILLED = true;
-		}
+	private boolean VISIBLE;
+	private boolean FILLED;
+	private boolean HIT;
+	private boolean DESTROYED;
+	private Arma myArma=null;
+	private TipoArma tArma=null;
+	protected CelulaSimples(Arma a){
+		VISIBLE = false;
+		DESTROYED = false;
+		HIT = false;
+		FILLED = false;
+		myArma = a;
+		tArma = a.tipo;
 	}
+	public CelulaSimples() {
+		VISIBLE = false;
+		DESTROYED = false;
+		HIT = false;
+		FILLED = false;
+	}
+	public boolean isFilled() {
+		return FILLED;
+	}
+	public void hit() throws ExceptionCellAlreadyHit {
+		if(HIT){
+			throw new ExceptionCellAlreadyHit();
+		}
+
+	}
+	public boolean isHit() {
+		return HIT;
+	}
+	public boolean isDestroyed() {
+		return DESTROYED;
+	}
+	public void fill() throws ExceptionCellAlreadyFilled {
+		if(FILLED)
+			throw new ExceptionCellAlreadyFilled();
+		FILLED = true;
+	}
+}

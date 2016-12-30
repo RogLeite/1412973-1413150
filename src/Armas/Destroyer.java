@@ -12,12 +12,14 @@ public class Destroyer extends Navio{
 		tipo = TipoArma.Destroyer;
 		cellMatrix = CelulaMatrix.instance(this, this.tipo.getNumCels(),1);
 		cellMatrix.fill();
+		setSize();
 	}
 	private Destroyer(float x, float y){
 		super(x,y);
 		tipo = TipoArma.Destroyer;
 		cellMatrix = CelulaMatrix.instance(this, this.tipo.getNumCels(),1);
 		cellMatrix.fill();
+		setSize();
 	}
 	public static Destroyer instance(){
 		return new Destroyer();

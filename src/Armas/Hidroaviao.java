@@ -20,6 +20,7 @@ public class Hidroaviao extends Arma {
 		} catch (ExceptionCellAlreadyFilled e) {
 			e.printStackTrace();
 		}
+		setSize(cellMatrix.getWidth()*CELL_SIZE, cellMatrix.getHeight()*CELL_SIZE);
 
 	}
 	public Hidroaviao(float x, float y){
@@ -32,6 +33,8 @@ public class Hidroaviao extends Arma {
 		} catch (ExceptionCellAlreadyFilled e) {
 			e.printStackTrace();
 		}
+		setSize(cellMatrix.getWidth()*CELL_SIZE, cellMatrix.getHeight()*CELL_SIZE);
+
 
 	}
 	public static Hidroaviao instance() {

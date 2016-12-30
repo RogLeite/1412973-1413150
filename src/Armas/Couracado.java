@@ -12,12 +12,14 @@ public class Couracado extends Navio{
 		tipo = TipoArma.Couracado;
 		cellMatrix = CelulaMatrix.instance(this, this.tipo.getNumCels(),1);
 		cellMatrix.fill();
+		setSize();
 	}
 	private Couracado(float x, float y){
 		super(x,y);
 		tipo = TipoArma.Couracado;
 		cellMatrix = CelulaMatrix.instance(this, this.tipo.getNumCels(),1);
 		cellMatrix.fill();
+		setSize();
 	}
 	public static Couracado instance(){
 		return new Couracado();

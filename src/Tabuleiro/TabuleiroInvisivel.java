@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import Armas.Arma;
 import Armas.ArmaListener;
+import Armas.CelulaMatrix;
 import Armas.ConjArmas;
 import TopoNivel.MyMouseListener;
 
@@ -20,12 +21,14 @@ public class TabuleiroInvisivel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private static final String BASE_ACTION_STRING= "INV";
 	private static final String TAKE_ACTION_STRING = "INV_TAKE_ACTION";
-	private ConjArmas arrayArmas = ArmaListener.getEmptyArray();;
+	private ConjArmas arrayArmas = ArmaListener.getEmptyArray();
+	private CelulaMatrix cellMatrix;
 //	private final int SIDE_TAB = 16;
 //	final float CELL_SIZE;
 	public TabuleiroInvisivel(int boardsize){
 		setBounds(0,0, boardsize, boardsize);
 //		addMouseListener(new MyMouseListener(getTakeActionString()));
+		cellMatrix.instance(x, y);
 		setEnabled(true);
 		setLayout(null);
 		setIgnoreRepaint(false);

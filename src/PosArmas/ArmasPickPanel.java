@@ -22,7 +22,7 @@ public class ArmasPickPanel extends JPanel{
 		ConjArmas CArmas = new ConjArmas();
 		CArmas.ArmVect= ArmaListener.getFilledArray((int)(height/16));
 		setLayout(null);
-		setIgnoreRepaint(false);
+		setIgnoreRepaint(true);
 		setVisible(true);
 //		System.out.printf("getComponentCount = %d\n",getContentPane().getComponentCount());
 //		System.out.printf("CArmas.ArmVect.length = %d\n",CArmas.ArmVect.length);
@@ -45,17 +45,18 @@ public class ArmasPickPanel extends JPanel{
 	}
 	public void paintComponent(Graphics g){
 
-		Graphics2D g2d = (Graphics2D) g;
+		Graphics2D g2d = (Graphics2D) g;/*
 		g2d.setColor(Color.GRAY);
-		g2d.fill(getBounds());
+		g2d.fill(getBounds());*/
 	}
 	public void selectArmaAqui(Point p){
 		try{
 			System.out.println("Cheguei ArmasPickPanel.selectArmaAqui");
 			ArmaListener.selectArma(getComponentAt(p));
+			getComponentAt(p).setVisible(false);
 			this.remove(getComponentAt(p));
 			System.out.println("Cheguei repaint ArmasPickPanel.selectArmaAqui");
-			repaint();
+//			repaint(getBounds());
 		}catch (ExceptionWeaponAllreadySelected e) {
 			System.out.println("Cheguei ExceptionWeaponAllreadySelected in ArmasPickPanel.selectArmaAqui");
 			return;

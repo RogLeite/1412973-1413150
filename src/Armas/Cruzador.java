@@ -12,12 +12,14 @@ public class Cruzador extends Navio{
 		 tipo = TipoArma.Cruzador;
 		cellMatrix = CelulaMatrix.instance(this, this.tipo.getNumCels(),1);
 		cellMatrix.fill();
+		setSize();
 	}
 	public Cruzador(float x, float y) {
 		super(x,y);
 		 tipo = TipoArma.Cruzador;
 		cellMatrix = CelulaMatrix.instance(this, this.tipo.getNumCels(),1);
 		cellMatrix.fill();
+		setSize();
 	}
 	public static Cruzador instance() {
 		return new Cruzador();
