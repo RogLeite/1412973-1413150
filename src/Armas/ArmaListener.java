@@ -34,8 +34,8 @@ public class ArmaListener extends Listener {
 		return a.getColor();
 	}
 
-	public static Arma[] getFilledArray( float width,int cellSize) {
-		return ConjArmas.getFilledArray( width,cellSize) ;
+	public static Arma[] getFilledArray(int cellSize) {
+		return ConjArmas.getFilledArray(cellSize) ;
 	}
 
 	public static void selectArma(Component c) throws ExceptionComponentIsNotArma, ExceptionWeaponAllreadySelected {

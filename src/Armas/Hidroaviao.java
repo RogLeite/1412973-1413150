@@ -54,7 +54,7 @@ public class Hidroaviao extends Arma {
 					g2d.setColor(this.tipo.getColor());
 					g2d.fillRect(i*CELL_SIZE,j*CELL_SIZE,CELL_SIZE,CELL_SIZE);
 					g2d.setColor(Color.BLACK);
-					g2d.drawRect(i*CELL_SIZE,j*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+					g2d.drawRect(i*CELL_SIZE,j*CELL_SIZE,CELL_SIZE-1,CELL_SIZE-1);
 				}
 			}
 		}

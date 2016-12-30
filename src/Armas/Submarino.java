@@ -37,7 +37,7 @@ public class Submarino extends Arma{
 		g2d.setColor(this.tipo.getColor());
 		g2d.fillRect(0,0,CELL_SIZE,CELL_SIZE);
 		g2d.setColor(Color.BLACK);
-		g2d.drawRect(0,0,CELL_SIZE,CELL_SIZE);
+		g2d.drawRect(0,0,CELL_SIZE-1,CELL_SIZE-1);
 	}
 	protected void rotateClockwise() {}
 	protected void rotateCounterClockwise() {}

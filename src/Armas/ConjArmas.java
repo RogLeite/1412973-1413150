@@ -29,8 +29,8 @@ public class ConjArmas{
 			System.out.printf("Cheguei (ArmVect==null) = %s\n", Boolean.toString((ArmVect==null)));
 			System.out.printf("Cheguei (ArmVect[%d]==null) = %s\n", i,Boolean.toString((ArmVect[i]==null)));
 			if(ArmVect[i]==null){
-//				throw new ExceptionArrayNotFilled();
-//				TODO
+				//				throw new ExceptionArrayNotFilled();
+				//				TODO
 				throw new ExceptionNoWeaponHere();
 			}
 
@@ -99,12 +99,12 @@ public class ConjArmas{
 		return null;
 	}
 
-	public static Arma[] getFilledArray(float width, int cellSize) {
+	public static Arma[] getFilledArray(int cellSize) {
 		//		System.out.printf("\nCheguei forInsereArmas\n");
 		int j=0;
 		Arma.setCellSize(cellSize);
 		Arma c[] = new Arma[TotalNotDestroyed];
-		
+
 		//		System.out.printf("getFilledArray:\n\tc\t= %s\n",Boolean.toString(c==null));
 		//		System.out.printf("TipoArma.Hidroaviao.getQtdMax() = %d\n",TipoArma.Hidroaviao.getQtdMax());
 		//		System.out.printf("TotalNotDestroyed = %d\n",TotalNotDestroyed);
@@ -120,16 +120,31 @@ public class ConjArmas{
 			c[j]= Couracado.instance();
 
 		//		System.out.printf("J = %d\n",j);
-		for(int i=0; i<c.length;i++){
-			c[i].setLocation((float)(i-((i/5)*5))*(width/5),(float)((i/5)*width/3));
-			//			System.out.printf("Cheguei width = %f ConjArmas.getFilledArray\n",width/3);
-			//			System.out.printf("Cheguei i = %d ConjArmas.getFilledArray\n",i/5);
-			System.out.printf("Cheguei \n\tc[%d].x = %f\n\tc[%d].y = %f\nConjArmas.getFilledArray\n",i,(i-((i/5)*5))*(width/5),i,((i/5)*width/3));
-			System.out.printf("Cheguei c[%d].getLocation = %s ConjArmas.getFilledArray\n",i,c[i].getLocation().toString());
-			c[i].setIgnoreRepaint(false);
-			c[i].setVisible(true);
-			c[i].setLayout(null);
+		j=0;
+		for(TipoArma t: TipoArma.values()){
+			for(int i=0;i<t.getQtdMax();i++,j++){
+				c[j].setLocation((float)i*cellSize*(t.getNumCels()+1),(float)(j/5)*(3*cellSize));
+				//			System.out.printf("Cheguei width = %f ConjArmas.getFilledArray\n",width/3);
+				//			System.out.printf("Cheguei i = %d ConjArmas.getFilledArray\n",i/5);
+				System.out.printf("Cheguei c[%d].getLocation = %s ConjArmas.getFilledArray\n",i,c[j].getLocation().toString());
+				c[j].setIgnoreRepaint(false);
+				c[j].setVisible(true);
+				c[j].setLayout(null);
+			}
 		}
+//
+//		j=0;
+//		int k=0;
+//		for(j=0;j<c.length;k++)
+//			for(int i=0;i<c[j].numPartes;i++,j++){
+//				c[j].setLocation((float)i*cellSize*(c[j].numPartes+1),(float)(k/5)*(3*cellSize));
+//				//			System.out.printf("Cheguei width = %f ConjArmas.getFilledArray\n",width/3);
+//				//			System.out.printf("Cheguei i = %d ConjArmas.getFilledArray\n",i/5);
+//				System.out.printf("Cheguei c[%d].getLocation = %s ConjArmas.getFilledArray\n",j,c[j].getLocation().toString());
+//				c[j].setIgnoreRepaint(false);
+//				c[j].setVisible(true);
+//				c[j].setLayout(null);
+//			}
 		return c;
 	}
 
