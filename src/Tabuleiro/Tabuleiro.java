@@ -44,7 +44,7 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 		setIgnoreRepaint(false);
 		bound_player = player;
 
-		tabInvisivel = newInstanceTabuleiroInvisivel(SIDE_TAB);
+		tabInvisivel = newInstanceTabuleiroInvisivel();
 //		System.out.printf("Cheguei tabInvisivel in %s TabuleiroInvisivel\n",tabInvisivel.getLocation().toString() );
 		add(tabInvisivel);
 		for(int i=1;i<SIDE_TAB;i++){
@@ -128,8 +128,8 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 		tabInvisivel = tabuleiroInvisivel;
 		System.out.println("Cheguei Tabuleiro.addTabuleiroInvisivel");
 	}
-	public TabuleiroInvisivel newInstanceTabuleiroInvisivel(int SIDE_TAB){
-		return TabuleiroInvisivel.newInstance(SIDE_TAB);
+	public TabuleiroInvisivel newInstanceTabuleiroInvisivel(){
+		return TabuleiroInvisivel.newInstance(getSideTab());
 	}
 	public void clicked(Point point){
 		try {
@@ -160,5 +160,18 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 	public boolean placingAllowed() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	private int getSideTab(){
+		return SIDE_TAB-1;
+	}
+	protected void correctPointRelatively(Point p){
+		p.x = (int) (p.getX()-CELL_SIZE);
+		p.y = (int) (p.getY()-CELL_SIZE);
+	}
+	protected Point getNewPointRelatively(Point p){
+		return new Point((int) (p.getX()-CELL_SIZE),(int) (p.getY()-CELL_SIZE));
+	}
+	public float getCellSize(){
+		return CELL_SIZE;
 	}
 }

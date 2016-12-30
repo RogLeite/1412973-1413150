@@ -106,5 +106,9 @@ public abstract class Arma extends JPanel {
 	private void convertPoint(Point p){
 		p.setLocation((p.getX()-getX())/CELL_SIZE-1, (p.getY()-getY())/CELL_SIZE-1); 
 	}
+
+	public CelulaMatrix getCellMatrix() {
+		return cellMatrix;
+	}
 }
 

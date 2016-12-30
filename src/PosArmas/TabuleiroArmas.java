@@ -33,15 +33,15 @@ public class TabuleiroArmas extends Tabuleiro{
 		System.out.printf("\nCheguei TabuleiroArmas.takeAction(%s)\n",p.toString());
 		try {
 			int cel = (int)CELL_SIZE;
-			p.setLocation((((float)p.getX())/cel)*cel, ((float)p.getY()/cel)*cel);
+			correctPointRelatively((Point) p);
 			System.out.printf("\nCheguei p = %s TabuleiroArmas.takeAction\n",p.toString());
-			ArmaListener.receiveArma((getTabuleiroInvisivel().getArmasArray()),p);
-		} catch (ExceptionArmVectFilled e) {
-			System.out.println("Cheguei ExceptionArmVectFilled TabuleiroArmas.takeAction");
-			return;
+			getTabuleiroInvisivel().receiveArma((Point) p);
+		}catch(ExceptionPlacingNotAllowed e){
+			e.printStackTrace();
+			
 		} catch (ExceptionNoWeaponSelected e) {
-			System.out.println("Cheguei ExceptionNoWeaponSelected TabuleiroArmas.takeAction");
-			return;
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 //		System.out.println("Cheguei setVisibilidade(true) TabuleiroArmas.takeAction");
 		setVisibilidade(true);

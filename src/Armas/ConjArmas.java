@@ -171,23 +171,17 @@ public class ConjArmas{
 		return new ConjArmas();
 	}
 
-	public static void receiveArma(ConjArmas c, Point2D p) throws ExceptionArmVectFilled, ExceptionNoWeaponSelected{
+	public static Arma receiveArma() throws ExceptionNoWeaponSelected{
 		System.out.println("Cheguei ConjArmas.receiveArma");
 		Arma a = getSelectedArma();
 		if(a==null){
 			throw new ExceptionNoWeaponSelected();
 		}
-		if(AllowPlacement()){
+		return a;
 
-		}
-		System.out.printf("\nCheguei Arma Location %s ConjArmas.receiveArma\n",p.toString());
-		a.setLocation((float)p.getX(),(float)p.getY());
-		addArma(c,a);
-
-		if(!AllowPlacement()){
-		}
-
-
+	}
+	public static void confirmedReceive(){
+		emptySelectedArma();
 	}
 	static void addArma(ConjArmas c, Arma a) throws ExceptionArmVectFilled {
 		System.out.println("Cheguei ConjArmas.addArma");

@@ -11,7 +11,7 @@ import TopoNivel.MyMouseListener;
 
 public interface TabuleiroListener{
 	
-	public TabuleiroInvisivel newInstanceTabuleiroInvisivel(int SIDE_TAB); /*{
+	public TabuleiroInvisivel newInstanceTabuleiroInvisivel(); /*{
 		return TabuleiroInvisivel.newInstance(SIDE_TAB);
 	}*/
 
@@ -61,5 +61,7 @@ public interface TabuleiroListener{
 	public void transferirTabuleiroInvisivel(Tabuleiro in,Tabuleiro out);/*{
 		out.transferirTabuleiroInvisivel(in);
 	}*/
+
+	public float getCellSize();
 	
 }
