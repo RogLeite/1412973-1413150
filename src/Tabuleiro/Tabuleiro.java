@@ -62,7 +62,6 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 		}
 
 
-
 	}
 	private String getBaseActionString() {
 		return BASE_ACTION_STRING;

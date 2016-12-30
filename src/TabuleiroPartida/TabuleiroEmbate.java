@@ -20,6 +20,7 @@ public class TabuleiroEmbate  extends Tabuleiro{
 
 	public TabuleiroEmbate(int x, int y, float boardsize, String player) {
 		super(x, y, boardsize, player);
+		setVisibilidade(false);
 		addMouseListener(new MyMouseListener(FrameEmbate.getTakeActionString()));
 	}
 

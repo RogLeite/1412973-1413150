@@ -102,7 +102,9 @@ public class ConjArmas{
 	public static Arma[] getFilledArray(float width, int cellSize) {
 		//		System.out.printf("\nCheguei forInsereArmas\n");
 		int j=0;
+		Arma.setCellSize(cellSize);
 		Arma c[] = new Arma[TotalNotDestroyed];
+		
 		//		System.out.printf("getFilledArray:\n\tc\t= %s\n",Boolean.toString(c==null));
 		//		System.out.printf("TipoArma.Hidroaviao.getQtdMax() = %d\n",TipoArma.Hidroaviao.getQtdMax());
 		//		System.out.printf("TotalNotDestroyed = %d\n",TotalNotDestroyed);
@@ -126,6 +128,7 @@ public class ConjArmas{
 			System.out.printf("Cheguei c[%d].getLocation = %s ConjArmas.getFilledArray\n",i,c[i].getLocation().toString());
 			c[i].setIgnoreRepaint(false);
 			c[i].setVisible(true);
+			c[i].setLayout(null);
 		}
 		return c;
 	}

@@ -7,8 +7,14 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 
 public abstract class Navio extends Arma {
-
-
+	protected void rotateClockwise(){
+		cellMatrix.spinClockwise();
+		setSize(cellMatrix.getHeight()*CELL_SIZE,cellMatrix.getWidth()*CELL_SIZE);
+	}
+	protected void rotateCounterClockwise(){
+		cellMatrix.spinCounterClockwise();
+		setSize(cellMatrix.getHeight()*CELL_SIZE,cellMatrix.getWidth()*CELL_SIZE);
+	}
 	protected Navio() {
 		super();
 	}

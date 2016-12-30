@@ -25,6 +25,7 @@ public class TabuleiroArmas extends Tabuleiro{
 
 	public TabuleiroArmas(int x, int y, float boardsize, String player) {
 		super(x, y, boardsize, player);
+		setVisibilidade(true);
 		addMouseListener(new MyMouseListener(getTakeActionString()));
 	}
 

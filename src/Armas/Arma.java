@@ -29,24 +29,30 @@ public abstract class Arma extends JPanel {
 	protected boolean vectHit[];			//indica partes atingidas
 	protected int WIDTH_IN_CELL;
 	protected int HEIGHT_IN_CELL;
-	protected int CELL_SIZE;
+	protected static int CELL_SIZE;
 
 	protected Arma() {
 		setLocation(0,0);
+		setVisible(true);
+		setLayout(null);
+		setIgnoreRepaint(false);
 	}
 	
 	protected Arma(float x, float y){
 		setLocation(x,y);
+		setVisible(true);
+		setLayout(null);
+		setIgnoreRepaint(false);
 	}
 
 	public void setLocation(float x, float y) {
 		setLocation((int)x,(int)y);
+		setVisible(true);
+		setLayout(null);
+		setIgnoreRepaint(false);
 	}
-	protected void rotateClockwise(){
-		cellMatrix.spinClockwise();
-	}protected void rotateCounterClockwise(){
-		cellMatrix.spinCounterClockwise();
-	}
+	protected abstract void rotateClockwise();
+	protected abstract void rotateCounterClockwise();
 	public Color getColor(){
 		return tipo.getColor();
 	}
@@ -58,8 +64,9 @@ public abstract class Arma extends JPanel {
 		super.setSize(cellMatrix.getWidth()*CELL_SIZE, cellMatrix.getHeight()*CELL_SIZE);
 	}
 	protected boolean isHitHere(Point2D p){
-		int x = (int) ((p.getX()-getX())/CELL_SIZE);
-		int y = (int) ((p.getY()-getY())/CELL_SIZE);
+		convertPoint((Point) p);
+		int x = (int) (p.getX());
+		int y = (int) (p.getY());
 		boolean b = false;
 		try{
 			b = cellMatrix.isHitHere(x,y);
@@ -71,8 +78,9 @@ public abstract class Arma extends JPanel {
 	}
 	
 	protected boolean Atingir(Point pt) throws ExceptionCellAlreadyHit, ExceptionNoWeaponHere{
-		int x = (int) ((pt.getX()-getX())/CELL_SIZE);
-		int y = (int) ((pt.getY()-getY())/CELL_SIZE);
+		convertPoint(pt);
+		int x = (int) (pt.getX());
+		int y = (int) (pt.getY());
 		return cellMatrix.hitHere(x, y);
 	}
 	public int getNumPartes(){
@@ -80,8 +88,9 @@ public abstract class Arma extends JPanel {
 	}
 
 	public boolean isHere(Point pt){
-		int x = (int) ((pt.getX()-getX())/CELL_SIZE);
-		int y = (int) ((pt.getY()-getY())/CELL_SIZE);
+		convertPoint(pt);
+		int x = (int) (pt.getX());
+		int y = (int) (pt.getY());
 		boolean b;
 		try {
 			b = cellMatrix.isHere(x, y);
@@ -89,6 +98,13 @@ public abstract class Arma extends JPanel {
 			return false;
 		}
 		return b;
+	}
+	public static void setCellSize(int c){
+		CELL_SIZE = c;
+	}
+	public abstract void paintComponent(Graphics g);
+	private void convertPoint(Point p){
+		p.setLocation((p.getX()-getX())/CELL_SIZE-1, (p.getY()-getY())/CELL_SIZE-1); 
 	}
 }
 

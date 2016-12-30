@@ -52,12 +52,20 @@ public class Hidroaviao extends Arma {
 			for(int j=0;j<cellMatrix.getHeight();j++){
 				if(cellMatrix.isHere(i,j)){
 					g2d.setColor(this.tipo.getColor());
-					g2d.fillRect(getX()*i*CELL_SIZE, getY()*j*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+					g2d.fillRect(i*CELL_SIZE,j*CELL_SIZE,CELL_SIZE,CELL_SIZE);
 					g2d.setColor(Color.BLACK);
-					g2d.drawRect(getX()*i*CELL_SIZE, getY()*j*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+					g2d.drawRect(i*CELL_SIZE,j*CELL_SIZE,CELL_SIZE,CELL_SIZE);
 				}
 			}
 		}
+	}
+	protected void rotateClockwise() {
+		cellMatrix.spinClockwise();
+		setSize(cellMatrix.getHeight()*CELL_SIZE,cellMatrix.getWidth()*CELL_SIZE);
+	}
+	protected void rotateCounterClockwise() {
+		cellMatrix.spinCounterClockwise();
+		setSize(cellMatrix.getHeight()*CELL_SIZE,cellMatrix.getWidth()*CELL_SIZE);
 	}
 	
 }

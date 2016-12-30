@@ -25,7 +25,8 @@ public class ArmasPickPanel extends JPanel{
 //		System.out.printf("getComponentCount = %d\n",getContentPane().getComponentCount());
 //		System.out.printf("CArmas.ArmVect.length = %d\n",CArmas.ArmVect.length);
 		for(int i=0;i<CArmas.ArmVect.length;i++){
-//			System.out.printf("3+i = %d\n",3+i);
+			System.out.printf("(CArmas.ArmVect[%d]==null) = %s ArmasPickPanel.ArmasPickPanel()\n",i,Boolean.toString(CArmas.ArmVect[i]==null));
+			System.out.printf("CArmas.ArmVect[%d].getLocation() = %s ArmasPickPanel.ArmasPickPanel()\n",i,CArmas.ArmVect[i].getLocation().toString());
 			add((CArmas.ArmVect[i]));
 		}
 	}
