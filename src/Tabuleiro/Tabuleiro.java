@@ -44,7 +44,7 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 		setIgnoreRepaint(false);
 		bound_player = player;
 
-		tabInvisivel = newInstanceTabuleiroInvisivel(SIDE_TAB);
+		tabInvisivel = newInstanceTabuleiroInvisivel();
 //		System.out.printf("Cheguei tabInvisivel in %s TabuleiroInvisivel\n",tabInvisivel.getLocation().toString() );
 		add(tabInvisivel);
 		for(int i=1;i<SIDE_TAB;i++){
@@ -60,7 +60,6 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 				 * */
 			}
 		}
-
 
 
 	}
@@ -94,20 +93,28 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 	//			visibilidade = true;
 	//	}
 	public void setVisibilidade(boolean v){
-		visibilidade = v;
+		getTabuleiroInvisivel().setVisibilidade(v);
 //				System.out.printf("\nCheguei %s Tabuleiro.setVisibilidade(%b)\n",bound_player,v);
 //		System.out.println("Cheguei Tabuleiro.setVisibilidade");
 		for(int i=0;i<getComponentCount()-1;i++){
+//			System.out.printf("\t Component %d Tabuleiro.setVisibilidade()\n",i);
 			((Celula)getComponent(i)).repaint();
 		}
 	}
+	protected void tabuleiroRepaint(){
+		for(int i=0;i<getComponentCount()-1;i++){
+//			System.out.printf("\t Component %d Tabuleiro.tabuleiroRepaint()\n",i);
+			((Celula)getComponent(i)).repaint();
+		}
+	}
+	
 	public boolean getVisibilidade(){
 		return visibilidade ;
 	}
 	public String getBoundPlayer(){
 		return bound_player;
 	}
-	public abstract void takeAction(Point2D p) throws ExceptionCellAlreadyHit, ExceptionCellAlreadyFilled;
+	public abstract void takeAction(Point2D p) throws ExceptionCellAlreadyHit, ExceptionCellAlreadyFilled, ExceptionNoWeaponHere;
 	public abstract boolean imHit(Point p); 
 	public boolean imFilled(Point p){
 		ConjArmas c = getTabuleiroInvisivel().getArmasArray();
@@ -124,13 +131,14 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 	}
 	void transferirTabuleiroInvisivel(Tabuleiro t){
 		t.addTabuleiroInvisivel(getTabuleiroInvisivel());
+		t.setVisibilidade(false);
 	}
 	private void addTabuleiroInvisivel(TabuleiroInvisivel tabuleiroInvisivel) {
 		tabInvisivel = tabuleiroInvisivel;
 		System.out.println("Cheguei Tabuleiro.addTabuleiroInvisivel");
 	}
-	public TabuleiroInvisivel newInstanceTabuleiroInvisivel(int SIDE_TAB){
-		return TabuleiroInvisivel.newInstance(SIDE_TAB);
+	public TabuleiroInvisivel newInstanceTabuleiroInvisivel(){
+		return TabuleiroInvisivel.newInstance(getSideTab());
 	}
 	public void clicked(Point point){
 		try {
@@ -139,6 +147,9 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 			// TODO Auto-generated catch block
 		} catch (ExceptionCellAlreadyFilled e) {
 			// TODO Auto-generated catch block
+		} catch (ExceptionNoWeaponHere e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 	}
 	public String getThisActionCommand(Class<?> class1) {
@@ -161,5 +172,35 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 	public boolean placingAllowed() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	private int getSideTab(){
+		return SIDE_TAB-1;
+	}
+	protected void correctPointRelatively(Point p){
+		p.x = (int) (p.getX()-CELL_SIZE);
+		p.y = (int) (p.getY()-CELL_SIZE);
+	}
+	protected Point getNewPointRelatively(Point p){
+//		System.out.printf("\tp = %s Tabuleiro.getNewPointRelatively\n",p.toString());
+//		System.out.printf("\tp relativo = [%d,%d] Tabuleiro.getNewPointRelatively\n",(int) (p.getX()-CELL_SIZE),(int) (p.getY()-CELL_SIZE));
+		return new Point((int) (p.getX()-CELL_SIZE),(int) (p.getY()-CELL_SIZE));
+	}
+	public float getCellSize(){
+		return CELL_SIZE;
+	}
+	public boolean isVisivel(Celula celula) {
+		return getTabuleiroInvisivel().isVisivelHere(getNewPointRelatively(celula.getLocation()));
+	}
+	public boolean isHit(Celula celula) {
+		return getTabuleiroInvisivel().isHitHere(getNewPointRelatively(celula.getLocation()));
+	}
+	public boolean isFilled(Celula celula) {
+		return getTabuleiroInvisivel().isFilledHere(getNewPointRelatively(celula.getLocation()));
+	}
+	public boolean isDestroyed(Celula celula) {
+		return getTabuleiroInvisivel().isDestroyedHere(getNewPointRelatively(celula.getLocation()));
+	}
+	public Color itsColor(Celula celula) throws IndexOutOfBoundsException, ExceptionNoWeaponHere {
+		return getTabuleiroInvisivel().isColorHere(getNewPointRelatively(celula.getLocation()));
 	}
 }

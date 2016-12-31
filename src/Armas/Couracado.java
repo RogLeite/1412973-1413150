@@ -12,12 +12,14 @@ public class Couracado extends Navio{
 		tipo = TipoArma.Couracado;
 		cellMatrix = CelulaMatrix.instance(this, this.tipo.getNumCels(),1);
 		cellMatrix.fill();
+		setSize();
 	}
 	private Couracado(float x, float y){
 		super(x,y);
 		tipo = TipoArma.Couracado;
 		cellMatrix = CelulaMatrix.instance(this, this.tipo.getNumCels(),1);
 		cellMatrix.fill();
+		setSize();
 	}
 	public static Couracado instance(){
 		return new Couracado();
@@ -35,10 +37,13 @@ public class Couracado extends Navio{
 		setSize();
 		for(int i=0;i<tipo.getNumCels();i++){
 			g2d.setColor(this.tipo.getColor());
-			g2d.fillRect(getX()*i*CELL_SIZE, getY()*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+			g2d.fillRect(i*CELL_SIZE,0,CELL_SIZE-1,CELL_SIZE-1);
 			g2d.setColor(Color.BLACK);
-			g2d.drawRect(getX()*i*CELL_SIZE, getY()*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+			g2d.drawRect(i*CELL_SIZE,0,CELL_SIZE-1,CELL_SIZE-1);
 		}
-	
+	}
+
+	protected TipoArma getTipo() {
+		return tipo;
 	}
 }

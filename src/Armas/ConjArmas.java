@@ -29,8 +29,8 @@ public class ConjArmas{
 			System.out.printf("Cheguei (ArmVect==null) = %s\n", Boolean.toString((ArmVect==null)));
 			System.out.printf("Cheguei (ArmVect[%d]==null) = %s\n", i,Boolean.toString((ArmVect[i]==null)));
 			if(ArmVect[i]==null){
-//				throw new ExceptionArrayNotFilled();
-//				TODO
+				//				throw new ExceptionArrayNotFilled();
+				//				TODO
 				throw new ExceptionNoWeaponHere();
 			}
 
@@ -99,10 +99,12 @@ public class ConjArmas{
 		return null;
 	}
 
-	public static Arma[] getFilledArray(float width, int cellSize) {
+	public static Arma[] getFilledArray(int cellSize) {
 		//		System.out.printf("\nCheguei forInsereArmas\n");
 		int j=0;
+		Arma.setCellSize(cellSize);
 		Arma c[] = new Arma[TotalNotDestroyed];
+
 		//		System.out.printf("getFilledArray:\n\tc\t= %s\n",Boolean.toString(c==null));
 		//		System.out.printf("TipoArma.Hidroaviao.getQtdMax() = %d\n",TipoArma.Hidroaviao.getQtdMax());
 		//		System.out.printf("TotalNotDestroyed = %d\n",TotalNotDestroyed);
@@ -118,15 +120,39 @@ public class ConjArmas{
 			c[j]= Couracado.instance();
 
 		//		System.out.printf("J = %d\n",j);
-		for(int i=0; i<c.length;i++){
-			c[i].setLocation((float)(i-((i/5)*5))*(width/5),(float)((i/5)*width/3));
-			//			System.out.printf("Cheguei width = %f ConjArmas.getFilledArray\n",width/3);
-			//			System.out.printf("Cheguei i = %d ConjArmas.getFilledArray\n",i/5);
-			System.out.printf("Cheguei \n\tc[%d].x = %f\n\tc[%d].y = %f\nConjArmas.getFilledArray\n",i,(i-((i/5)*5))*(width/5),i,((i/5)*width/3));
-			System.out.printf("Cheguei c[%d].getLocation = %s ConjArmas.getFilledArray\n",i,c[i].getLocation().toString());
-			c[i].setIgnoreRepaint(false);
-			c[i].setVisible(true);
+		int k=1;
+		TipoArma t = TipoArma.getnome(k);
+//		System.out.printf("t = %s ConjArmas.getFilledArray()\n", t.toString());
+//		System.out.println("ConjArmas.getFilledArray()\n---------------------------------");
+		for(int l=0;k<=TipoArma.getQtdTipes();k++,t = TipoArma.getnome(k)){
+//			System.out.printf("l=%d\n", l);
+			for(int i=0;i<t.getQtdMax();i++){
+//				System.out.printf("\tl=%d\n", l);
+				c[l].setLocation((float) (i*cellSize*(t.getNumCels()+1)*0.9),(float)(k)*(3*cellSize));
+				//			System.out.printf("Cheguei width = %f ConjArmas.getFilledArray\n",width/3);
+				//			System.out.printf("Cheguei i = %d ConjArmas.getFilledArray\n",i/5);
+//				System.out.printf("Cheguei c[%d].getLocation = %s ConjArmas.getFilledArray\n",i,c[l].getLocation().toString());
+//				System.out.printf("\tc[%d] = %s \n",l,c[l].getLocation().toString());
+				c[l].setIgnoreRepaint(false);
+				c[l].setVisible(true);
+				c[l].setLayout(null);
+				l++;
+			}
 		}
+//		System.out.println("\n---------------------------------");
+//
+//		j=0;
+//		int k=0;
+//		for(j=0;j<c.length;k++)
+//			for(int i=0;i<c[j].numPartes;i++,j++){
+//				c[j].setLocation((float)i*cellSize*(c[j].numPartes+1),(float)(k/5)*(3*cellSize));
+//				//			System.out.printf("Cheguei width = %f ConjArmas.getFilledArray\n",width/3);
+//				//			System.out.printf("Cheguei i = %d ConjArmas.getFilledArray\n",i/5);
+//				System.out.printf("Cheguei c[%d].getLocation = %s ConjArmas.getFilledArray\n",j,c[j].getLocation().toString());
+//				c[j].setIgnoreRepaint(false);
+//				c[j].setVisible(true);
+//				c[j].setLayout(null);
+//			}
 		return c;
 	}
 
@@ -145,23 +171,17 @@ public class ConjArmas{
 		return new ConjArmas();
 	}
 
-	public static void receiveArma(ConjArmas c, Point2D p) throws ExceptionArmVectFilled, ExceptionNoWeaponSelected{
+	public static Arma receiveArma() throws ExceptionNoWeaponSelected{
 		System.out.println("Cheguei ConjArmas.receiveArma");
 		Arma a = getSelectedArma();
 		if(a==null){
 			throw new ExceptionNoWeaponSelected();
 		}
-		if(AllowPlacement()){
+		return a;
 
-		}
-		System.out.printf("\nCheguei Arma Location %s ConjArmas.receiveArma\n",p.toString());
-		a.setLocation((float)p.getX(),(float)p.getY());
-		addArma(c,a);
-
-		if(!AllowPlacement()){
-		}
-
-
+	}
+	public static void confirmedReceive(){
+		emptySelectedArma();
 	}
 	static void addArma(ConjArmas c, Arma a) throws ExceptionArmVectFilled {
 		System.out.println("Cheguei ConjArmas.addArma");

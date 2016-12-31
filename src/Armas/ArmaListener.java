@@ -34,8 +34,8 @@ public class ArmaListener extends Listener {
 		return a.getColor();
 	}
 
-	public static Arma[] getFilledArray( float width,int cellSize) {
-		return ConjArmas.getFilledArray( width,cellSize) ;
+	public static Arma[] getFilledArray(int cellSize) {
+		return ConjArmas.getFilledArray(cellSize) ;
 	}
 
 	public static void selectArma(Component c) throws ExceptionComponentIsNotArma, ExceptionWeaponAllreadySelected {
@@ -84,9 +84,12 @@ public class ArmaListener extends Listener {
 			throw new ExceptionNoWeaponHere();
 		}
 	}
-	public static void receiveArma(ConjArmas conjArmas, Point2D p) throws ExceptionArmVectFilled, ExceptionNoWeaponSelected {
-		ConjArmas.receiveArma(conjArmas,p);
+	public static Arma receiveArma() throws ExceptionNoWeaponSelected{
+		return ConjArmas.receiveArma();
 		
+	}
+	public static void confirmedReceive(){
+		ConjArmas.confirmedReceive();
 	}
 	public static void rotatePiece() throws ExceptionNoWeaponSelected {
 		System.out.println("Cheguei ArmasListener.rotatePiece()");

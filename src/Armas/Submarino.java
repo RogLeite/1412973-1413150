@@ -9,6 +9,7 @@ public class Submarino extends Arma{
 	private final TipoArma tipo = TipoArma.Submarino;
 	private Submarino() {
 		super();
+//		System.out.printf("CELL_SIZE = %d Submarino.Submarino()\n", CELL_SIZE);
 		setSize(CELL_SIZE, CELL_SIZE);
 		cellMatrix = CelulaMatrix.instance(this, 1,1);
 		cellMatrix.fill();
@@ -34,9 +35,15 @@ public class Submarino extends Arma{
 		setSize();
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.setColor(this.tipo.getColor());
-		g2d.fillRect(getX()*CELL_SIZE, getY()*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+		g2d.fillRect(0,0,CELL_SIZE,CELL_SIZE);
 		g2d.setColor(Color.BLACK);
-		g2d.drawRect(getX()*CELL_SIZE, getY()*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+		g2d.drawRect(0,0,CELL_SIZE-1,CELL_SIZE-1);
+	}
+	protected void rotateClockwise() {}
+	protected void rotateCounterClockwise() {}
+
+	protected TipoArma getTipo() {
+		return tipo;
 	}
 
 

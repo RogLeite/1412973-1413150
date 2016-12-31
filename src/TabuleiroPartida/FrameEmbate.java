@@ -5,6 +5,7 @@ import java.awt.Point;
 
 import javax.swing.JButton;
 
+import Armas.ExceptionNoWeaponHere;
 import Tabuleiro.ExceptionCellAlreadyHit;
 import Tabuleiro.Tabuleiro;
 import TopoNivel.GameFrame;
@@ -20,6 +21,7 @@ public class FrameEmbate extends GameFrame{
 	private static TabuleiroEmbate P1;
 	private static TabuleiroEmbate P2;
 	private JButton butt;
+	private int charSize = 6;
 	private static float SIZE_FACTOR = 20;
 	private static float ALT_DEFAULT = 16*SIZE_FACTOR;
 	private static float MARGIN = 1*SIZE_FACTOR;
@@ -31,6 +33,8 @@ public class FrameEmbate extends GameFrame{
 	private static final String SAVE_STRING = "MATCH_SAVE_BOARD";
 	private static final String BASE_ACTION_STRING = "MATCH";
 	private static final String TAKE_ACTION_STRING = "MATCH_TAKE_ACTION";
+	private static final String END_PLAY_STRING = "MATCH_END_PLAY";
+	private static String Loser = null;
 	private static int SHOTS_LEFT = SHOTS_LEFT_DEFAULT;
 	private static float OVER_MARGIN = MARGIN*2;
 	private FrameEmbate(String[] names){
@@ -39,18 +43,18 @@ public class FrameEmbate extends GameFrame{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		CURR_FRAME = "MATCH";
 		setBounds(0,0,(int)((LARG_DEFAULT+(MARGIN*4))+20),(int)(ALT_DEFAULT+(MARGIN*10)));
-		
-		
+
+
 		setNeutralPlayer();
 
 		P1 = new TabuleiroEmbate((int)MARGIN, (int)OVER_MARGIN,ALT_DEFAULT,getPlayerOption(1));
-//		System.out.printf("\t CURR_PLAYER: %s",P1.getBoundPlayer());
+		//		System.out.printf("\t CURR_PLAYER: %s",P1.getBoundPlayer());
 
 		P1.setVisibilidade(false);
 		P1.setName(P1.getBoundPlayer()+" BOARD");
 
 		P2 = new TabuleiroEmbate((int)(ALT_DEFAULT+3*MARGIN),(int)OVER_MARGIN,ALT_DEFAULT,getPlayerOption(2));
-//		System.out.printf("\t CURR_PLAYER: %s",P2.getBoundPlayer());
+		//		System.out.printf("\t CURR_PLAYER: %s",P2.getBoundPlayer());
 
 		P2.setVisibilidade(false);
 		P2.setName(P2.getBoundPlayer()+" BOARD");
@@ -72,21 +76,38 @@ public class FrameEmbate extends GameFrame{
 		butt.setLayout(null);
 		getContentPane().add(butt,2);
 
-		/*Adiciona a Barra de Menu*/
-		
-		setJMenuBar(FrameEmbateMenuBar.instanceEmbateMenuBar());
-		
+		//		butt = new JButton("Terminar");
+		//		butt.setSize((int)(MARGIN*5), (int)(MARGIN*2));
+		//		butt.setLocation((int)(getWidth()-butt.getWidth())/2,(int)(getHeight()-MARGIN*5));
+		//		butt.addActionListener(new MyActionListener());
+		//		butt.setActionCommand(getEndPlayString());
+		//		butt.setName("BUTTON at "+getTitle());
+		//		butt.setIgnoreRepaint(true);
+		//		butt.setEnabled(false);
+		//		butt.setVisible(false);
+		//		butt.setLayout(null);
+		//		getContentPane().add(butt,3);
 
+
+		/*Adiciona a Barra de Menu*/
+
+		setJMenuBar(FrameEmbateMenuBar.instanceEmbateMenuBar());
+
+
+	}
+	static String getEndPlayString() {
+		return END_PLAY_STRING;
 	}
 	public void paintComponent(Graphics g){
 		Graphics2D g2d = (Graphics2D)g;
-		if(!getCanPlay())
-			g2d.drawString("PLAY DENIED", getWidth()/2, 2*getHeight()/3);
+		if(Loser!=null){
+			g2d.drawString(Loser,(int)(getWidth()-Loser.length()*charSize ),(int)(getHeight()-MARGIN*13/2));
+		}
 
 	}
 
 	public static FrameEmbate instance(String[] names){
-//		System.out.println("Cheguei TabuleiroEmbateEmbate.instance()");
+		//		System.out.println("Cheguei TabuleiroEmbateEmbate.instance()");
 		tabuleiro = new FrameEmbate(names);
 		tabuleiro.setLayout(null);
 		tabuleiro.setIgnoreRepaint(true);
@@ -98,10 +119,10 @@ public class FrameEmbate extends GameFrame{
 		}
 		return tabuleiro;
 	}
-	
-	
+
+
 	protected void switchPlayers() {
-//		System.out.println("Cheguei TabuleiroEmbate.switchPlayers()");
+		//		System.out.println("Cheguei TabuleiroEmbate.switchPlayers()");
 		SHOTS_LEFT = SHOTS_LEFT_DEFAULT;
 		((JButton)getContentPane().getComponent(2)).setEnabled(true);
 		((JButton)getContentPane().getComponent(2)).setActionCommand(getBeginPlayString());
@@ -111,13 +132,13 @@ public class FrameEmbate extends GameFrame{
 
 	}
 	protected void beginPlay(){
-//		System.out.println("Cheguei JButton able/disable TabuleiroEmbate.beginPlay()");
+		//		System.out.println("Cheguei JButton able/disable TabuleiroEmbate.beginPlay()");
 		tabuleiro.nextPlayer();
 		((JButton)getContentPane().getComponent(2)).setEnabled(false);
-//		System.out.printf("\n\tNome: %s",((TabuleiroEmbate)(tabuleiro.getContentPane().getComponent(0))).getBoundPlayer());
-//		System.out.printf("\t CURR_PLAYER: %s",getCurrPlayer());
-//		System.out.printf("\n\tNome: %s",((TabuleiroEmbate)(tabuleiro.getContentPane().getComponent(1))).getBoundPlayer());
-//		System.out.printf("\t CURR_PLAYER: %s",getCurrPlayer());
+		//		System.out.printf("\n\tNome: %s",((TabuleiroEmbate)(tabuleiro.getContentPane().getComponent(0))).getBoundPlayer());
+		//		System.out.printf("\t CURR_PLAYER: %s",getCurrPlayer());
+		//		System.out.printf("\n\tNome: %s",((TabuleiroEmbate)(tabuleiro.getContentPane().getComponent(1))).getBoundPlayer());
+		//		System.out.printf("\t CURR_PLAYER: %s",getCurrPlayer());
 
 		if(((TabuleiroEmbate)(tabuleiro.getContentPane().getComponent(0))).getBoundPlayer().equals(getCurrPlayer())){
 			//			System.out.println("Cheguei P1 turn TabuleiroEmbateEmbate.beginPlay()");
@@ -136,10 +157,15 @@ public class FrameEmbate extends GameFrame{
 	public void denyedPlay() {
 		setCanPlay(false);
 	}
-	protected void cellHit() {
+	protected void cellHit(TabuleiroEmbate t) {
 		SHOTS_LEFT--;
-		if(SHOTS_LEFT<=0){
-			switchPlayers();
+		if(t.isAllDestroyed()){
+			matchEnd(t.getBoundPlayer());
+		}
+		else{
+			if(SHOTS_LEFT<=0){
+				switchPlayers();
+			}
 		}
 	}
 
@@ -147,22 +173,40 @@ public class FrameEmbate extends GameFrame{
 	public void takeAction(String bound_player,Point p){
 		for(int i=0;i<TAB_COUNT;i++){
 			if(!currPlayerIsNeutral()){
-//			System.out.printf("\nCheguei FrameEmbate.takeAction()\n\ttab.getBound: %s \n\tboundplayer: %s\n",((TabuleiroEmbate)tabuleiro.getContentPane().getComponent(i)).getBoundPlayer(),bound_player);
-			if(((TabuleiroEmbate)tabuleiro.getContentPane().getComponent(i)).getBoundPlayer().equals(bound_player)
-					&& !((TabuleiroEmbate)tabuleiro.getContentPane().getComponent(i)).getVisibilidade()/*getBoundPlayer().equals(getCurrPlayer())*/){
-				try {
-					((TabuleiroEmbate)tabuleiro.getContentPane().getComponent(i)).takeAction(p);
-//					System.out.println("Cheguei deu certo FrameEmbate.takeAction()");
-					cellHit();
-					return;
-				} catch (ExceptionCellAlreadyHit e) {
-					denyedPlay();
-					return;
-				} 
-			}
-			else{}
+				TabuleiroEmbate t = (TabuleiroEmbate)tabuleiro.getContentPane().getComponent(i);
+				//			System.out.printf("\nCheguei FrameEmbate.takeAction()\n\ttab.getBound: %s \n\tboundplayer: %s\n",((TabuleiroEmbate)tabuleiro.getContentPane().getComponent(i)).getBoundPlayer(),bound_player);
+				if(t.getBoundPlayer().equals(bound_player)
+						&& !t.getVisibilidade()/*getBoundPlayer().equals(getCurrPlayer())*/
+						&& !bound_player.equals(getCurrPlayer())){
+					try {
+						t.takeAction(p);
+						//					System.out.println("Cheguei deu certo FrameEmbate.takeAction()");
+						cellHit(t);
+						return;
+					} catch (ExceptionCellAlreadyHit e) {
+						denyedPlay();
+						return;
+					} catch (ExceptionNoWeaponHere e) {
+						System.out.println("ExceptionNoWeaponHere FrameEmbate.takeAction");
+						e.printStackTrace();
+					}
+				}
+				else{}
 			}
 		}
+	}
+	private void matchEnd(String losingPlayer) {
+		JButton butt = (JButton)getContentPane().getComponent(2);
+		butt.setActionCommand(getEndPlayString());
+		TabuleiroEmbate t1 = (TabuleiroEmbate)tabuleiro.getContentPane().getComponent(0);
+		TabuleiroEmbate t2 = (TabuleiroEmbate)tabuleiro.getContentPane().getComponent(1);
+		t1.setVisibilidade(true);
+		t2.setVisibilidade(true);
+		setNeutralPlayer();
+		butt.setName("Terminar");
+		butt.setEnabled(true);
+		Loser = losingPlayer+" Perdeu!!!";
+
 	}
 	public static String getSaveString() {
 		return SAVE_STRING;
@@ -180,7 +224,7 @@ public class FrameEmbate extends GameFrame{
 	public void saveBoards() {
 
 		System.out.printf("\n/*************************/\n\tSALVEI O TABULEIROOOO\n/*************************/\n");
-		
+
 	}
 	public void takeAction(Point p) {}
 	public static String getTakeActionString() {

@@ -113,6 +113,9 @@ public class Testador{
 	public static String[] getPlayers() {
 		return PlayerNames;
 	}
+	public static void endedPlay() {
+		System.exit(0);;
+	}
 	
 
 }

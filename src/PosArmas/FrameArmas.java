@@ -158,7 +158,6 @@ public class FrameArmas extends GameFrame {
 			return;
 		}
 	}
-	protected void cellHit() {}
 	public void takeAction(String bound_player, Point p) {}
 
 	public static String getBaseActionString() {		
@@ -166,8 +165,7 @@ public class FrameArmas extends GameFrame {
 	}
 
 	public static void safeTerminate() {
-		// TODO Armazenamento do tabuleiro
-
+		ArmaListener.confirmedReceive();
 	}
 	private ArmasPickPanel getAPanel(){
 		return APanel;

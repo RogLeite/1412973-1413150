@@ -20,12 +20,15 @@ public class ArmasPickPanel extends JPanel{
 		setBounds((int) x, (int) y, (int) width, (int) height);
 
 		ConjArmas CArmas = new ConjArmas();
-		CArmas.ArmVect= ArmaListener.getFilledArray((float)getWidth(),(int)(height/16));
-
+		CArmas.ArmVect= ArmaListener.getFilledArray((int)(height/16));
+		setLayout(null);
+		setIgnoreRepaint(true);
+		setVisible(true);
 //		System.out.printf("getComponentCount = %d\n",getContentPane().getComponentCount());
 //		System.out.printf("CArmas.ArmVect.length = %d\n",CArmas.ArmVect.length);
 		for(int i=0;i<CArmas.ArmVect.length;i++){
-//			System.out.printf("3+i = %d\n",3+i);
+//			System.out.printf("(CArmas.ArmVect[%d]==null) = %s ArmasPickPanel.ArmasPickPanel()\n",i,Boolean.toString(CArmas.ArmVect[i]==null));
+//			System.out.printf("CArmas.ArmVect[%d].getLocation() = %s ArmasPickPanel.ArmasPickPanel()\n",i,CArmas.ArmVect[i].getLocation().toString());
 			add((CArmas.ArmVect[i]));
 		}
 	}
@@ -34,7 +37,7 @@ public class ArmasPickPanel extends JPanel{
 		return APanel;
 	}
 	public static ArmasPickPanel getInstance(){
-		System.out.println("Cheguei ArmasPickPanel.getInstance");
+//		System.out.println("Cheguei ArmasPickPanel.getInstance");
 		if(APanel==null){
 			System.out.println("Cheguei APanel = null\t ArmasPickPanel.getInstance");
 		}
@@ -42,17 +45,18 @@ public class ArmasPickPanel extends JPanel{
 	}
 	public void paintComponent(Graphics g){
 
-		Graphics2D g2d = (Graphics2D) g;
+		Graphics2D g2d = (Graphics2D) g;/*
 		g2d.setColor(Color.GRAY);
-		g2d.fill(getBounds());
+		g2d.fill(getBounds());*/
 	}
 	public void selectArmaAqui(Point p){
 		try{
-			System.out.println("Cheguei ArmasPickPanel.selectArmaAqui");
+//			System.out.println("Cheguei ArmasPickPanel.selectArmaAqui");
 			ArmaListener.selectArma(getComponentAt(p));
+			getComponentAt(p).setVisible(false);
 			this.remove(getComponentAt(p));
-			System.out.println("Cheguei repaint ArmasPickPanel.selectArmaAqui");
-			repaint();
+//			System.out.println("Cheguei repaint ArmasPickPanel.selectArmaAqui");
+//			repaint(getBounds());
 		}catch (ExceptionWeaponAllreadySelected e) {
 			System.out.println("Cheguei ExceptionWeaponAllreadySelected in ArmasPickPanel.selectArmaAqui");
 			return;
@@ -63,7 +67,7 @@ public class ArmasPickPanel extends JPanel{
 	}
 	public void rotatePiece() {
 		try {
-			System.out.println("Cheguei ArmasPickPanel.rotatePiece()");
+//			System.out.println("Cheguei ArmasPickPanel.rotatePiece()");
 			ArmaListener.rotatePiece();
 		} catch (ExceptionNoWeaponSelected e) {
 			System.out.println("Cheguei ExceptionNoWeaponSelected in ArmasPickPanel.rotatePiece()");

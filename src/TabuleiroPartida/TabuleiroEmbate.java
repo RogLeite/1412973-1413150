@@ -20,18 +20,13 @@ public class TabuleiroEmbate  extends Tabuleiro{
 
 	public TabuleiroEmbate(int x, int y, float boardsize, String player) {
 		super(x, y, boardsize, player);
+		setVisibilidade(false);
 		addMouseListener(new MyMouseListener(FrameEmbate.getTakeActionString()));
 	}
 
-	public void takeAction(Point2D p) throws ExceptionCellAlreadyHit{
+	public void takeAction(Point2D p) throws ExceptionCellAlreadyHit, ExceptionNoWeaponHere{
 		//		System.out.printf("\nCheguei TabuleiroEmbate.takeAction(%s)\n",p.toString());
-		try {
-			getTabuleiroInvisivel().getArmasArray().atingiuArma((int)p.getX(), (int)p.getY());
-		} catch (ExceptionNoWeaponHere e1) {
-			System.out.print("Foi na Agua!!\tTabuleiroEmbate.takeAction");
-		} catch (ExceptionArrayNotFilled e1) {
-			
-		}
+			getTabuleiroInvisivel().hitHere(getNewPointRelatively((Point) p));
 		
 		try{
 			Celula.hitCell(((Celula)getComponentAt((Point)p)));
@@ -39,10 +34,15 @@ public class TabuleiroEmbate  extends Tabuleiro{
 		catch(ClassCastException e){
 			System.out.println("Não é Celula bobinho!");
 		}
+		tabuleiroRepaint();
 	}
 	public boolean imHit(Point p){
 		ConjArmas c = getTabuleiroInvisivel().getArmasArray();
 		return ArmaListener.hasDestroyedPart(c,p.getLocation());
+	}
+
+	public boolean isAllDestroyed() {
+		return getTabuleiroInvisivel().isAllDestroyed();
 	}
 
 }

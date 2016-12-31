@@ -25,6 +25,7 @@ public class TabuleiroArmas extends Tabuleiro{
 
 	public TabuleiroArmas(int x, int y, float boardsize, String player) {
 		super(x, y, boardsize, player);
+		setVisibilidade(true);
 		addMouseListener(new MyMouseListener(getTakeActionString()));
 	}
 
@@ -32,14 +33,13 @@ public class TabuleiroArmas extends Tabuleiro{
 		System.out.printf("\nCheguei TabuleiroArmas.takeAction(%s)\n",p.toString());
 		try {
 			int cel = (int)CELL_SIZE;
-			p.setLocation((((float)p.getX())/cel)*cel, ((float)p.getY()/cel)*cel);
-			System.out.printf("\nCheguei p = %s TabuleiroArmas.takeAction\n",p.toString());
-			ArmaListener.receiveArma((getTabuleiroInvisivel().getArmasArray()),p);
-		} catch (ExceptionArmVectFilled e) {
-			System.out.println("Cheguei ExceptionArmVectFilled TabuleiroArmas.takeAction");
+			System.out.printf("\nCheguei p = %s TabuleiroArmas.takeAction\n",getNewPointRelatively((Point) p).toString());
+			getTabuleiroInvisivel().receiveArma(getNewPointRelatively((Point) p));
+		}catch(ExceptionPlacingNotAllowed e){
+			System.out.println("Cheguei ExceptionPlacingNotAllowed TabuleiroArmas.takeAction()");
 			return;
 		} catch (ExceptionNoWeaponSelected e) {
-			System.out.println("Cheguei ExceptionNoWeaponSelected TabuleiroArmas.takeAction");
+			System.out.println("Cheguei ExceptionNoWeaponSelected TabuleiroArmas.takeAction()");
 			return;
 		}
 //		System.out.println("Cheguei setVisibilidade(true) TabuleiroArmas.takeAction");

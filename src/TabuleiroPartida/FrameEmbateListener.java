@@ -9,6 +9,7 @@ import Tabuleiro.Tabuleiro;
 import TopoNivel.GameFrame;
 import TopoNivel.MyActionListener;
 import TopoNivel.MyMouseListener;
+import TopoNivel.TestadorListener;
 
 public class FrameEmbateListener extends Listener{
 	
@@ -43,6 +44,9 @@ public class FrameEmbateListener extends Listener{
 		}
 		else if(m.compareTo(FrameEmbate.getSaveString())==0){
 			FrameEmbate.getInstance().saveBoards();
+		}
+		else if(m.compareTo(FrameEmbate.getEndPlayString())==0){
+			TestadorListener.endedPlay();
 		}
 		else
 			System.out.println("Cheguei else final FrameEmbateListener.receiveCommand()");
