@@ -18,7 +18,6 @@ public abstract class GameFrame extends JFrame{
 	public abstract void denyedPlay();
 	public abstract void takeAction(Point p);
 	public abstract void takeAction(String bound_player,Point p);
-	protected abstract void cellHit();
 	
 	public String getPlayerOption(int i){
 		//		System.out.printf("Cheguei GameFrame.getPlayerOption(%d)\n",i);

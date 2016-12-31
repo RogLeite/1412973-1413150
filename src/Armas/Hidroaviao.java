@@ -20,7 +20,7 @@ public class Hidroaviao extends Arma {
 		} catch (ExceptionCellAlreadyFilled e) {
 			e.printStackTrace();
 		}
-		setSize(cellMatrix.getWidth()*CELL_SIZE, cellMatrix.getHeight()*CELL_SIZE);
+		setSize(cellMatrix.getMyWidth()*CELL_SIZE, cellMatrix.getMyHeight()*CELL_SIZE);
 
 	}
 	public Hidroaviao(float x, float y){
@@ -33,7 +33,7 @@ public class Hidroaviao extends Arma {
 		} catch (ExceptionCellAlreadyFilled e) {
 			e.printStackTrace();
 		}
-		setSize(cellMatrix.getWidth()*CELL_SIZE, cellMatrix.getHeight()*CELL_SIZE);
+		setSize(cellMatrix.getMyWidth()*CELL_SIZE, cellMatrix.getMyHeight()*CELL_SIZE);
 
 
 	}
@@ -51,8 +51,8 @@ public class Hidroaviao extends Arma {
 	public void paintComponent(Graphics g){
 		Graphics2D g2d = (Graphics2D)g;
 		setSize();
-		for(int i=0;i<cellMatrix.getWidth();i++){
-			for(int j=0;j<cellMatrix.getHeight();j++){
+		for(int i=0;i<cellMatrix.getMyWidth();i++){
+			for(int j=0;j<cellMatrix.getMyHeight();j++){
 				if(cellMatrix.isHere(i,j)){
 					g2d.setColor(this.tipo.getColor());
 					g2d.fillRect(i*CELL_SIZE,j*CELL_SIZE,CELL_SIZE,CELL_SIZE);
@@ -64,11 +64,11 @@ public class Hidroaviao extends Arma {
 	}
 	protected void rotateClockwise() {
 		cellMatrix.spinClockwise();
-		setSize(cellMatrix.getHeight()*CELL_SIZE,cellMatrix.getWidth()*CELL_SIZE);
+		setSize(cellMatrix.getMyHeight()*CELL_SIZE,cellMatrix.getMyWidth()*CELL_SIZE);
 	}
 	protected void rotateCounterClockwise() {
 		cellMatrix.spinCounterClockwise();
-		setSize(cellMatrix.getHeight()*CELL_SIZE,cellMatrix.getWidth()*CELL_SIZE);
+		setSize(cellMatrix.getMyHeight()*CELL_SIZE,cellMatrix.getMyWidth()*CELL_SIZE);
 	}
 	protected TipoArma getTipo() {
 		return tipo;

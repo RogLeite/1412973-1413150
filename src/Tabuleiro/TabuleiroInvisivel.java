@@ -93,5 +93,8 @@ public class TabuleiroInvisivel extends JPanel{
 		}
 		cellMatrix.hitHere(pointToMatrixPoint(p).x,pointToMatrixPoint(p).y);
 	}
+	public boolean isAllDestroyed() {
+		return cellMatrix.allDestroyed();
+	}
 }
 

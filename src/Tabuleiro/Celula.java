@@ -37,7 +37,7 @@ public final class Celula extends JPanel{
 		}
 		else{
 			c.HIT = true;
-			c.repaint();
+			c.repaint(c.getBounds());
 		}
 	}
 

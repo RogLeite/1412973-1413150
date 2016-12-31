@@ -32,6 +32,7 @@ public class FrameEmbate extends GameFrame{
 	private static final String SAVE_STRING = "MATCH_SAVE_BOARD";
 	private static final String BASE_ACTION_STRING = "MATCH";
 	private static final String TAKE_ACTION_STRING = "MATCH_TAKE_ACTION";
+	private static final String END_PLAY_STRING = "MATCH_END_PLAY";
 	private static int SHOTS_LEFT = SHOTS_LEFT_DEFAULT;
 	private static float OVER_MARGIN = MARGIN*2;
 	private FrameEmbate(String[] names){
@@ -72,12 +73,28 @@ public class FrameEmbate extends GameFrame{
 		butt.setEnabled(true);
 		butt.setLayout(null);
 		getContentPane().add(butt,2);
+		
+//		butt = new JButton("Terminar");
+//		butt.setSize((int)(MARGIN*5), (int)(MARGIN*2));
+//		butt.setLocation((int)(getWidth()-butt.getWidth())/2,(int)(getHeight()-MARGIN*5));
+//		butt.addActionListener(new MyActionListener());
+//		butt.setActionCommand(getEndPlayString());
+//		butt.setName("BUTTON at "+getTitle());
+//		butt.setIgnoreRepaint(true);
+//		butt.setEnabled(false);
+//		butt.setVisible(false);
+//		butt.setLayout(null);
+//		getContentPane().add(butt,3);
+		
 
 		/*Adiciona a Barra de Menu*/
 		
 		setJMenuBar(FrameEmbateMenuBar.instanceEmbateMenuBar());
 		
 
+	}
+	static String getEndPlayString() {
+		return END_PLAY_STRING;
 	}
 	public void paintComponent(Graphics g){
 		Graphics2D g2d = (Graphics2D)g;
@@ -137,8 +154,11 @@ public class FrameEmbate extends GameFrame{
 	public void denyedPlay() {
 		setCanPlay(false);
 	}
-	protected void cellHit() {
+	protected void cellHit(TabuleiroEmbate t) {
 		SHOTS_LEFT--;
+//		if(t.isAllDestroyed()){
+//			matchEnd(t.getBoundPlayer());
+//		}
 		if(SHOTS_LEFT<=0){
 			switchPlayers();
 		}
@@ -148,25 +168,40 @@ public class FrameEmbate extends GameFrame{
 	public void takeAction(String bound_player,Point p){
 		for(int i=0;i<TAB_COUNT;i++){
 			if(!currPlayerIsNeutral()){
+				TabuleiroEmbate t = (TabuleiroEmbate)tabuleiro.getContentPane().getComponent(i);
 //			System.out.printf("\nCheguei FrameEmbate.takeAction()\n\ttab.getBound: %s \n\tboundplayer: %s\n",((TabuleiroEmbate)tabuleiro.getContentPane().getComponent(i)).getBoundPlayer(),bound_player);
-			if(((TabuleiroEmbate)tabuleiro.getContentPane().getComponent(i)).getBoundPlayer().equals(bound_player)
-					&& !((TabuleiroEmbate)tabuleiro.getContentPane().getComponent(i)).getVisibilidade()/*getBoundPlayer().equals(getCurrPlayer())*/){
+			if(t.getBoundPlayer().equals(bound_player)
+					&& !t.getVisibilidade()/*getBoundPlayer().equals(getCurrPlayer())*/
+					&& !bound_player.equals(getCurrPlayer())){
 				try {
-					((TabuleiroEmbate)tabuleiro.getContentPane().getComponent(i)).takeAction(p);
+					t.takeAction(p);
 //					System.out.println("Cheguei deu certo FrameEmbate.takeAction()");
-					cellHit();
+					cellHit(t);
 					return;
 				} catch (ExceptionCellAlreadyHit e) {
 					denyedPlay();
 					return;
 				} catch (ExceptionNoWeaponHere e) {
-					// TODO Auto-generated catch block
+					System.out.println("ExceptionNoWeaponHere FrameEmbate.takeAction");
 					e.printStackTrace();
-				} 
+				}
 			}
 			else{}
 			}
 		}
+	}
+	private void matchEnd(String losingPlayer) {
+		JButton butt = (JButton)getContentPane().getComponent(2);
+		butt.setActionCommand(getEndPlayString());
+		//		TabuleiroEmbate t1 = (TabuleiroEmbate)tabuleiro.getContentPane().getComponent(1);
+//		TabuleiroEmbate t2 = (TabuleiroEmbate)tabuleiro.getContentPane().getComponent(2);
+//		t1.setVisibilidade(true);
+//		t1.setEnabled(false);
+//		t2.setVisibilidade(true);
+//		t2.setEnabled(false);
+//		setNeutralPlayer();
+		
+		
 	}
 	public static String getSaveString() {
 		return SAVE_STRING;

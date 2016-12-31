@@ -21,6 +21,9 @@ public class TestadorListener extends Listener{
 	public static String[] getPlayers(){
 		return Testador.getPlayers();
 	}
+	public static void endedPlay() {
+		Testador.endedPlay();
+	}
 
 
 }

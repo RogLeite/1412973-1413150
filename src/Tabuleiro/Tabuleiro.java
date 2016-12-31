@@ -101,6 +101,13 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 			((Celula)getComponent(i)).repaint();
 		}
 	}
+	protected void tabuleiroRepaint(){
+		for(int i=0;i<getComponentCount()-1;i++){
+//			System.out.printf("\t Component %d Tabuleiro.tabuleiroRepaint()\n",i);
+			((Celula)getComponent(i)).repaint();
+		}
+	}
+	
 	public boolean getVisibilidade(){
 		return visibilidade ;
 	}

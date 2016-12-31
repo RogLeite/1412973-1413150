@@ -26,7 +26,7 @@ public class TabuleiroEmbate  extends Tabuleiro{
 
 	public void takeAction(Point2D p) throws ExceptionCellAlreadyHit, ExceptionNoWeaponHere{
 		//		System.out.printf("\nCheguei TabuleiroEmbate.takeAction(%s)\n",p.toString());
-			getTabuleiroInvisivel().hitHere((Point) p);
+			getTabuleiroInvisivel().hitHere(getNewPointRelatively((Point) p));
 		
 		try{
 			Celula.hitCell(((Celula)getComponentAt((Point)p)));
@@ -34,10 +34,15 @@ public class TabuleiroEmbate  extends Tabuleiro{
 		catch(ClassCastException e){
 			System.out.println("Não é Celula bobinho!");
 		}
+		tabuleiroRepaint();
 	}
 	public boolean imHit(Point p){
 		ConjArmas c = getTabuleiroInvisivel().getArmasArray();
 		return ArmaListener.hasDestroyedPart(c,p.getLocation());
+	}
+
+	public boolean isAllDestroyed() {
+		return getTabuleiroInvisivel().isAllDestroyed();
 	}
 
 }

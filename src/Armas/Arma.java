@@ -61,7 +61,7 @@ public abstract class Arma extends JPanel {
 	}
 	
 	protected void setSize(){
-		super.setSize(cellMatrix.getWidth()*CELL_SIZE, cellMatrix.getHeight()*CELL_SIZE);
+		super.setSize(cellMatrix.getMyWidth()*CELL_SIZE, cellMatrix.getMyHeight()*CELL_SIZE);
 	}
 	protected boolean isHitHere(Point2D p){
 		convertPoint((Point) p);
@@ -111,5 +111,6 @@ public abstract class Arma extends JPanel {
 		return cellMatrix;
 	}
 	protected abstract TipoArma getTipo();
+
 }
 
