@@ -6,7 +6,7 @@ public enum TipoArma {
 	Submarino (1, Color.GREEN, 4),	//MAX = 4
 	Destroyer (2,Color.ORANGE, 3),	//MAX = 3
 	Hidroaviao (3,Color.YELLOW, 5),	//MAX = 5
-	Cruzador(4,Color.MAGENTA, 2),		//MAX = 2
+	Cruzador(4,Color.PINK, 2),		//MAX = 2
 	Couracado (5,Color.WHITE, 1);	//MAX = 1
 
 	private final int nCell;

@@ -41,6 +41,9 @@ public class Couracado extends Navio{
 			g2d.setColor(Color.BLACK);
 			g2d.drawRect(i*CELL_SIZE,0,CELL_SIZE-1,CELL_SIZE-1);
 		}
-	
+	}
+
+	protected TipoArma getTipo() {
+		return tipo;
 	}
 }

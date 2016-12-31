@@ -24,15 +24,9 @@ public class TabuleiroEmbate  extends Tabuleiro{
 		addMouseListener(new MyMouseListener(FrameEmbate.getTakeActionString()));
 	}
 
-	public void takeAction(Point2D p) throws ExceptionCellAlreadyHit{
+	public void takeAction(Point2D p) throws ExceptionCellAlreadyHit, ExceptionNoWeaponHere{
 		//		System.out.printf("\nCheguei TabuleiroEmbate.takeAction(%s)\n",p.toString());
-		try {
-			getTabuleiroInvisivel().getArmasArray().atingiuArma((int)p.getX(), (int)p.getY());
-		} catch (ExceptionNoWeaponHere e1) {
-			System.out.print("Foi na Agua!!\tTabuleiroEmbate.takeAction");
-		} catch (ExceptionArrayNotFilled e1) {
-			
-		}
+			getTabuleiroInvisivel().hitHere((Point) p);
 		
 		try{
 			Celula.hitCell(((Celula)getComponentAt((Point)p)));

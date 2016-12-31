@@ -42,6 +42,9 @@ public class Destroyer extends Navio{
 			g2d.drawRect(i*CELL_SIZE,0,CELL_SIZE-1,CELL_SIZE-1);
 		}
 	}
+	protected TipoArma getTipo() {
+		return tipo;
+	}
 }
 
 

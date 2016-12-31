@@ -110,5 +110,6 @@ public abstract class Arma extends JPanel {
 	public CelulaMatrix getCellMatrix() {
 		return cellMatrix;
 	}
+	protected abstract TipoArma getTipo();
 }
 

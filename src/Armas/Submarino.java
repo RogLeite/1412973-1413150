@@ -9,7 +9,7 @@ public class Submarino extends Arma{
 	private final TipoArma tipo = TipoArma.Submarino;
 	private Submarino() {
 		super();
-		System.out.printf("CELL_SIZE = %d Submarino.Submarino()\n", CELL_SIZE);
+//		System.out.printf("CELL_SIZE = %d Submarino.Submarino()\n", CELL_SIZE);
 		setSize(CELL_SIZE, CELL_SIZE);
 		cellMatrix = CelulaMatrix.instance(this, 1,1);
 		cellMatrix.fill();
@@ -41,6 +41,10 @@ public class Submarino extends Arma{
 	}
 	protected void rotateClockwise() {}
 	protected void rotateCounterClockwise() {}
+
+	protected TipoArma getTipo() {
+		return tipo;
+	}
 
 
 }

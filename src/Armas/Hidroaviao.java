@@ -70,5 +70,8 @@ public class Hidroaviao extends Arma {
 		cellMatrix.spinCounterClockwise();
 		setSize(cellMatrix.getHeight()*CELL_SIZE,cellMatrix.getWidth()*CELL_SIZE);
 	}
+	protected TipoArma getTipo() {
+		return tipo;
+	}
 	
 }

@@ -5,6 +5,7 @@ import java.awt.Point;
 
 import javax.swing.JButton;
 
+import Armas.ExceptionNoWeaponHere;
 import Tabuleiro.ExceptionCellAlreadyHit;
 import Tabuleiro.Tabuleiro;
 import TopoNivel.GameFrame;
@@ -158,6 +159,9 @@ public class FrameEmbate extends GameFrame{
 				} catch (ExceptionCellAlreadyHit e) {
 					denyedPlay();
 					return;
+				} catch (ExceptionNoWeaponHere e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				} 
 			}
 			else{}
