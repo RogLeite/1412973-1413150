@@ -48,7 +48,7 @@ public class FrameArmas extends GameFrame {
 		super();
 		CURR_FRAME = "CAPT";
 		setBounds(0,0,(int)((LARG_DEFAULT+(MARGIN*4))+20),(int)(ALT_DEFAULT+(MARGIN*8)));
-		P = new TabuleiroArmas((int)(ALT_DEFAULT+3*MARGIN),(int)MARGIN, ALT_DEFAULT, getPlayerOption(QTD_FRAMES++));
+		P = new TabuleiroArmas((int)(ALT_DEFAULT+3*MARGIN),(int)MARGIN, ALT_DEFAULT, getPlayerOption(QTD_FRAMES++),this);
 		P.setLayout(null);
 		P.setVisibilidade(true);
 		getContentPane().add(P,getContentPane().getComponentCount());
@@ -200,6 +200,10 @@ public class FrameArmas extends GameFrame {
 		} catch (ExceptionBoardNotInstanced e) {
 			FrameEmbateListener.instance(getAllPlayers());
 		}
+	}
+
+	public void receberArma(Arma a) {
+		((ArmasPickPanel)(getContentPane().getComponent(3))).devolverArma(a);
 	}
 }
 

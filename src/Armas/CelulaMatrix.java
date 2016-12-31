@@ -1,6 +1,7 @@
 package Armas;
 
 import java.awt.Color;
+import java.awt.Point;
 
 import PosArmas.ExceptionPlacingNotAllowed;
 import Tabuleiro.ExceptionCellAlreadyFilled;
@@ -195,6 +196,22 @@ public class CelulaMatrix {
 		isHere(x,y);
 		return m[x][y].Color();
 	}
+	public Arma getThisWeapon(Point np) {
+		return (Arma) m[np.x][np.y].getArma();
+	}
+	public void removeThisWeapon(Arma a) {
+		for(int i=0;i<getMyWidth();i++){
+			for(int j=0;j<getMyHeight();j++){
+				Point np = new Point(i,j);
+				if((Arma) getThisWeapon(np)==a){
+					CelulaSimples c = new CelulaSimples();
+					c.setVisibilidade(m[i][j].getVisibilidade());
+					m[i][j] = c;
+				}
+			}
+		}
+		
+	}
 }
 class CelulaSimples{
 
@@ -213,6 +230,9 @@ class CelulaSimples{
 		HOVERED = false;
 		myArma = a;
 		tArma = a.getTipo();
+	}
+	public boolean getVisibilidade() {
+		return VISIBLE;
 	}
 	public void destroy() {
 		DESTROYED = true;

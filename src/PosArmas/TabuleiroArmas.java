@@ -6,12 +6,14 @@ import java.awt.geom.Point2D;
 import Armas.ArmaListener;
 import Armas.ConjArmas;
 import Armas.ExceptionArmVectFilled;
+import Armas.ExceptionNoWeaponHere;
 import Armas.ExceptionNoWeaponSelected;
 import Tabuleiro.Celula;
 import Tabuleiro.ExceptionCellAlreadyFilled;
 //import Tabuleiro.ExceptionCellAlreadyHit;
 import Tabuleiro.Tabuleiro;
 import Tabuleiro.TabuleiroListener;
+import TabuleiroPartida.FrameEmbateListener;
 import TopoNivel.MyMouseListener;
 public class TabuleiroArmas extends Tabuleiro{
 
@@ -20,11 +22,12 @@ public class TabuleiroArmas extends Tabuleiro{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private static FrameArmas frameMae;
 	private static final String TAKE_ACTION_STRING = "TAB_TAKE_ACTION";
 
-	public TabuleiroArmas(int x, int y, float boardsize, String player) {
+	public TabuleiroArmas(int x, int y, float boardsize, String player,FrameArmas f) {
 		super(x, y, boardsize, player);
+		frameMae = f;
 		setVisibilidade(true);
 		addMouseListener(new MyMouseListener(getTakeActionString()));
 	}
@@ -39,8 +42,11 @@ public class TabuleiroArmas extends Tabuleiro{
 			System.out.println("Cheguei ExceptionPlacingNotAllowed TabuleiroArmas.takeAction()");
 			return;
 		} catch (ExceptionNoWeaponSelected e) {
-			System.out.println("Cheguei ExceptionNoWeaponSelected TabuleiroArmas.takeAction()");
-			return;
+			try {
+				frameMae.receberArma(getTabuleiroInvisivel().devolvaArma(getNewPointRelatively((Point) p)));
+			} catch (ExceptionNoWeaponHere e1) {
+				System.out.println("ExceptionPlacingNotAllowed TabuleiroArmas.takeAction()");
+			}
 		}
 //		System.out.println("Cheguei setVisibilidade(true) TabuleiroArmas.takeAction");
 		setVisibilidade(true);

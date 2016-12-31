@@ -96,5 +96,14 @@ public class ArmaListener extends Listener {
 		ConjArmas.rotatePiece();
 	}
 
+	public static Arma getSelectedArma() {
+		return ConjArmas.getSelectedArma();
+	}
+
+	public static void emptySelectedArma() {
+		ConjArmas.emptySelectedArma();
+		
+	}
+
 
 }

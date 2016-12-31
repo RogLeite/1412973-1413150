@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Rectangle;
 
 import javax.swing.JPanel;
 
+import Armas.Arma;
 import Armas.ArmaListener;
 import Armas.ConjArmas;
 import Armas.ExceptionComponentIsNotArma;
@@ -73,6 +75,12 @@ public class ArmasPickPanel extends JPanel{
 			System.out.println("Cheguei ExceptionNoWeaponSelected in ArmasPickPanel.rotatePiece()");
 			return; 
 		}
+	}
+	public void devolverArma(Arma a) {
+		Rectangle r = a.getBounds();
+		add(a);
+//		repaint(this.getX()+1,this.getY()+1,this.getWidth()-1,this.getHeight()-1);
+		getComponentAt(r.getLocation()).repaint();
 	}
 
 }

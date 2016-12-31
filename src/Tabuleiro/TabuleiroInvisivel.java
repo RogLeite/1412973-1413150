@@ -96,5 +96,14 @@ public class TabuleiroInvisivel extends JPanel{
 	public boolean isAllDestroyed() {
 		return cellMatrix.allDestroyed();
 	}
+	public Arma devolvaArma(Point p) throws ExceptionNoWeaponHere {
+		Point np = pointToMatrixPoint(p);
+		Arma a=cellMatrix.getThisWeapon(np);
+		if(a==null){
+			throw new ExceptionNoWeaponHere();
+		}
+		cellMatrix.removeThisWeapon(a);
+		return a;
+	}
 }
 
