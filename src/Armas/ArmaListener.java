@@ -43,10 +43,12 @@ public class ArmaListener extends Listener {
 		System.out.println("Cheguei ArmaListener.selectArma");
 		if(c instanceof Arma){
 			Arma a = (Arma) c;
-			if(ConjArmas.getSelectedArma()!=null){
+			try {
+				a = ConjArmas.getSelectedArma();
 				throw new ExceptionWeaponAllreadySelected();
+			} catch (ExceptionNoWeaponSelected e) {
+				ConjArmas.setSelectedArma(a);
 			}
-			ConjArmas.setSelectedArma(a);
 		}
 		else{
 			throw new ExceptionComponentIsNotArma();
@@ -96,7 +98,7 @@ public class ArmaListener extends Listener {
 		ConjArmas.rotatePiece();
 	}
 
-	public static Arma getSelectedArma() {
+	public static Arma getSelectedArma() throws ExceptionNoWeaponSelected {
 		return ConjArmas.getSelectedArma();
 	}
 

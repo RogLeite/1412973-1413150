@@ -45,4 +45,11 @@ public class TabuleiroEmbate  extends Tabuleiro{
 		return getTabuleiroInvisivel().isAllDestroyed();
 	}
 
+	public void hoveredHere(Point point) {}
+
+	@Override
+	public Point getMousePointRelative() {
+		return MousePointRelative;
+	}
+
 }

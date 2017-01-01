@@ -9,6 +9,7 @@ import java.awt.Point;
 import javax.swing.JPanel;
 
 import Armas.ExceptionNoWeaponHere;
+import Armas.ExceptionNoWeaponSelected;
 
 public final class Celula extends JPanel{
 	/**
@@ -57,8 +58,8 @@ public final class Celula extends JPanel{
 	public void paintComponent(Graphics g){
 		//
 		Graphics2D g2d = (Graphics2D) g;
-//				System.out.println("Cheguei Celula.paintComponent()");
-//		System.out.printf("\tdecideCor() = %s Celula.paintComponent()\n",decideCor().toString());
+		//				System.out.println("Cheguei Celula.paintComponent()");
+		//		System.out.printf("\tdecideCor() = %s Celula.paintComponent()\n",decideCor().toString());
 		g2d.setColor(decideCor());
 		g2d.fillRect(0, 0,(int)CELL_SIZE, (int)CELL_SIZE);
 		if(imHit()){
@@ -73,27 +74,29 @@ public final class Celula extends JPanel{
 
 	}
 	private boolean imVisivel() {
-		Tabuleiro t = ((Tabuleiro)this.getParent());
-		return t.isVisivel(this);
+		return tabResp.isVisivel(this);
 	}
 
 	private boolean imHit() {
-		Tabuleiro t = ((Tabuleiro)this.getParent());
-		return t.isHit(this);
+		return tabResp.isHit(this);
 	}
 	private boolean imFilled() {
-		Tabuleiro t = ((Tabuleiro)this.getParent());
-		return t.isFilled(this);
+		return tabResp.isFilled(this);
 	}
 
 	private boolean imDestroyed() {
-		Tabuleiro t = ((Tabuleiro)this.getParent());
-		return t.isDestroyed(this);
+		return tabResp.isDestroyed(this);
 	}
 	private Color myColor() throws IndexOutOfBoundsException, ExceptionNoWeaponHere {
-		Tabuleiro t = ((Tabuleiro)this.getParent());
-		return t.itsColor(this);
+		return tabResp.itsColor(this);
 	}
+	private boolean imHovered() {
+		return tabResp.isHovered(this);
+	}
+	private Color myHoverColor() throws ExceptionNoWeaponSelected {
+		return tabResp.hoverColor(this);
+	}
+
 	private Color decideCor(){
 		//		System.out.println("Cheguei Celula.decideCor()");
 		//		System.out.printf("imFilled %b\n",t.imFilled(this.getCorrectedLocation()));
@@ -109,6 +112,29 @@ public final class Celula extends JPanel{
 					System.out.println("ExceptionNoWeaponHere Celula.decideCor");
 					return new Color(43, 66, 227);
 				}
+			}
+			else if(imHovered()){
+				boolean b;
+				try{
+					b = tabResp.isPlacingAllowed(getLocation());
+				}catch(ExceptionNoWeaponSelected e){
+					//Azul Escuro
+					return new Color(43, 66, 227);
+				}
+				if(b){
+					Color c;
+					try {
+						c = myHoverColor();
+					} catch (ExceptionNoWeaponSelected e) {
+						//Azul Escuro
+						return new Color(43, 66, 227);
+					}
+					return c;
+				}
+				else{
+					return Color.RED;
+				}
+
 			}
 			else{
 				//Azul Escuro
@@ -141,6 +167,7 @@ public final class Celula extends JPanel{
 	//	public boolean getVisibilidade(){
 	//		return visibilidade;
 	//	}
+
 
 
 

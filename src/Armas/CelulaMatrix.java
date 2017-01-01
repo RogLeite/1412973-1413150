@@ -150,7 +150,7 @@ public class CelulaMatrix {
 				for(int k=i+x-1;k<i+x+2;k++){
 					for(int l=j+y-1;l<j+y+2;l++){
 						if(!(k<0||l<0||k>=cellMatrix.getMyWidth()||l>=cellMatrix.getMyHeight())){
-							if(cellMatrix.m[k][l].isFilled()){
+							if(cellMatrix.m[k][l].isFilled()&&m[i][j].isFilled()){
 								throw new ExceptionPlacingNotAllowed();
 							}
 						}
@@ -166,35 +166,6 @@ public class CelulaMatrix {
 				m[i][j].setVisibilidade(v);
 			}
 		}
-	}
-	public boolean isHitHere(int x, int y) throws IndexOutOfBoundsException{
-		isHere(x,y);
-		boolean b = m[x][y].isHit();
-		if(b){
-			System.out.printf("\t m[%d][%d] isHit = %b CelulaMatrix.isHitHere\n", x,y,m[x][y].isHit());
-		}
-		return b;
-	}
-	public boolean isVisivelHere(int x, int y) throws IndexOutOfBoundsException{
-		isHere(x,y);
-		return m[x][y].isVisivel();
-	}
-	public boolean isFilledHere(int x, int y) throws IndexOutOfBoundsException{
-		isHere(x,y);
-		boolean b = m[x][y].isFilled();
-		if(b){
-			System.out.printf("\t m[%d][%d] ifFilled = %b CelulaMatrix.isFilledHere\n", x,y,m[x][y].isFilled());
-		}
-		//		System.out.printf("\t m[%d][%d] ifFilled = %b CelulaMatrix.isFilledHere\n", x,y,m[x][y].isFilled());
-		return b;
-	}
-	public boolean isDestroyedHere(int x, int y) throws IndexOutOfBoundsException{
-		isHere(x,y);
-		return m[x][y].isDestroyed();
-	}
-	public Color isColorHere(int x, int y) throws IndexOutOfBoundsException, ExceptionNoWeaponHere{
-		isHere(x,y);
-		return m[x][y].Color();
 	}
 	public Arma getThisWeapon(Point np) {
 		return (Arma) m[np.x][np.y].getArma();
@@ -212,6 +183,59 @@ public class CelulaMatrix {
 		}
 		
 	}
+	
+	public boolean isHitHere(int x, int y) throws IndexOutOfBoundsException{
+		isHere(x,y);
+		boolean b = m[x][y].isHit();
+		if(b){
+			System.out.printf("\t m[%d][%d] isHit = %b CelulaMatrix.isHitHere\n", x,y,m[x][y].isHit());
+		}
+		return b;
+	}
+	public boolean isVisivelHere(int x, int y) throws IndexOutOfBoundsException{
+		isHere(x,y);
+		return m[x][y].isVisivel();
+	}
+	public boolean isFilledHere(int x, int y) throws IndexOutOfBoundsException{
+		isHere(x,y);
+		boolean b = m[x][y].isFilled();
+		if(b){
+//			System.out.printf("\t m[%d][%d] ifFilled = %b CelulaMatrix.isFilledHere\n", x,y,m[x][y].isFilled());
+		}
+		//		System.out.printf("\t m[%d][%d] ifFilled = %b CelulaMatrix.isFilledHere\n", x,y,m[x][y].isFilled());
+		return b;
+	}
+	public boolean isDestroyedHere(int x, int y) throws IndexOutOfBoundsException{
+		isHere(x,y);
+		return m[x][y].isDestroyed();
+	}
+	public Color isColorHere(int x, int y) throws IndexOutOfBoundsException, ExceptionNoWeaponHere{
+		isHere(x,y);
+		return m[x][y].Color();
+	}
+	public boolean isHoveredHere(int x, int y) {
+		return m[x][y].isHovered();
+	}
+	public void updateHover(Point p, CelulaMatrix cm) {
+		System.out.println("Foi\tCelulaMatrix.updateHover()");
+		for(int i=0;i<getMyWidth();i++){
+			for(int j=0;j<getMyHeight();j++){
+				if(cm==null){
+					m[i][j].setHovered(false);
+				}
+				else if((i-p.x>=0)
+						&&(i-p.x<cm.getMyWidth())
+						&&(j-p.y>=0)
+						&&(j-p.y<cm.getMyHeight())){
+					System.out.printf("SetHover\n\tcm.isFilledHere(%d-%d,%d-%d)\n\tm[%d][%d].setHovered(<%b>)\nCelulaMatrix.updateHover()\n",i,p.x,j,p.y,i,j,cm.isFilledHere(i-p.x,j-p.y));
+					m[i][j].setHovered(cm.isFilledHere(i-p.x,j-p.y));
+				}
+				else{
+					m[i][j].setHovered(false);
+				}
+			}
+		}
+	}
 }
 class CelulaSimples{
 
@@ -219,9 +243,9 @@ class CelulaSimples{
 	private boolean FILLED;
 	private boolean HIT;
 	private boolean DESTROYED;
+	private boolean HOVERED;
 	private Arma myArma=null;
 	private TipoArma tArma=null;
-	private boolean HOVERED;
 	protected CelulaSimples(Arma a){
 		VISIBLE = false;
 		DESTROYED = false;
@@ -230,6 +254,12 @@ class CelulaSimples{
 		HOVERED = false;
 		myArma = a;
 		tArma = a.getTipo();
+	}
+	public void setHovered(boolean b) {
+		HOVERED = b;
+	}
+	public boolean isHovered() {
+		return HOVERED;
 	}
 	public boolean getVisibilidade() {
 		return VISIBLE;

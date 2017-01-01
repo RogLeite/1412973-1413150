@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import Armas.ArmaListener;
 import Armas.ConjArmas;
 import Armas.ExceptionNoWeaponHere;
+import Armas.ExceptionNoWeaponSelected;
 import PosArmas.TabuleiroArmas;
 import TabuleiroPartida.TabuleiroEmbate;
 import TopoNivel.MyMouseListener;
@@ -37,6 +38,7 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 	private final String bound_player;
 	private boolean visibilidade = false;
 	private TabuleiroInvisivel tabInvisivel;
+	protected Point MousePointRelative;
 	public Tabuleiro(int x, int y, float boardsize, String player){
 		CELL_SIZE = boardsize/SIDE_TAB;
 		setBounds(x, y, (int)boardsize, (int)boardsize);
@@ -138,7 +140,7 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 		System.out.println("Cheguei Tabuleiro.addTabuleiroInvisivel");
 	}
 	public TabuleiroInvisivel newInstanceTabuleiroInvisivel(){
-		return TabuleiroInvisivel.newInstance(getSideTab());
+		return TabuleiroInvisivel.newInstance(getSideTab(),this);
 	}
 	public void clicked(Point point){
 		try {
@@ -169,9 +171,10 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 		// TODO Auto-generated method stub
 		return false;
 	}
-	public boolean placingAllowed() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isPlacingAllowed(Point p) throws ExceptionNoWeaponSelected {
+		boolean b ;
+			b = getTabuleiroInvisivel().isPlacingAllowed(getNewPointRelatively(p));
+		return b;
 	}
 	private int getSideTab(){
 		return SIDE_TAB-1;
@@ -202,5 +205,11 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 	}
 	public Color itsColor(Celula celula) throws IndexOutOfBoundsException, ExceptionNoWeaponHere {
 		return getTabuleiroInvisivel().isColorHere(getNewPointRelatively(celula.getLocation()));
+	}
+	public boolean isHovered(Celula celula) {
+		return getTabuleiroInvisivel().isHoveredHere(getNewPointRelatively(celula.getLocation()));
+	}
+	public Color hoverColor(Celula celula) throws ExceptionNoWeaponSelected {
+		return getTabuleiroInvisivel().hoverColor();
 	}
 }
