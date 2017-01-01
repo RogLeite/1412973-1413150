@@ -6,6 +6,7 @@ import java.awt.Point;
 import javax.swing.JButton;
 
 import Armas.ExceptionNoWeaponHere;
+import Armas.SaveLoadGame;
 import Tabuleiro.ExceptionCellAlreadyHit;
 import Tabuleiro.Tabuleiro;
 import TopoNivel.GameFrame;
@@ -223,6 +224,7 @@ public class FrameEmbate extends GameFrame{
 	}
 	public void saveBoards() {
 
+		SaveLoadGame.SaveConjArmas(player, ((TabuleiroEmbate)(tabuleiro.getContentPane().getComponent(1))));
 		System.out.printf("\n/*************************/\n\tSALVEI O TABULEIROOOO\n/*************************/\n");
 
 	}
