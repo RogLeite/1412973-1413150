@@ -54,7 +54,7 @@ public abstract class Arma extends JPanel {
 	protected abstract void rotateClockwise();
 	protected abstract void rotateCounterClockwise();
 	public Color getColor(){
-		return tipo.getColor();
+		return getTipo().getColor();
 	}
 	public boolean getDestroyed(){
 		return cellMatrix.allDestroyed();

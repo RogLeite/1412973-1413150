@@ -122,37 +122,37 @@ public class ConjArmas{
 		//		System.out.printf("J = %d\n",j);
 		int k=1;
 		TipoArma t = TipoArma.getnome(k);
-//		System.out.printf("t = %s ConjArmas.getFilledArray()\n", t.toString());
-//		System.out.println("ConjArmas.getFilledArray()\n---------------------------------");
+		//		System.out.printf("t = %s ConjArmas.getFilledArray()\n", t.toString());
+		//		System.out.println("ConjArmas.getFilledArray()\n---------------------------------");
 		for(int l=0;k<=TipoArma.getQtdTipes();k++,t = TipoArma.getnome(k)){
-//			System.out.printf("l=%d\n", l);
+			//			System.out.printf("l=%d\n", l);
 			for(int i=0;i<t.getQtdMax();i++){
-//				System.out.printf("\tl=%d\n", l);
+				//				System.out.printf("\tl=%d\n", l);
 				c[l].setLocation((float) (i*cellSize*(t.getNumCels()+1)*0.9)+cellSize,(float)(k)*(3*cellSize));
 				//			System.out.printf("Cheguei width = %f ConjArmas.getFilledArray\n",width/3);
 				//			System.out.printf("Cheguei i = %d ConjArmas.getFilledArray\n",i/5);
-//				System.out.printf("Cheguei c[%d].getLocation = %s ConjArmas.getFilledArray\n",i,c[l].getLocation().toString());
-//				System.out.printf("\tc[%d] = %s \n",l,c[l].getLocation().toString());
+				//				System.out.printf("Cheguei c[%d].getLocation = %s ConjArmas.getFilledArray\n",i,c[l].getLocation().toString());
+				//				System.out.printf("\tc[%d] = %s \n",l,c[l].getLocation().toString());
 				c[l].setIgnoreRepaint(false);
 				c[l].setVisible(true);
 				c[l].setLayout(null);
 				l++;
 			}
 		}
-//		System.out.println("\n---------------------------------");
-//
-//		j=0;
-//		int k=0;
-//		for(j=0;j<c.length;k++)
-//			for(int i=0;i<c[j].numPartes;i++,j++){
-//				c[j].setLocation((float)i*cellSize*(c[j].numPartes+1),(float)(k/5)*(3*cellSize));
-//				//			System.out.printf("Cheguei width = %f ConjArmas.getFilledArray\n",width/3);
-//				//			System.out.printf("Cheguei i = %d ConjArmas.getFilledArray\n",i/5);
-//				System.out.printf("Cheguei c[%d].getLocation = %s ConjArmas.getFilledArray\n",j,c[j].getLocation().toString());
-//				c[j].setIgnoreRepaint(false);
-//				c[j].setVisible(true);
-//				c[j].setLayout(null);
-//			}
+		//		System.out.println("\n---------------------------------");
+		//
+		//		j=0;
+		//		int k=0;
+		//		for(j=0;j<c.length;k++)
+		//			for(int i=0;i<c[j].numPartes;i++,j++){
+		//				c[j].setLocation((float)i*cellSize*(c[j].numPartes+1),(float)(k/5)*(3*cellSize));
+		//				//			System.out.printf("Cheguei width = %f ConjArmas.getFilledArray\n",width/3);
+		//				//			System.out.printf("Cheguei i = %d ConjArmas.getFilledArray\n",i/5);
+		//				System.out.printf("Cheguei c[%d].getLocation = %s ConjArmas.getFilledArray\n",j,c[j].getLocation().toString());
+		//				c[j].setIgnoreRepaint(false);
+		//				c[j].setVisible(true);
+		//				c[j].setLayout(null);
+		//			}
 		return c;
 	}
 
@@ -196,15 +196,18 @@ public class ConjArmas{
 		throw new ExceptionArmVectFilled();
 	}
 	static void setSelectedArma(Arma a){
-		System.out.println("Cheguei ConjArmas.setSelectedArma");
+		//		System.out.println("Cheguei ConjArmas.setSelectedArma");
 		selectedArma = a;
 	}
-	static Arma getSelectedArma() {
-		System.out.println("Cheguei ConjArmas.getSelectedArma");
+	static Arma getSelectedArma() throws ExceptionNoWeaponSelected {
+		if(selectedArma==null){
+			throw new ExceptionNoWeaponSelected();
+		}
+		//		System.out.println("Cheguei ConjArmas.getSelectedArma");
 		return selectedArma;
 	}
 	static void emptySelectedArma() {
-		System.out.println("Cheguei ConjArmas.emptySelectedArma");
+		//		System.out.println("Cheguei ConjArmas.emptySelectedArma");
 		selectedArma = null;
 	}
 	public Arma[] getArmVec() {

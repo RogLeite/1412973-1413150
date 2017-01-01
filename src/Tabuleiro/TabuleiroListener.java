@@ -63,5 +63,9 @@ public interface TabuleiroListener{
 	}*/
 
 	public float getCellSize();
+
+	public void hoveredHere(Point point);
+
+	public Point getMousePointRelative();
 	
 }

@@ -178,7 +178,7 @@ public class FrameArmas extends GameFrame {
 	public void rotatePiece() {
 		System.out.println("Cheguei FrameArmas.rotatePiece()");
 		getAPanel().rotatePiece();
-
+		getBoard().hoveredHere(getBoard().getMousePosition());
 	}
 	public void selectArma(Point p){
 		ArmasPickPanel.getInstance().selectArmaAqui(p);

@@ -29,13 +29,15 @@ public class TabuleiroInvisivel extends JPanel{
 	private ConjArmas arrayArmas = ArmaListener.getEmptyArray();
 	private CelulaMatrix cellMatrix;
 	private final int BOARD_SIZE;
+	private TabuleiroListener tabMae;
 	//	private final int SIDE_TAB = 16;
 	//	final float CELL_SIZE;
-	public TabuleiroInvisivel(int boardsize){
+	public TabuleiroInvisivel(int boardsize,TabuleiroListener tM){
 		BOARD_SIZE = boardsize;
 		setBounds(0,0, getBoardSize(), getBoardSize());
 		//		addMouseListener(new MyMouseListener(getTakeActionString()));
 		cellMatrix = CelulaMatrix.instance(getBoardSize(), getBoardSize());
+		tabMae = tM;
 		setEnabled(true);
 		setLayout(null);
 		setIgnoreRepaint(false);
@@ -43,8 +45,8 @@ public class TabuleiroInvisivel extends JPanel{
 	static String getTakeActionString() {
 		return TAKE_ACTION_STRING;
 	}
-	public static TabuleiroInvisivel newInstance(int SIDE_TAB) {
-		return new TabuleiroInvisivel(SIDE_TAB);
+	public static TabuleiroInvisivel newInstance(int SIDE_TAB,TabuleiroListener tM) {
+		return new TabuleiroInvisivel(SIDE_TAB, tM);
 	}
 	public static String getBaseActionString(){
 		return BASE_ACTION_STRING;
@@ -72,21 +74,6 @@ public class TabuleiroInvisivel extends JPanel{
 	public void setVisibilidade(boolean v) {
 		cellMatrix.setVisibilidade(v);
 	}
-	public boolean isVisivelHere(Point p) {
-		return cellMatrix.isVisivelHere(pointToMatrixPoint(p).x,pointToMatrixPoint(p).y);
-	}
-	public boolean isHitHere(Point p) {
-		return cellMatrix.isHitHere(pointToMatrixPoint(p).x,pointToMatrixPoint(p).y);
-	}
-	public boolean isFilledHere(Point p) {
-		return cellMatrix.isFilledHere(pointToMatrixPoint(p).x,pointToMatrixPoint(p).y);
-	}
-	public boolean isDestroyedHere(Point p) {
-		return cellMatrix.isDestroyedHere(pointToMatrixPoint(p).x,pointToMatrixPoint(p).y);
-	}
-	public Color isColorHere(Point p) throws IndexOutOfBoundsException, ExceptionNoWeaponHere {
-		return cellMatrix.isColorHere(pointToMatrixPoint(p).x,pointToMatrixPoint(p).y);
-	}
 	public void hitHere(Point p) throws ExceptionCellAlreadyHit, ExceptionNoWeaponHere {
 		if(isHitHere(p)){
 			throw new ExceptionCellAlreadyHit();
@@ -104,6 +91,47 @@ public class TabuleiroInvisivel extends JPanel{
 		}
 		cellMatrix.removeThisWeapon(a);
 		return a;
+	}
+	public boolean isPlacingAllowed(Point p) throws ExceptionNoWeaponSelected {
+		Arma a = ArmaListener.receiveArma();
+		try {
+			a.getCellMatrix().checkSpaceIn(cellMatrix,pointToMatrixPoint(tabMae.getMousePointRelative()).x,pointToMatrixPoint(tabMae.getMousePointRelative()).y);
+		} catch (ExceptionPlacingNotAllowed e) {
+			return false;
+		}
+		return true;
+	}
+	public boolean isVisivelHere(Point p) {
+		return cellMatrix.isVisivelHere(pointToMatrixPoint(p).x,pointToMatrixPoint(p).y);
+	}
+	public boolean isHitHere(Point p) {
+		return cellMatrix.isHitHere(pointToMatrixPoint(p).x,pointToMatrixPoint(p).y);
+	}
+	public boolean isFilledHere(Point p) {
+		return cellMatrix.isFilledHere(pointToMatrixPoint(p).x,pointToMatrixPoint(p).y);
+	}
+	public boolean isDestroyedHere(Point p) {
+		return cellMatrix.isDestroyedHere(pointToMatrixPoint(p).x,pointToMatrixPoint(p).y);
+	}
+	public Color isColorHere(Point p) throws IndexOutOfBoundsException, ExceptionNoWeaponHere {
+		return cellMatrix.isColorHere(pointToMatrixPoint(p).x,pointToMatrixPoint(p).y);
+	}
+	public boolean isHoveredHere(Point p) {
+		return cellMatrix.isHoveredHere(pointToMatrixPoint(p).x,pointToMatrixPoint(p).y);
+	}
+	public Color hoverColor() throws ExceptionNoWeaponSelected {
+		Arma a = ArmaListener.getSelectedArma();
+		return a.getColor();
+	}
+	public void updateHover(Point p) {
+		CelulaMatrix cm;
+		try{
+			Arma a = ArmaListener.getSelectedArma();
+			cm = a.getCellMatrix();
+		}catch(ExceptionNoWeaponSelected e){
+			cm = null;
+		}
+		cellMatrix.updateHover(pointToMatrixPoint(p),cm);
 	}
 }
 
