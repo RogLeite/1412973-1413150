@@ -1,6 +1,7 @@
 package TabuleiroPartida;
 
 import java.awt.Point;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.xml.bind.Marshaller.Listener;
@@ -30,7 +31,7 @@ public class FrameEmbateListener extends Listener{
 		}
 		return "<in FrameEmbateListener>YOU DON'T KNOW WHAT YOU'RE LOOKING FOR!";
 	}
-	public static void receiveCommand(String m) throws ExceptionBoardNotInstanced{
+	public static void receiveCommand(String m) throws ExceptionBoardNotInstanced, IOException{
 
 		System.out.printf("\nCheguei message: '%s' FrameEmbateListener.receiveCommand()\n",m);
 		System.out.printf("\nCheguei BPS: '%s' FrameEmbateListener.receiveCommand()\n",FrameEmbate.getBeginPlayString());

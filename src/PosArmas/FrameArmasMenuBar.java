@@ -29,7 +29,7 @@ public class FrameArmasMenuBar extends JMenuBar{
 		JMenu menu = new JMenu("File");
 		menu.setMnemonic(KeyEvent.VK_A);
 		
-		JMenuItem saveItem = new JMenuItem("Save Tables Layout");
+		JMenuItem saveItem = new JMenuItem("Load Tables Layout");
 		saveItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
 		saveItem.setActionCommand(FrameArmasListener.getThisActionCommand(FrameArmasMenuBar.class));
 		saveItem.addActionListener(new MyActionListener());

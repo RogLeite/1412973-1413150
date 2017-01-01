@@ -32,7 +32,7 @@ public class TabuleiroEmbate  extends Tabuleiro{
 			Celula.hitCell(((Celula)getComponentAt((Point)p)));
 		}
 		catch(ClassCastException e){
-			System.out.println("Não é Celula bobinho!");
+			System.out.println("NÃ£o Ã© Celula bobinho!");
 		}
 		tabuleiroRepaint();
 	}
@@ -47,9 +47,11 @@ public class TabuleiroEmbate  extends Tabuleiro{
 
 	public void hoveredHere(Point point) {}
 
-	@Override
 	public Point getMousePointRelative() {
 		return MousePointRelative;
 	}
 
+	public ConjArmas getArmas (){
+		return getTabuleiroInvisivel().getArmasArray();
+	}
 }

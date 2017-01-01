@@ -2,11 +2,13 @@ package TabuleiroPartida;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.io.IOException;
 
 import javax.swing.JButton;
 
 import Armas.ExceptionNoWeaponHere;
 import Armas.SaveLoadGame;
+import PlayerNameInput.FrameRegistroNomesListener;
 import Tabuleiro.ExceptionCellAlreadyHit;
 import Tabuleiro.Tabuleiro;
 import TopoNivel.GameFrame;
@@ -222,9 +224,12 @@ public class FrameEmbate extends GameFrame{
 		// TODO Auto-generated method stub
 		return SWITCH_PLAYERS_STRING;
 	}
-	public void saveBoards() {
-
-		SaveLoadGame.SaveConjArmas(player, ((TabuleiroEmbate)(tabuleiro.getContentPane().getComponent(1))));
+	public void saveBoards() throws IOException {
+		TabuleiroEmbate t1 = (TabuleiroEmbate)tabuleiro.getContentPane().getComponent(0);
+		TabuleiroEmbate t2 = (TabuleiroEmbate)tabuleiro.getContentPane().getComponent(1);
+		
+		SaveLoadGame.SaveConjArmas(FrameRegistroNomesListener.getPlayerNames()[0], t1.getArmas());
+		SaveLoadGame.SaveConjArmas(FrameRegistroNomesListener.getPlayerNames()[1], t2.getArmas());
 		System.out.printf("\n/*************************/\n\tSALVEI O TABULEIROOOO\n/*************************/\n");
 
 	}
