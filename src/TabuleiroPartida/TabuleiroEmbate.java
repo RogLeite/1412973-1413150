@@ -45,4 +45,7 @@ public class TabuleiroEmbate  extends Tabuleiro{
 		return getTabuleiroInvisivel().isAllDestroyed();
 	}
 
+	public ConjArmas getArmas (){
+		return getTabuleiroInvisivel().getArmasArray();
+	}
 }
