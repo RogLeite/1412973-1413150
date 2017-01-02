@@ -186,7 +186,7 @@ public class FrameArmas extends GameFrame {
 	public void selectArma(Point p){
 		ArmasPickPanel.getInstance().selectArmaAqui(p);
 	}
-	public String getThisActionCommand(Class<?> class1){
+	public static String getThisActionCommand(Class<?> class1){
 		if(class1.isAssignableFrom(MyMouseListener.class)){
 			System.out.println("Cheguei MyMouseListener FrameArmasListener.getThisActionCommand()");
 			return FrameArmas.getTakeActionString();
