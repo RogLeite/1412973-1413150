@@ -90,6 +90,7 @@ public class TabuleiroInvisivel extends JPanel{
 			throw new ExceptionNoWeaponHere();
 		}
 		cellMatrix.removeThisWeapon(a);
+		a.setVisible(true);
 		return a;
 	}
 	public boolean isPlacingAllowed(Point p) throws ExceptionNoWeaponSelected {

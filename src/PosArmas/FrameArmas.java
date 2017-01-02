@@ -102,20 +102,13 @@ public class FrameArmas extends GameFrame {
 	}
 
 
-	public static void drawMessages(Graphics g, String s){
+	public void drawMessages(String s){
 		
 		System.out.printf("Cheguei DrawMessage (%s) in FrameArmas", s);
-		Graphics2D g2d = (Graphics2D)g;
-		g2d.drawString(s, (LARG_DEFAULT-MARGIN-s.length()*32)/20, (ALT_DEFAULT-MARGIN*2)/2);
-//		(getWidth()-campoP.getWidth())/2,(int)(getHeight()-MARGIN*7
-//		(int)(MARGIN*7 + name.length()*8), (int)(MARGIN*2));
-	}
-
-	public void paintComponent(Graphics g){
-		Graphics2D g2d = (Graphics2D)g;
-		if(!getCanPlay())
-			g2d.drawString("PLAY DENIED", getWidth()/2, 2*getHeight()/3);
-		//		g2d.drawString(TEXTS[0],getWidth()-MARGIN*7/2/*- TEXTS[0].length()*charlenght*/, getHeight()/2/*-MARGIN*7*/ );
+		
+		Graphics2D g2d = (Graphics2D)getGraphics();
+		g2d.clearRect((int)(2*MARGIN),(int)( MARGIN*3)+3, (int)ALT_DEFAULT, -12);
+		g2d.drawString(s, 2*MARGIN,MARGIN*3);
 	}
 
 	public FrameArmas instance(String name){
