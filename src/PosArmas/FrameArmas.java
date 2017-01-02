@@ -102,11 +102,13 @@ public class FrameArmas extends GameFrame {
 	}
 
 
-	/*	public void drawArmas(Graphics g){
-		Graphics2D g2d= (Graphics2D) g ;
-
+	public static void drawMessages(Graphics g, String s){
+		System.out.printf("Cheguei DrawMessage (%s) in FrameArmas", s);
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.drawString(s, (LARG_DEFAULT-10*s.length())/2, ALT_DEFAULT*5/12);
+		
 	}
-	 */
+
 	public void paintComponent(Graphics g){
 		Graphics2D g2d = (Graphics2D)g;
 		if(!getCanPlay())

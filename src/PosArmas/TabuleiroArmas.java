@@ -41,6 +41,7 @@ public class TabuleiroArmas extends Tabuleiro{
 //			System.out.printf("\nCheguei p = %s TabuleiroArmas.takeAction\n",getNewPointRelatively((Point) p).toString());
 			getTabuleiroInvisivel().receiveArma(getNewPointRelatively((Point) p));
 		}catch(ExceptionPlacingNotAllowed e){
+			FrameArmas.drawMessages(getGraphics(), "ExceptionPlacingNotAllowed");
 			System.out.println("Cheguei ExceptionPlacingNotAllowed TabuleiroArmas.takeAction()");
 			return;
 		} catch (ExceptionNoWeaponSelected e) {
@@ -60,6 +61,9 @@ public class TabuleiroArmas extends Tabuleiro{
 	public boolean imHit(Point p){
 		return false;
 	}
+	
+
+	
 	
 	public void hoveredHere(Point point) {
 		Point p = getNewPointRelatively(point);
