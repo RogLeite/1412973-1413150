@@ -50,28 +50,34 @@ public class Hidroaviao extends Arma {
 	}
 	public void paintComponent(Graphics g){
 		Graphics2D g2d = (Graphics2D)g;
-		setSize();
-		for(int i=0;i<cellMatrix.getMyWidth();i++){
-			for(int j=0;j<cellMatrix.getMyHeight();j++){
-				if(cellMatrix.isHere(i,j)){
-					g2d.setColor(this.tipo.getColor());
-					g2d.fillRect(i*CELL_SIZE,j*CELL_SIZE,CELL_SIZE,CELL_SIZE);
-					g2d.setColor(Color.BLACK);
-					g2d.drawRect(i*CELL_SIZE,j*CELL_SIZE,CELL_SIZE-1,CELL_SIZE-1);
-				}
-			}
-		}
+//		setSize();
+		g2d.clearRect(0, 0, getWidth(), getHeight());
+		g2d.setBackground(Color.WHITE);
+		g2d.setColor(this.tipo.getColor());
+		g2d.fillRect(0,CELL_SIZE,CELL_SIZE,CELL_SIZE);
+		g2d.setColor(Color.BLACK);
+		g2d.drawRect(0,CELL_SIZE,CELL_SIZE-1,CELL_SIZE-1);
+		g2d.setColor(this.tipo.getColor());
+
+		g2d.fillRect(CELL_SIZE,0,CELL_SIZE,CELL_SIZE);
+		g2d.setColor(Color.BLACK);
+		g2d.drawRect(CELL_SIZE,0,CELL_SIZE-1,CELL_SIZE-1);
+		g2d.setColor(this.tipo.getColor());
+
+		g2d.fillRect(2*CELL_SIZE,CELL_SIZE,CELL_SIZE,CELL_SIZE);
+		g2d.setColor(Color.BLACK);
+		g2d.drawRect(2*CELL_SIZE,CELL_SIZE,CELL_SIZE-1,CELL_SIZE-1);
 	}
 	protected void rotateClockwise() {
 		cellMatrix.spinClockwise();
-		setSize(cellMatrix.getMyHeight()*CELL_SIZE,cellMatrix.getMyWidth()*CELL_SIZE);
+		//		setSize(cellMatrix.getMyHeight()*CELL_SIZE,cellMatrix.getMyWidth()*CELL_SIZE);
 	}
 	protected void rotateCounterClockwise() {
 		cellMatrix.spinCounterClockwise();
-		setSize(cellMatrix.getMyHeight()*CELL_SIZE,cellMatrix.getMyWidth()*CELL_SIZE);
+		//		setSize(cellMatrix.getMyHeight()*CELL_SIZE,cellMatrix.getMyWidth()*CELL_SIZE);
 	}
 	protected TipoArma getTipo() {
 		return tipo;
 	}
-	
+
 }

@@ -9,11 +9,11 @@ import java.awt.geom.Point2D;
 public abstract class Navio extends Arma {
 	protected void rotateClockwise(){
 		cellMatrix.spinClockwise();
-		setSize(cellMatrix.getMyHeight()*CELL_SIZE,cellMatrix.getMyWidth()*CELL_SIZE);
+//		setSize(cellMatrix.getMyHeight()*CELL_SIZE,cellMatrix.getMyWidth()*CELL_SIZE);
 	}
 	protected void rotateCounterClockwise(){
 		cellMatrix.spinCounterClockwise();
-		setSize(cellMatrix.getMyHeight()*CELL_SIZE,cellMatrix.getMyWidth()*CELL_SIZE);
+//		setSize(cellMatrix.getMyHeight()*CELL_SIZE,cellMatrix.getMyWidth()*CELL_SIZE);
 	}
 	protected Navio() {
 		super();

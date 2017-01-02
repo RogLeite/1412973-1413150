@@ -34,7 +34,7 @@ public class Couracado extends Navio{
 	}
 	public void paintComponent(Graphics g){
 		Graphics2D g2d = (Graphics2D)g;
-		setSize();
+//		setSize();
 		for(int i=0;i<tipo.getNumCels();i++){
 			g2d.setColor(this.tipo.getColor());
 			g2d.fillRect(i*CELL_SIZE,0,CELL_SIZE-1,CELL_SIZE-1);
