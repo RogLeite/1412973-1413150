@@ -67,5 +67,7 @@ public interface TabuleiroListener{
 	public void hoveredHere(Point point);
 
 	public Point getMousePointRelative();
+
+	public int getSideTab();
 	
 }

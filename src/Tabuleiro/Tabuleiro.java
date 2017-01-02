@@ -176,7 +176,7 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 		b = getTabuleiroInvisivel().isPlacingAllowed(getNewPointRelatively(p));
 		return b;
 	}
-	private int getSideTab(){
+	public int getSideTab(){
 		return SIDE_TAB-1;
 	}
 	protected void correctPointRelatively(Point p){

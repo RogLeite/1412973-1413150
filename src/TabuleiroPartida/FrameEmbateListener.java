@@ -52,6 +52,9 @@ public class FrameEmbateListener extends Listener{
 		else if(m.compareTo(FrameEmbate.getSaveString())==0){
 			FrameEmbate.getInstance().saveBoards();
 		}
+		else if(m.compareTo(FrameEmbate.getLoadString())==0){
+			FrameEmbate.getInstance().loadBoards();
+		}
 		else if(m.compareTo(FrameEmbate.getEndPlayString())==0){
 			TestadorListener.endedPlay();
 		}
@@ -75,5 +78,8 @@ public class FrameEmbateListener extends Listener{
 	}
 	public static Tabuleiro getThisBoard(FrameEmbate instance, int board) {
 		return instance.getThisBoard(board);
+	}
+	public static String getThisActionCommand(String string) {
+		return FrameEmbate.getThisActionCommand(string);
 	}
 }

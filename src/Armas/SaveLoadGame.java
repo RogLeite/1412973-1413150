@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import Armas.Arma;
+import Tabuleiro.TabuleiroInvisivel;
+import Tabuleiro.TabuleiroListener;
 
 public class SaveLoadGame {
 
@@ -28,11 +30,11 @@ public class SaveLoadGame {
 		oout.close();
 	}
 
-	public static ConjArmas LoadConjArmas (String player) throws IOException, ClassNotFoundException, ExceptionArmVectFilled{
+	public static ConjArmas LoadConjArmas (String player, TabuleiroListener t) throws IOException, ClassNotFoundException, ExceptionArmVectFilled{
 		System.out.printf("Cheguei LoadConjArmas.\n ");
 		FileInputStream finp = new FileInputStream(player + ".tmp");
 		ObjectInputStream oinp = new ObjectInputStream(finp);
-		ConjArmas c=ConjArmas.getEmptyArray();
+		TabuleiroInvisivel ti = TabuleiroInvisivel.newInstance(t.getSideTab(), t);
 		Arma a;
 //		while(true) /*achar opção melhor*/{
 //			int numPartes= oinp.readInt();
@@ -54,8 +56,14 @@ public class SaveLoadGame {
 //			ConjArmas.addArma(c,a);
 		
 //		}
-		for(int i=0; i<TipoArma.getSomaQtdMax();i++)
-			ConjArmas.addArma(c,(Arma)oinp.readObject());
+		for(int i=0; i<TipoArma.getSomaQtdMax();i++){
+//			ConjArmas.addArma(c,(Arma)oinp.readObject());
+			//*****************************
+			// usa esse ti
+//			ti.receiveArma();
+			//**********************
+		}
+		//transferirTabuleiroInvisivel();
 		oinp.close();
 		finp.close();
 		return c;

@@ -31,9 +31,15 @@ public class FrameEmbateMenuBar extends JMenuBar{
 		
 		JMenuItem saveItem = new JMenuItem("Save Tables Layout");
 		saveItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
-		saveItem.setActionCommand(FrameEmbateListener.getThisActionCommand(FrameEmbateMenuBar.class));
+		saveItem.setActionCommand(FrameEmbateListener.getThisActionCommand("SAVE"));
 		saveItem.addActionListener(new MyActionListener());
 		menu.add(saveItem);
+		
+		JMenuItem loadItem = new JMenuItem("Load Tables Layout");
+		loadItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
+		loadItem.setActionCommand(FrameEmbateListener.getThisActionCommand("LOAD"));
+		loadItem.addActionListener(new MyActionListener());
+		menu.add(loadItem);
 		
 		return menu;
 	}
