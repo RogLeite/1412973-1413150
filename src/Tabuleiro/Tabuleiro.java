@@ -200,9 +200,10 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 	public boolean isFilled(Celula celula) {
 		return getTabuleiroInvisivel().isFilledHere(getNewPointRelatively(celula.getLocation()));
 	}
-	public boolean isDestroyed(Celula celula) {
-		return getTabuleiroInvisivel().isDestroyedHere(getNewPointRelatively(celula.getLocation()));
-	}
+			public boolean isDestroyed(Celula celula) {
+				return getTabuleiroInvisivel().isDestroyedHere(getNewPointRelatively(celula.getLocation()));
+			}
+			//quando uma é destroida, todas são consideradas
 	public Color itsColor(Celula celula) throws IndexOutOfBoundsException, ExceptionNoWeaponHere {
 		return getTabuleiroInvisivel().isColorHere(getNewPointRelatively(celula.getLocation()));
 	}
