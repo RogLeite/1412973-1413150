@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.xml.bind.Marshaller.Listener;
 
+import PosArmas.FrameArmasListener;
 import Tabuleiro.Tabuleiro;
 import TopoNivel.GameFrame;
 import TopoNivel.MyActionListener;
@@ -28,6 +29,11 @@ public class FrameEmbateListener extends Listener{
 		else if(class1.isAssignableFrom(MyMouseListener.class)){
 //			System.out.println("Cheguei MyMouseListener string FrameEmbateListener.getThisActionCommand()");
 			return FrameEmbate.getTakeActionString();
+		}
+		else if(class1.isAssignableFrom(FrameArmasListener.class)){
+//			System.out.println("Cheguei FrameEmbateMenuBar string FrameEmbateListener.getThisActionCommand()");
+			System.out.println(FrameEmbate.getSaveString());
+			return FrameEmbate.getSaveString();
 		}
 		return "<in FrameEmbateListener>YOU DON'T KNOW WHAT YOU'RE LOOKING FOR!";
 	}

@@ -15,13 +15,15 @@ public class FrameArmasMenuBar extends JMenuBar{
 
 	private static final long serialVersionUID = 1L;
 	private static FrameArmasMenuBar instance;
+	private static FrameArmasListener frameMae;
 
-	private FrameArmasMenuBar(){
+	private FrameArmasMenuBar(FrameArmasListener f){
+		frameMae = f;
 		add(menuFile());
 	}
 
-	static FrameArmasMenuBar instanceEmbateMenuBar() {
-		instance = new FrameArmasMenuBar();
+	static FrameArmasMenuBar instanceEmbateMenuBar(FrameArmasListener f) {
+		instance = new FrameArmasMenuBar(f);
 		return instance;
 	}
 	private static JMenu menuFile(){
@@ -31,7 +33,7 @@ public class FrameArmasMenuBar extends JMenuBar{
 		
 		JMenuItem saveItem = new JMenuItem("Load Tables Layout");
 		saveItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
-		saveItem.setActionCommand(FrameArmasListener.getThisActionCommand(FrameArmasMenuBar.class));
+		saveItem.setActionCommand(frameMae.getThisActionCommand(FrameArmasMenuBar.class));
 		saveItem.addActionListener(new MyActionListener());
 		menu.add(saveItem);
 		

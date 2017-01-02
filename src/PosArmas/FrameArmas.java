@@ -192,6 +192,10 @@ public class FrameArmas extends GameFrame {
 //			System.out.println("Cheguei MyActionListener FrameArmasListener.getThisActionCommand()");
 			return FrameArmas.getBaseActionString();
 		}
+		else if(class1.isAssignableFrom(FrameArmasMenuBar.class)){
+			System.out.println("Cheguei FrameArmasMenuBar string FrameArmasListener.getThisActionCommand()");
+			return FrameEmbateListener.getThisActionCommand(FrameArmasListener.class);
+		}
 		return "<in FrameArmasListener>YOU DON'T KNOW WHAT YOU'RE LOOKING FOR!";
 	}
 	public void rememberBoard(int board) {
