@@ -60,7 +60,7 @@ public class FrameArmas extends GameFrame {
 
 		getContentPane().add(campoP,getContentPane().getComponentCount());
 
-		butt = new JButton("TabuleiroArmas pronto!");
+		butt = new JButton("Pronto!");
 		butt.setSize((int)(MARGIN*7), (int)(MARGIN*2));
 		butt.setLocation((int)(getWidth()-butt.getWidth())/2,(int)(getHeight()-MARGIN*5));
 		butt.addActionListener(new MyActionListener());
@@ -102,12 +102,13 @@ public class FrameArmas extends GameFrame {
 	}
 
 
-	public static void drawMessages(Graphics g, String s){
-		System.out.printf("Cheguei DrawMessage (%s) in FrameArmas", s);
-		Graphics2D g2d = (Graphics2D)g;
-		g2d.drawString(s, (LARG_DEFAULT-10*s.length())/2, ALT_DEFAULT*5/12);
-		
-	}
+//	public static void drawMessages(Graphics g, String s){
+//		System.out.printf("Cheguei DrawMessage (%s) in FrameArmas", s);
+//		Graphics2D g2d = (Graphics2D)g;
+//		g2d.drawString(s, (LARG_DEFAULT-MARGIN*7-s.length()*8)/2, (ALT_DEFAULT-MARGIN*2)/2);
+//		//(getWidth()-campoP.getWidth())/2,(int)(getHeight()-MARGIN*7)
+//	//	(int)(MARGIN*7 + name.length()*8), (int)(MARGIN*2));
+//	}
 
 	public void paintComponent(Graphics g){
 		Graphics2D g2d = (Graphics2D)g;

@@ -82,5 +82,11 @@ public class ArmasPickPanel extends JPanel{
 //		repaint(this.getX()+1,this.getY()+1,this.getWidth()-1,this.getHeight()-1);
 		getComponentAt(r.getLocation()).repaint();
 	}
-
+	public static void drawMessages(Graphics g, String s){
+		System.out.printf("Cheguei DrawMessage (%s) in FrameArmas", s);
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.setColor(Color.RED);
+		g2d.drawString(s, (ArmasPickPanel.getInstance().getWidth() -s.length())/10, ArmasPickPanel.getInstance().getHeight()/4);
+		
+	}
 }
