@@ -109,7 +109,7 @@ public class CelulaMatrix {
 //		System.out.printf("(m[%d][%d].getArma()==null) = %b CelulaMatrix.hitHere\n", x,y,(m[x][y].getArma()==null));
 		if(m[x][y].getArma()!=null){
 			if(((Arma) m[x][y].getArma()).getDestroyed()){
-				destroy();
+				((Arma) m[x][y].getArma()).cellMatrix.destroy();
 			}
 		}
 		//		if(!isHere(x, y)){

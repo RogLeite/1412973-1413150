@@ -34,6 +34,7 @@ public class FrameEmbate extends GameFrame{
 	private static final int TAB_COUNT = 2;
 	private static final int SHOTS_LEFT_DEFAULT = 3;
 	private static final String SAVE_STRING = "MATCH_SAVE_BOARD";
+	private static final String LOAD_STRING = "MATCH_LOAD_BOARD";
 	private static final String BASE_ACTION_STRING = "MATCH";
 	private static final String TAKE_ACTION_STRING = "MATCH_TAKE_ACTION";
 	private static final String END_PLAY_STRING = "MATCH_END_PLAY";
@@ -136,6 +137,11 @@ public class FrameEmbate extends GameFrame{
 	}
 	protected void beginPlay(){
 		//		System.out.println("Cheguei JButton able/disable TabuleiroEmbate.beginPlay()");
+		if(getJMenuBar().getMenu(1)!=null){
+			getJMenuBar().getMenu(1).setEnabled(false);
+			getJMenuBar().remove(1);
+			setJMenuBar(getJMenuBar());
+		}
 		tabuleiro.nextPlayer();
 		((JButton)getContentPane().getComponent(2)).setEnabled(false);
 		//		System.out.printf("\n\tNome: %s",((TabuleiroEmbate)(tabuleiro.getContentPane().getComponent(0))).getBoundPlayer());
@@ -221,6 +227,9 @@ public class FrameEmbate extends GameFrame{
 	public static String getSaveString() {
 		return SAVE_STRING;
 	}
+	static String getLoadString() {
+		return LOAD_STRING;
+	}
 	public static String getBaseActionString() {
 		return BASE_ACTION_STRING;
 	}
@@ -228,13 +237,12 @@ public class FrameEmbate extends GameFrame{
 		return BEGIN_PLAY_STRING;
 	}
 	public static String getSwitchPlayersString() {
-		// TODO Auto-generated method stub
 		return SWITCH_PLAYERS_STRING;
 	}
 	public void saveBoards() throws IOException {
 		TabuleiroEmbate t1 = (TabuleiroEmbate)tabuleiro.getContentPane().getComponent(0);
 		TabuleiroEmbate t2 = (TabuleiroEmbate)tabuleiro.getContentPane().getComponent(1);
-		
+
 		SaveLoadGame.SaveConjArmas(FrameRegistroNomesListener.getPlayerNames()[0], t1.getArmas());
 		SaveLoadGame.SaveConjArmas(FrameRegistroNomesListener.getPlayerNames()[1], t2.getArmas());
 		System.out.printf("\n/*************************/\n\tSALVEI O TABULEIROOOO\n/*************************/\n");
@@ -246,5 +254,17 @@ public class FrameEmbate extends GameFrame{
 	}
 	public Tabuleiro getThisBoard(int board) {
 		return (Tabuleiro)getContentPane().getComponent(board);
+	}
+	public static String getThisActionCommand(String string) {
+		switch(string){
+		case "SAVE": return getSaveString();
+		case "LOAD": return getLoadString();
+		}
+		return null;
+	}
+	public void loadBoards() {
+		System.out.printf("\n/*************************/\n\tCARREGUEI O TABULEIROOOO\n/*************************/\n");
+
+		
 	}
 }
