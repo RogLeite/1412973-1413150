@@ -17,7 +17,8 @@ import Armas.ExceptionWeaponAllreadySelected;
 
 public class ArmasPickPanel extends JPanel{
 	private static ArmasPickPanel APanel;
-	private ArmasPickPanel(float x, float y, float width, float height){
+	private FrameArmas frameMae;
+	private ArmasPickPanel(float x, float y, float width, float height,FrameArmas fM){
 		super();
 		setBounds((int) x, (int) y, (int) width, (int) height);
 
@@ -26,6 +27,7 @@ public class ArmasPickPanel extends JPanel{
 		setLayout(null);
 		setIgnoreRepaint(true);
 		setVisible(true);
+		frameMae = fM;
 //		System.out.printf("getComponentCount = %d\n",getContentPane().getComponentCount());
 //		System.out.printf("CArmas.ArmVect.length = %d\n",CArmas.ArmVect.length);
 		for(int i=0;i<CArmas.ArmVect.length;i++){
@@ -34,8 +36,8 @@ public class ArmasPickPanel extends JPanel{
 			add((CArmas.ArmVect[i]));
 		}
 	}
-	public static ArmasPickPanel instance(float x, float y, float width, float height){
-		APanel = new ArmasPickPanel(x,y,width, height);
+	public static ArmasPickPanel instance(float x, float y, float width, float height,FrameArmas frameMae){
+		APanel = new ArmasPickPanel(x,y,width, height, frameMae);
 		return APanel;
 	}
 	public static ArmasPickPanel getInstance(){
@@ -54,9 +56,16 @@ public class ArmasPickPanel extends JPanel{
 	public void selectArmaAqui(Point p){
 		try{
 //			System.out.println("Cheguei ArmasPickPanel.selectArmaAqui");
-			ArmaListener.selectArma(getComponentAt(p));
-			getComponentAt(p).setVisible(false);
-			this.remove(getComponentAt(p));
+			if(!(getComponentAt(p) instanceof Arma)){
+				throw new ExceptionComponentIsNotArma();
+			}
+			Arma a = (Arma) getComponentAt(p);
+			ArmaListener.selectArma(a);
+			a.setVisible(false);
+			Rectangle pa = a.getBounds();
+			this.remove(a);
+			Graphics2D g2d = (Graphics2D)getGraphics();
+			g2d.clearRect((int)pa.getX(),(int)pa.getY(),(int)pa.getWidth(),(int)pa.getHeight());
 //			System.out.println("Cheguei repaint ArmasPickPanel.selectArmaAqui");
 //			repaint(getBounds());
 		}catch (ExceptionWeaponAllreadySelected e) {
@@ -77,16 +86,12 @@ public class ArmasPickPanel extends JPanel{
 		}
 	}
 	public void devolverArma(Arma a) {
+		Graphics2D g2d = (Graphics2D)(/*frameMae.*/getGraphics());
+		g2d.clearRect(a.getX(),a.getY(),a.getWidth(),a.getHeight());
 		a.setVisible(true);
 		add(a);
+		a.repaint(0,0,a.getWidth(),a.getHeight());
 //		repaint(this.getX()+1,this.getY()+1,this.getWidth()-1,this.getHeight()-1);
 //		getComponentAt(r.getLocation()).repaint();
-	}
-	public static void drawMessages(Graphics g, String s){
-		System.out.printf("Cheguei DrawMessage (%s) in FrameArmas", s);
-		Graphics2D g2d = (Graphics2D)g;
-		g2d.setColor(Color.RED);
-		g2d.drawString(s, (ArmasPickPanel.getInstance().getWidth() -s.length())/10, ArmasPickPanel.getInstance().getHeight()/4);
-		
 	}
 }

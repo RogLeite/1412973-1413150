@@ -75,7 +75,7 @@ public class FrameArmas extends GameFrame {
 		//		ArmaListener.addArmas(T, SIZE_FACTOR);
 		//		getContentPane().add(T,getContentPane().getComponentCount());
 
-		APanel = ArmasPickPanel.instance(0, 0,getWidth()/2,ALT_DEFAULT);
+		APanel = ArmasPickPanel.instance(0, 0,getWidth()/2,ALT_DEFAULT, this);
 		/*ConjArmas CArmas = new ConjArmas();
 		CArmas.ArmVect= ArmaListener.getFilledArray((float)getAPanel().getWidth(),(int) ALT_DEFAULT/16);
 
@@ -178,7 +178,11 @@ public class FrameArmas extends GameFrame {
 	public void rotatePiece() {
 		System.out.println("Cheguei FrameArmas.rotatePiece()");
 		getAPanel().rotatePiece();
-		getBoard().hoveredHere(getBoard().getMousePosition());
+		Point p = getBoard().getMousePosition();
+		if(p==null){
+			return;
+		}
+		getBoard().hoveredHere(p);
 	}
 	public void selectArma(Point p){
 		ArmasPickPanel.getInstance().selectArmaAqui(p);
