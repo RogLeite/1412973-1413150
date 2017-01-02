@@ -33,7 +33,7 @@ public class FrameArmas extends GameFrame {
 	private static JButton butt;
 
 	//	private static TabuleiroInvisivel T;
-
+	private static final String LOAD_STRING = "MATCH_LOAD_BOARDS";
 	private static final String BASE_ACTION_STRING = "PLACE";
 	private static final String TAKE_ACTION_STRING = "PLACE_TAKE_ACTION";
 	private static final String PLACEMENT_DONE_STRING = "PLACE_DONE";
@@ -102,11 +102,13 @@ public class FrameArmas extends GameFrame {
 	}
 
 
-	/*	public void drawArmas(Graphics g){
-		Graphics2D g2d= (Graphics2D) g ;
-
+	public static void drawMessages(Graphics g, String s){
+		System.out.printf("Cheguei DrawMessage (%s) in FrameArmas", s);
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.drawString(s, (LARG_DEFAULT-10*s.length())/2, ALT_DEFAULT*5/12);
+		
 	}
-	 */
+
 	public void paintComponent(Graphics g){
 		Graphics2D g2d = (Graphics2D)g;
 		if(!getCanPlay())
@@ -163,6 +165,9 @@ public class FrameArmas extends GameFrame {
 	public static String getBaseActionString() {		
 		return BASE_ACTION_STRING;
 	}
+	public static String getLoadString(){
+		return LOAD_STRING;
+	}
 
 	public static void safeTerminate() {
 		ArmaListener.confirmedReceive();
@@ -183,7 +188,7 @@ public class FrameArmas extends GameFrame {
 	public void selectArma(Point p){
 		ArmasPickPanel.getInstance().selectArmaAqui(p);
 	}
-	public String getThisActionCommand(Class<?> class1){
+	public static String getThisActionCommand(Class<?> class1){
 		if(class1.isAssignableFrom(MyMouseListener.class)){
 			System.out.println("Cheguei MyMouseListener FrameArmasListener.getThisActionCommand()");
 			return FrameArmas.getTakeActionString();

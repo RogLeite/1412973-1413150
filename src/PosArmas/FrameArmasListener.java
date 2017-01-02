@@ -18,6 +18,10 @@ import TopoNivel.TestadorListener;
 
 public interface FrameArmasListener{
 	public String getThisActionCommand(Class<?> class1);/*{
+=======
+	public String getThisActionCommand(Class<?> class1);
+//	{
+>>>>>>> origin/master
 //		if(class1.isAssignableFrom(MyMouseListener.class)){
 //			System.out.println("Cheguei MyMouseListener FrameArmasListener.getThisActionCommand()");
 //			return FrameArmas.getTakeActionString();
@@ -27,6 +31,7 @@ public interface FrameArmasListener{
 //			return FrameArmas.getBaseActionString();
 //		}
 //		return "<in FrameArmasListener>YOU DON'T KNOW WHAT YOU'RE LOOKING FOR!";
+<<<<<<< HEAD
 		if(class1.isAssignableFrom(FrameArmasMenuBar.class)){
 			System.out.println("Cheguei FrameArmasMenuBar string FrameArmasListener.getThisActionCommand()");
 			System.out.println(FrameEmbate.getSaveString());
