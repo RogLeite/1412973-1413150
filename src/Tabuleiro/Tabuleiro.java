@@ -47,7 +47,7 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 		bound_player = player;
 
 		tabInvisivel = newInstanceTabuleiroInvisivel();
-//		System.out.printf("Cheguei tabInvisivel in %s TabuleiroInvisivel\n",tabInvisivel.getLocation().toString() );
+		//		System.out.printf("Cheguei tabInvisivel in %s TabuleiroInvisivel\n",tabInvisivel.getLocation().toString() );
 		add(tabInvisivel);
 		for(int i=1;i<SIDE_TAB;i++){
 			for(int j=1;j<SIDE_TAB;j++){
@@ -96,20 +96,20 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 	//	}
 	public void setVisibilidade(boolean v){
 		getTabuleiroInvisivel().setVisibilidade(v);
-//				System.out.printf("\nCheguei %s Tabuleiro.setVisibilidade(%b)\n",bound_player,v);
-//		System.out.println("Cheguei Tabuleiro.setVisibilidade");
+		//				System.out.printf("\nCheguei %s Tabuleiro.setVisibilidade(%b)\n",bound_player,v);
+		//		System.out.println("Cheguei Tabuleiro.setVisibilidade");
 		for(int i=0;i<getComponentCount()-1;i++){
-//			System.out.printf("\t Component %d Tabuleiro.setVisibilidade()\n",i);
+			//			System.out.printf("\t Component %d Tabuleiro.setVisibilidade()\n",i);
 			((Celula)getComponent(i)).repaint();
 		}
 	}
 	protected void tabuleiroRepaint(){
 		for(int i=0;i<getComponentCount()-1;i++){
-//			System.out.printf("\t Component %d Tabuleiro.tabuleiroRepaint()\n",i);
+			//			System.out.printf("\t Component %d Tabuleiro.tabuleiroRepaint()\n",i);
 			((Celula)getComponent(i)).repaint();
 		}
 	}
-	
+
 	public boolean getVisibilidade(){
 		return visibilidade ;
 	}
@@ -120,7 +120,7 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 	public abstract boolean imHit(Point p); 
 	public boolean imFilled(Point p){
 		ConjArmas c = getTabuleiroInvisivel().getArmasArray();
-//		System.out.printf("Cheguei c tem algo? %b Tabuleiro.imFilled\n", (c!=null));
+		//		System.out.printf("Cheguei c tem algo? %b Tabuleiro.imFilled\n", (c!=null));
 		return ArmaListener.hasArma(c,p.getLocation());
 	}
 	public boolean imDestroyed(Point p){
@@ -173,7 +173,7 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 	}
 	public boolean isPlacingAllowed(Point p) throws ExceptionNoWeaponSelected {
 		boolean b ;
-			b = getTabuleiroInvisivel().isPlacingAllowed(getNewPointRelatively(p));
+		b = getTabuleiroInvisivel().isPlacingAllowed(getNewPointRelatively(p));
 		return b;
 	}
 	private int getSideTab(){
@@ -184,8 +184,8 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 		p.y = (int) (p.getY()-CELL_SIZE);
 	}
 	protected Point getNewPointRelatively(Point p){
-//		System.out.printf("\tp = %s Tabuleiro.getNewPointRelatively\n",p.toString());
-//		System.out.printf("\tp relativo = [%d,%d] Tabuleiro.getNewPointRelatively\n",(int) (p.getX()-CELL_SIZE),(int) (p.getY()-CELL_SIZE));
+		//		System.out.printf("\tp = %s Tabuleiro.getNewPointRelatively\n",p.toString());
+		//		System.out.printf("\tp relativo = [%d,%d] Tabuleiro.getNewPointRelatively\n",(int) (p.getX()-CELL_SIZE),(int) (p.getY()-CELL_SIZE));
 		return new Point((int) (p.getX()-CELL_SIZE),(int) (p.getY()-CELL_SIZE));
 	}
 	public float getCellSize(){
@@ -200,10 +200,9 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 	public boolean isFilled(Celula celula) {
 		return getTabuleiroInvisivel().isFilledHere(getNewPointRelatively(celula.getLocation()));
 	}
-			public boolean isDestroyed(Celula celula) {
-				return getTabuleiroInvisivel().isDestroyedHere(getNewPointRelatively(celula.getLocation()));
-			}
-			//quando uma é destroida, todas são consideradas
+	public boolean isDestroyed(Celula celula) {
+		return getTabuleiroInvisivel().isDestroyedHere(getNewPointRelatively(celula.getLocation()));
+	}
 	public Color itsColor(Celula celula) throws IndexOutOfBoundsException, ExceptionNoWeaponHere {
 		return getTabuleiroInvisivel().isColorHere(getNewPointRelatively(celula.getLocation()));
 	}

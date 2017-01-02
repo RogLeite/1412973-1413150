@@ -112,5 +112,7 @@ public abstract class Arma extends JPanel {
 	}
 	protected abstract TipoArma getTipo();
 
+	
+
 }
 
