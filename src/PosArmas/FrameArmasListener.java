@@ -17,7 +17,8 @@ import TopoNivel.MyMouseListener;
 import TopoNivel.TestadorListener;
 
 public interface FrameArmasListener{
-	public String getThisActionCommand(Class<?> class1){
+	public String getThisActionCommand(Class<?> class1);
+//	{
 //		if(class1.isAssignableFrom(MyMouseListener.class)){
 //			System.out.println("Cheguei MyMouseListener FrameArmasListener.getThisActionCommand()");
 //			return FrameArmas.getTakeActionString();
@@ -27,12 +28,7 @@ public interface FrameArmasListener{
 //			return FrameArmas.getBaseActionString();
 //		}
 //		return "<in FrameArmasListener>YOU DON'T KNOW WHAT YOU'RE LOOKING FOR!";
-		if(class1.isAssignableFrom(FrameArmasMenuBar.class)){
-			System.out.println("Cheguei FrameArmasMenuBar string FrameArmasListener.getThisActionCommand()");
-			System.out.println(FrameEmbate.getSaveString());
-			return FrameEmbate.getSaveString();
-		}
-	}
+//	}
 
 	public void takeAction(Point p);/*{
 //		System.out.println("Cheguei FrameArmasListener.takeAction()");

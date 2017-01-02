@@ -33,7 +33,7 @@ public class FrameArmas extends GameFrame {
 	private static JButton butt;
 
 	//	private static TabuleiroInvisivel T;
-
+	private static final String LOAD_STRING = "MATCH_LOAD_BOARDS";
 	private static final String BASE_ACTION_STRING = "PLACE";
 	private static final String TAKE_ACTION_STRING = "PLACE_TAKE_ACTION";
 	private static final String PLACEMENT_DONE_STRING = "PLACE_DONE";
@@ -163,6 +163,9 @@ public class FrameArmas extends GameFrame {
 	public static String getBaseActionString() {		
 		return BASE_ACTION_STRING;
 	}
+	public static String getLoadString(){
+		return LOAD_STRING;
+	}
 
 	public static void safeTerminate() {
 		ArmaListener.confirmedReceive();
@@ -191,6 +194,11 @@ public class FrameArmas extends GameFrame {
 		else if(class1.isAssignableFrom(MyActionListener.class)){
 //			System.out.println("Cheguei MyActionListener FrameArmasListener.getThisActionCommand()");
 			return FrameArmas.getBaseActionString();
+		}
+		else if(class1.isAssignableFrom(FrameArmasMenuBar.class)){
+			System.out.println("Cheguei FrameArmasMenuBar string FrameArmasListener.getThisActionCommand()");
+			System.out.println(FrameArmas.getLoadString());
+			return FrameArmas.getLoadString();
 		}
 		return "<in FrameArmasListener>YOU DON'T KNOW WHAT YOU'RE LOOKING FOR!";
 	}
