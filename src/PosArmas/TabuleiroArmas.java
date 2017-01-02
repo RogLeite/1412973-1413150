@@ -40,16 +40,16 @@ public class TabuleiroArmas extends Tabuleiro{
 			int cel = (int)CELL_SIZE;
 //			System.out.printf("\nCheguei p = %s TabuleiroArmas.takeAction\n",getNewPointRelatively((Point) p).toString());
 			getTabuleiroInvisivel().receiveArma(getNewPointRelatively((Point) p));
-			frameMae.drawMessages("Arma Posicionada\nClique nela novamente para retirá-la");
+			frameMae.drawMessages(" Arma Posicionada! Clique nela novamente para retirá-la. ");
 		}catch(ExceptionPlacingNotAllowed e){
-			frameMae.drawMessages("ExceptionPlacingNotAllowed");
+			frameMae.drawMessages(" Não é possível posicionar a peça aqui! ");
 		//	ArmasPickPanel.drawMessages(getGraphics(), "ExceptionPlacingNotAllowed");
 		System.out.println("Cheguei ExceptionPlacingNotAllowed TabuleiroArmas.takeAction()");
 			return;
 		} catch (ExceptionNoWeaponSelected e) {
 			try {
 				frameMae.receberArma(getTabuleiroInvisivel().devolvaArma(getNewPointRelatively((Point) p)));
-				frameMae.drawMessages("Arma Retirada, selecione-a novamente!");
+				frameMae.drawMessages("Arma Retirada, selecione outra arma!");
 			} catch (ExceptionNoWeaponHere e1) {
 				System.out.println("ExceptionNoWeaponHere TabuleiroArmas.takeAction()");
 			}
@@ -64,9 +64,6 @@ public class TabuleiroArmas extends Tabuleiro{
 	public boolean imHit(Point p){
 		return false;
 	}
-	
-
-	
 	
 	public void hoveredHere(Point point) {
 		Point p = getNewPointRelatively(point);

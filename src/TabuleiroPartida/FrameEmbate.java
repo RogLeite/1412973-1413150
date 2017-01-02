@@ -110,7 +110,7 @@ public class FrameEmbate extends GameFrame{
 	}
 
 	public static FrameEmbate instance(String[] names){
-		//		System.out.println("Cheguei TabuleiroEmbateEmbate.instance()");
+		//System.out.println("Cheguei TabuleiroEmbateEmbate.instance()");
 		tabuleiro = new FrameEmbate(names);
 		tabuleiro.setLayout(null);
 		tabuleiro.setIgnoreRepaint(true);
@@ -172,22 +172,29 @@ public class FrameEmbate extends GameFrame{
 		}
 	}
 
-
+	public void drawMessage(String s){
+		System.out.printf("Cheguei DrawMessage (%s) in FrameEmbate", s);
+		Graphics2D g2d = (Graphics2D)getGraphics();
+		g2d.clearRect((int)(2*MARGIN),(int)( MARGIN*3)+3, (int)ALT_DEFAULT, -12);
+		g2d.drawString(s, 2*MARGIN,MARGIN*4);
+	}
+	
 	public void takeAction(String bound_player,Point p){
 		for(int i=0;i<TAB_COUNT;i++){
 			if(!currPlayerIsNeutral()){
 				TabuleiroEmbate t = (TabuleiroEmbate)tabuleiro.getContentPane().getComponent(i);
-				//			System.out.printf("\nCheguei FrameEmbate.takeAction()\n\ttab.getBound: %s \n\tboundplayer: %s\n",((TabuleiroEmbate)tabuleiro.getContentPane().getComponent(i)).getBoundPlayer(),bound_player);
+				//System.out.printf("\nCheguei FrameEmbate.takeAction()\n\ttab.getBound: %s \n\tboundplayer: %s\n",((TabuleiroEmbate)tabuleiro.getContentPane().getComponent(i)).getBoundPlayer(),bound_player);
 				if(t.getBoundPlayer().equals(bound_player)
 						&& !t.getVisibilidade()/*getBoundPlayer().equals(getCurrPlayer())*/
 						&& !bound_player.equals(getCurrPlayer())){
 					try {
 						t.takeAction(p);
-						//					System.out.println("Cheguei deu certo FrameEmbate.takeAction()");
+						//System.out.println("Cheguei deu certo FrameEmbate.takeAction()");
 						cellHit(t);
 						return;
 					} catch (ExceptionCellAlreadyHit e) {
 						denyedPlay();
+						drawMessage("Jogada inválida!");
 						return;
 					} catch (ExceptionNoWeaponHere e) {
 						System.out.println("ExceptionNoWeaponHere FrameEmbate.takeAction");
