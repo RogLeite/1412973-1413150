@@ -1,10 +1,8 @@
 package Armas;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Point;
 import java.awt.geom.Point2D;
-import javax.swing.JFrame;
 
 import Tabuleiro.ExceptionCellAlreadyHit;
 
