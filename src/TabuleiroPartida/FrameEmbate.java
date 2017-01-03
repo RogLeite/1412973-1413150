@@ -13,6 +13,7 @@ import Armas.SaveLoadGame;
 import PlayerNameInput.FrameRegistroNomesListener;
 import Tabuleiro.ExceptionCellAlreadyHit;
 import Tabuleiro.Tabuleiro;
+import Tabuleiro.TabuleiroInvisivel;
 import TopoNivel.GameFrame;
 import TopoNivel.MyActionListener;
 import TopoNivel.MyMouseListener;
@@ -245,8 +246,8 @@ public class FrameEmbate extends GameFrame{
 		TabuleiroEmbate t1 = (TabuleiroEmbate)tabuleiro.getContentPane().getComponent(0);
 		TabuleiroEmbate t2 = (TabuleiroEmbate)tabuleiro.getContentPane().getComponent(1);
 
-		SaveLoadGame.SaveConjArmas(FrameRegistroNomesListener.getPlayerNames()[0], t1.getArmas());
-		SaveLoadGame.SaveConjArmas(FrameRegistroNomesListener.getPlayerNames()[1], t2.getArmas());
+		SaveLoadGame.SaveConjArmas(FrameRegistroNomesListener.getPlayerNames()[0], t1.getTabuleiroInvisivel());
+		SaveLoadGame.SaveConjArmas(FrameRegistroNomesListener.getPlayerNames()[1], t2.getTabuleiroInvisivel());
 		System.out.printf("\n/*************************/\n\tSALVEI O TABULEIROOOO\n/*************************/\n");
 
 	}
@@ -264,15 +265,18 @@ public class FrameEmbate extends GameFrame{
 		}
 		return null;
 	}
-	public void loadBoards() throws ClassNotFoundException, IOException, ExceptionArmVectFilled {
+	public void loadBoards() throws ClassNotFoundException, IOException {
 		
 		TabuleiroEmbate t1 = (TabuleiroEmbate)tabuleiro.getContentPane().getComponent(0);
 		TabuleiroEmbate t2 = (TabuleiroEmbate)tabuleiro.getContentPane().getComponent(1);
 
-		ConjArmas c1=SaveLoadGame.LoadConjArmas(FrameRegistroNomesListener.getPlayerNames()[0]);
-		ConjArmas c2=SaveLoadGame.LoadConjArmas(FrameRegistroNomesListener.getPlayerNames()[1]);
-		t1.setArmas(c1);
-		t2.setArmas(c2);
+		TabuleiroInvisivel c1=SaveLoadGame.LoadConjArmas(FrameRegistroNomesListener.getPlayerNames()[0]);
+		TabuleiroInvisivel c2=SaveLoadGame.LoadConjArmas(FrameRegistroNomesListener.getPlayerNames()[1]);
+		t1.addTabuleiroInvisivel(c1);
+		t2.addTabuleiroInvisivel(c2);
+//
+//		t1.setArmas(c1);
+//		t2.setArmas(c2);
 		
 //		SaveLoadGame.LoadConjArmas(FrameRegistroNomesListener.getPlayerNames()[0], t1);
 	//	SaveLoadGame.LoadConjArmas(FrameRegistroNomesListener.getPlayerNames()[1], t2);

@@ -53,7 +53,12 @@ public class FrameEmbateListener extends Listener{
 			FrameEmbate.getInstance().saveBoards();
 		}
 		else if(m.compareTo(FrameEmbate.getLoadString())==0){
-			FrameEmbate.getInstance().loadBoards();
+			try {
+				FrameEmbate.getInstance().loadBoards();
+			} catch (ClassNotFoundException e) {
+				System.out.println("ClassNotFoundException in FrameEmbateListener.receiveCommand()");
+//				e.printStackTrace();
+			}
 		}
 		else if(m.compareTo(FrameEmbate.getEndPlayString())==0){
 			TestadorListener.endedPlay();

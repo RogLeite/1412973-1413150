@@ -135,7 +135,7 @@ public abstract class Tabuleiro extends JPanel implements TabuleiroListener/* im
 		t.addTabuleiroInvisivel(getTabuleiroInvisivel());
 		t.setVisibilidade(false);
 	}
-	private void addTabuleiroInvisivel(TabuleiroInvisivel tabuleiroInvisivel) {
+	public void addTabuleiroInvisivel(TabuleiroInvisivel tabuleiroInvisivel) {
 		tabInvisivel = tabuleiroInvisivel;
 		System.out.println("Cheguei Tabuleiro.addTabuleiroInvisivel");
 	}
