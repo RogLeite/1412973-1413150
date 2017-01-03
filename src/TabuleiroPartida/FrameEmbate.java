@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 
+import Armas.ConjArmas;
+import Armas.ExceptionArmVectFilled;
 import Armas.ExceptionNoWeaponHere;
 import Armas.SaveLoadGame;
 import PlayerNameInput.FrameRegistroNomesListener;
@@ -262,7 +264,23 @@ public class FrameEmbate extends GameFrame{
 		}
 		return null;
 	}
-	public void loadBoards() {
+	public void loadBoards() throws ClassNotFoundException, IOException, ExceptionArmVectFilled {
+		
+		TabuleiroEmbate t1 = (TabuleiroEmbate)tabuleiro.getContentPane().getComponent(0);
+		TabuleiroEmbate t2 = (TabuleiroEmbate)tabuleiro.getContentPane().getComponent(1);
+
+		ConjArmas c1=SaveLoadGame.LoadConjArmas(FrameRegistroNomesListener.getPlayerNames()[0]);
+		ConjArmas c2=SaveLoadGame.LoadConjArmas(FrameRegistroNomesListener.getPlayerNames()[1]);
+		t1.setArmas(c1);
+		t2.setArmas(c2);
+		
+//		SaveLoadGame.LoadConjArmas(FrameRegistroNomesListener.getPlayerNames()[0], t1);
+	//	SaveLoadGame.LoadConjArmas(FrameRegistroNomesListener.getPlayerNames()[1], t2);
+
+//		SaveLoadGame.SaveConjArmas(FrameRegistroNomesListener.getPlayerNames()[0], t1.getArmas());
+//		SaveLoadGame.SaveConjArmas(FrameRegistroNomesListener.getPlayerNames()[1], t2.getArmas());
+
+		
 		System.out.printf("\n/*************************/\n\tCARREGUEI O TABULEIROOOO\n/*************************/\n");
 
 		

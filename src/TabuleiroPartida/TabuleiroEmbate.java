@@ -54,4 +54,7 @@ public class TabuleiroEmbate  extends Tabuleiro{
 	public ConjArmas getArmas (){
 		return getTabuleiroInvisivel().getArmasArray();
 	}
+	public void setArmas (ConjArmas c){
+		 getTabuleiroInvisivel().setArmasArray(c);
+	}
 }

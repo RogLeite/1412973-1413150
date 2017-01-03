@@ -54,6 +54,10 @@ public class TabuleiroInvisivel extends JPanel{
 	public ConjArmas getArmasArray() {
 		return arrayArmas;
 	}
+	public void setArmasArray(ConjArmas c) {
+		arrayArmas=c;
+	}
+	
 	public void receiveArma(Point p) throws ExceptionPlacingNotAllowed, ExceptionNoWeaponSelected{
 
 		Arma a = ArmaListener.receiveArma();
