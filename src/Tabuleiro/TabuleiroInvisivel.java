@@ -26,7 +26,6 @@ public class TabuleiroInvisivel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private static final String BASE_ACTION_STRING= "INV";
 	private static final String TAKE_ACTION_STRING = "INV_TAKE_ACTION";
-	private ConjArmas arrayArmas = ArmaListener.getEmptyArray();
 	private CelulaMatrix cellMatrix;
 	private final int BOARD_SIZE;
 	private TabuleiroListener tabMae;
@@ -50,12 +49,6 @@ public class TabuleiroInvisivel extends JPanel{
 	}
 	public static String getBaseActionString(){
 		return BASE_ACTION_STRING;
-	}
-	public ConjArmas getArmasArray() {
-		return arrayArmas;
-	}
-	public void setArmasArray(ConjArmas c) {
-		arrayArmas=c;
 	}
 	
 	public void receiveArma(Point p) throws ExceptionPlacingNotAllowed, ExceptionNoWeaponSelected{
